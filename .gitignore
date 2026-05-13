@@ -1,0 +1,21 @@
+node_modules
+.next
+out
+.env
+.env.local
+.env*.local
+.DS_Store
+*.log
+.vercel
+
+# Local PDF text extracts used only during build
+.pdf-text
+
+# Source brand documents are kept locally only.
+# The Information Memorandum contains commercially sensitive financial data.
+# Keep them out of the repo by default; share them via secure channels.
+source-docs
+
+# Editor
+.vscode
+.idea
