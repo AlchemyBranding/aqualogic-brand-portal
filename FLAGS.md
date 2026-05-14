@@ -6,88 +6,93 @@ A running list of everything the portal has flagged for the client team to provi
 
 | Status | File | Note |
 |---|---|---|
-| ✅ Read | `source-docs/Aqualogic_Brand Strategy.pdf` | Strategy doc (42pp) — full language content extracted |
+| ✅ Read | `source-docs/Aqualogic_Brand Strategy.pdf` | Strategy doc (42pp). All 14 substantive sections used. |
 | ✅ Read | `source-docs/Sustec.pdf` | Sustec visual brand guidelines |
-| ✅ Read | `source-docs/Aqualogic.pdf` | Original Aqualogic visual brand guidelines (the file prompt called `Aqualogic_IM_v3.pdf`). Visual content used; old written content (tagline, vision, voice) intentionally discarded per prompt |
-| ✅ Read | `source-docs/Aqualogic IM v3.pdf` | Information Memorandum (business / financial). Used for group strategy context only |
-| ⏭️ Skipped | `source-docs/Aqualogic — Website Structure & Messaging Review.pdf` | Marked reference-only in the prompt |
-| ❌ Missing | `ALWebsite.pdf` | Reference only per prompt. OK to skip |
+| ✅ Read | `source-docs/Aqualogic.pdf` | Original Aqualogic visual brand guidelines. Visual content used; old written content discarded per the prompt. |
+| ✅ Read | `source-docs/Aqualogic IM v3.pdf` | Information Memorandum. Used for group strategy context only. |
+| ⏭️ Skipped | `source-docs/Aqualogic — Website Structure & Messaging Review.pdf` | Reference only |
+| ❌ Missing | `ALWebsite.pdf` | Reference only per prompt |
 
-## Outbound URLs to provide
+## Outbound URLs
 
-These appear in the site footer and on the LinkedIn page. Update via `lib/external-links.ts`:
-
-- [x] Sustec website URL — `https://sustec.uk/`
-- [x] Aqualogic website URL — `https://aqualogic-wc.com/`
-- [x] Aqualogic LinkedIn URL — `https://www.linkedin.com/company/aqualogic-wc-ltd/`
-- [x] Sustec LinkedIn URL — **N/A**, Sustec has no public LinkedIn presence
+- [x] Sustec website — `https://sustec.uk/`
+- [x] Aqualogic website — `https://aqualogic-wc.com/`
+- [x] Aqualogic LinkedIn — `https://www.linkedin.com/company/aqualogic-wc-ltd/`
+- [x] Sustec LinkedIn — **N/A**, no public presence
 - [ ] Internal intranet URL
 
-## Asset folders awaiting files
+## Dropbox files to download manually
 
-Drop files into the relevant folder under `/public/assets/` and they appear automatically in the portal.
+I can't authenticate to Dropbox from this environment. Please download from the shared folders and drop into the matching project paths. Files appear automatically on the relevant pages once they land in the right folder.
 
-### Aqualogic
+### 1. Aqualogic photography
+- Source: https://www.dropbox.com/scl/fo/5an0tqs9tzmi9ddgry5qw/AANpQE2NRYIN0ZPCExrHE2k?rlkey=1nsshxary2xtf8501mflbwxv5&dl=0
+- Drop into: `public/assets/aqualogic/photography/`
+- Appears on: `/aqualogic/visuals/imagery` and `/aqualogic/downloads`
 
-- [ ] `/public/assets/aqualogic/logos/` — SVG, PNG, EPS for primary, mono, reverse, single-colour, horizontal, stacked, mark variants
-- [ ] `/public/assets/aqualogic/marketing-kit/` — decks, templates, brochures
-- [ ] `/public/assets/aqualogic/banners/` — LinkedIn banners (1584×396), email signatures
-- [ ] `/public/assets/aqualogic/photography/` — office, team, sites, equipment shots
-- [ ] `/public/assets/aqualogic/icons/` — once an icon system is defined
+### 2. Additional Aqualogic logo files
+- Source: https://www.dropbox.com/scl/fo/v2i8qzzx4h9mj7i843wp5/AN5R6OD5Md0t4avmn1obJmY?rlkey=v0sjtrc3fm42ay64wtn745d34&dl=0
+- Drop into: `public/assets/aqualogic/logos/`
+- Naming: include `primary`, `mono`, `reverse`, `mark`, etc. in filenames so the auto-variant labels render. Examples already in place to copy.
+- Appears on: `/aqualogic/visuals/logo` and `/aqualogic/downloads`
 
-### Sustec
+### 3. Sustec brand guidelines and logo files
+- Source: https://www.dropbox.com/scl/fo/b5qf709mdywou3397js3c/AG1VoTAr3ekGHBWOJpykgTk?rlkey=uilnv0jb9wr93ydtkdrdrdb9z&dl=0
+- Drop logos into: `public/assets/sustec/logos/`
+- If there's an updated brand guideline PDF, place at: `source-docs/` and let me know — I'll merge any new content into the Sustec one-page area.
+- Appears on: `/sustec` (visual identity section) and `/sustec/downloads`
 
-- [ ] `/public/assets/sustec/logos/` — SVG, PNG, EPS variants
-- [ ] `/public/assets/sustec/marketing-kit/`
-- [ ] `/public/assets/sustec/banners/`
-- [ ] `/public/assets/sustec/photography/`
+### 4. Aqualogic Journey Wall artwork
+- Source: https://www.dropbox.com/scl/fi/qxyb86diqm24qgfwpp8sb/Aqualogic-Journey-Wall-3240x2540-Bottom-PROOF.pdf?rlkey=e1299j0o70qtp1bnnckau0fm2&dl=0
+- This is the print artwork. I've recreated the timeline data in code at `components/HeritageTimeline.tsx` (used on `/aqualogic/heritage` in Aqualogic styling and inside `/sustec` Heritage section in Sustec styling). When you supply more milestones or want richer styling, edit that component.
+
+## Other asset folders awaiting files
+
+- [ ] `public/assets/aqualogic/marketing-kit/` — decks, templates, brochures
+- [ ] `public/assets/aqualogic/banners/` — LinkedIn banner (1584×396 px)
+- [ ] `public/assets/aqualogic/headshots/` — team headshots (new)
+- [ ] `public/assets/aqualogic/icons/` — once an icon system is defined
+- [ ] `public/assets/sustec/marketing-kit/`
+- [ ] `public/assets/sustec/banners/`
+- [ ] `public/assets/sustec/photography/`
 
 ## Sanity (Phase 1.5)
 
-The portal is built end-to-end with Sanity wiring, but the project itself has not been created. Until env vars are set, `/studio`, `/case-studies` and `/admin/upload` render a setup-needed notice.
+The portal is wired end-to-end. Until env vars are set, `/studio`, `/case-studies` and `/admin/upload` render a setup-needed notice.
 
 - [ ] Create a project at sanity.io (free tier)
-- [ ] Set `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION`
+- [ ] Set `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION` in Vercel + `.env.local`
 - [ ] Generate a write token (Editor permissions) and set `SANITY_WRITE_TOKEN`
-- [ ] Optionally set `ALCHEMY_NOTIFY_EMAIL` for submission notifications (notification email not yet wired up)
+- [ ] Optional: `ALCHEMY_NOTIFY_EMAIL` for submission notifications (notification email not yet wired)
 
-## Brand guideline additions (Aqualogic)
+## Aqualogic brand guideline additions
 
-Surfaced in /aqualogic/recommendations. These are structural gaps in the existing visual guidelines:
+These are structural gaps in the existing visual guidelines that the brand should address as it grows:
 
-- [ ] Publish logo mono / reverse / single-colour variants
+- [ ] Publish logo mono / single-colour variants (reverse now supplied)
 - [ ] Define logo minimum size (px and mm)
-- [ ] Add RGB, CMYK, Pantone equivalents to colour palette
+- [ ] Add RGB, CMYK, Pantone equivalents to the colour palette
 - [ ] Add accessibility / WCAG 2.1 AA contrast guidance
 - [ ] Define typography hierarchy (H1–H6 scale, line-height, spacing)
 - [ ] Define a secondary editorial typeface and fallback stack
 - [ ] Define an icon system
 - [ ] Define grid and spacing scale
-- [ ] Add photography style with do/don't examples
-- [ ] Add motion / animation guidance for digital
-- [ ] Add do/don't worked examples for logo, colour, voice
-- [ ] Publish a short brand-level accessibility statement
+- [ ] Photography style with do/don't examples
+- [ ] Motion / animation guidance for digital
+- [ ] Worked do/don't examples for logo, colour, voice
+- [ ] Short brand-level accessibility statement
 
-## Brand guideline additions (Sustec)
+## Sustec
 
-Surfaced in /sustec/recommendations:
-
-- [ ] Define a written brand layer (story, voice, tone)
-- [ ] Publish logo mono / reverse / single-colour variants
-- [ ] Define the clearspace X-factor explicitly
-- [ ] Add full RGB, CMYK, Pantone, accessibility guidance for colour
-- [ ] Define typography hierarchy
-- [ ] Add photography style direction
-- [ ] Define co-branding rules (Sustec + operating brand)
-- [ ] Write an acquisition-onboarding playbook for new operating brands joining the portfolio
+Per the strategy, Sustec is the group brand and is deliberately quieter. Recommendations are not surfaced for Sustec.
 
 ## Deployment
 
-- [ ] Create GitHub repo and push (deliberately left manual per setup choice)
-- [ ] Create Vercel project and deploy
-- [ ] Set production env vars on Vercel (`SITE_PASSWORD`, `AUTH_SECRET`, Sanity vars)
-- [ ] Confirm middleware password works in production (cookies use `secure: true` outside dev)
+- [x] GitHub repo created and pushed (AlchemyBranding/aqualogic-brand-portal)
+- [x] Vercel project created and deployed
+- [x] Production env vars set (`SITE_PASSWORD`, `AUTH_SECRET`)
+- [ ] Custom domain (when ready)
 
 ## Notification email
 
-The case study submission form does not yet send notification emails to Alchemy on submission. The hook point exists (`ALCHEMY_NOTIFY_EMAIL` env var). Recommend wiring up via Resend / Postmark / a Sanity webhook → Slack once a notification preference is chosen.
+The case study submission form does not yet send notification emails. Hook point: `ALCHEMY_NOTIFY_EMAIL` env var. Recommend wiring via Resend / Postmark / a Sanity webhook once a preference is chosen.

@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 
 export const metadata = { title: 'Values and behaviours — Aqualogic' };
@@ -39,11 +40,37 @@ const values = [
 export default function Values() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Values and behaviours' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Values and behaviours"
         title="Values and behaviours."
         lede="Values matter because they turn the brand from something Aqualogic says into something the business does. Behaviours are the practical expression of those values. Values set the standard. Behaviours make the standard visible."
       />
+
+      <section className="container-page pb-12 max-w-prose">
+        <h2 className="h-section text-aqualogic-ink">How to use them</h2>
+        <p className="body-prose mt-4">
+          As operating tools, not decorative language. Use them to shape recruitment, leadership,
+          development, recognition and internal communication. In marketing, the values should act
+          as tone and content filters &mdash; Trust through proof-led communication, Ingenuity
+          through problem-solving and improvement stories, Excellence through delivery standards,
+          Collaboration through team and client stories, Agility through responsiveness and pace.
+        </p>
+        <h2 className="h-section text-aqualogic-ink mt-10">Why this set works</h2>
+        <p className="body-prose mt-4">
+          This set balances external credibility with internal truth. Trust, Ingenuity and
+          Excellence give Aqualogic a strong core around confidence, thinking and standards.
+          Collaboration and Agility add the cultural and commercial qualities that make the
+          business feel distinct in practice. Together, they reflect both what Aqualogic wants to
+          be known for and how it wants to operate.
+        </p>
+      </section>
 
       <section className="container-page pb-20 grid gap-6 md:grid-cols-2">
         {values.map((v) => (
@@ -66,24 +93,6 @@ export default function Values() {
         ))}
       </section>
 
-      <section className="container-page pb-20 max-w-prose">
-        <h2 className="h-section text-aqualogic-ink">Why this set works</h2>
-        <p className="body-prose mt-4">
-          This set balances external credibility with internal truth. Trust, Ingenuity and
-          Excellence give Aqualogic a strong core around confidence, thinking and standards.
-          Collaboration and Agility add the cultural and commercial qualities that make the
-          business feel distinct in practice. Together, they reflect both what Aqualogic wants to
-          be known for and how it wants to operate.
-        </p>
-        <h2 className="h-section text-aqualogic-ink mt-10">How to use them</h2>
-        <p className="body-prose mt-4">
-          As operating tools, not decorative language. Use them to shape recruitment, leadership,
-          development, recognition and internal communication. In marketing, the values should act
-          as tone and content filters &mdash; Trust through proof-led communication, Ingenuity
-          through problem-solving and improvement stories, Excellence through delivery standards,
-          Collaboration through team and client stories, Agility through responsiveness and pace.
-        </p>
-      </section>
     </BrandFrame>
   );
 }

@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 
 export const metadata = { title: 'Purpose, Vision, Mission — Aqualogic' };
@@ -6,11 +7,33 @@ export const metadata = { title: 'Purpose, Vision, Mission — Aqualogic' };
 export default function PurposeVisionMission() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Purpose, Vision, Mission' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Purpose, Vision, Mission"
         title="Purpose, Vision, Mission."
         lede="Three statements doing different jobs. Purpose explains why Aqualogic exists. Vision sets the future the business is working towards. Mission explains what the business does, who it does it for and how."
       />
+
+      <section className="container-page pb-12 max-w-prose">
+        <h2 className="h-section text-aqualogic-ink">How to use these statements</h2>
+        <p className="body-prose mt-4">
+          They will only be useful if they are adopted internally. They need to become part of how
+          Aqualogic introduces itself, briefs its teams and trains its leaders to speak
+          consistently. Use them in induction, leadership materials, company overview decks,
+          internal communications and future updates to the brand guidelines.
+        </p>
+        <p className="body-prose mt-4">
+          On the website, the purpose and vision should sit more naturally within the About story
+          and wider company narrative, while the mission should shape the clearer explanation of
+          what Aqualogic does and how it creates value.
+        </p>
+      </section>
 
       <section className="container-page pb-12">
         <StatementCard
@@ -36,21 +59,6 @@ export default function PurposeVisionMission() {
           why="Specific enough to be useful, but broad enough to hold the current business and near-term growth. Reflects the positioning direction, ties together the network and customer-side story, and avoids the vagueness that makes mission statements unusable."
           tone="ink"
         />
-      </section>
-
-      <section className="container-page pb-20 max-w-prose">
-        <h2 className="h-section text-aqualogic-ink">How to use these statements</h2>
-        <p className="body-prose mt-4">
-          They will only be useful if they are adopted internally. They need to become part of how
-          Aqualogic introduces itself, briefs its teams and trains its leaders to speak
-          consistently. Use them in induction, leadership materials, company overview decks,
-          internal communications and future updates to the brand guidelines.
-        </p>
-        <p className="body-prose mt-4">
-          On the website, the purpose and vision should sit more naturally within the About story
-          and wider company narrative, while the mission should shape the clearer explanation of
-          what Aqualogic does and how it creates value.
-        </p>
       </section>
     </BrandFrame>
   );

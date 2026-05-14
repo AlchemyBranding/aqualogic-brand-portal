@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 
 export const metadata = { title: 'Tone of voice — Aqualogic' };
@@ -42,11 +43,33 @@ const donts = [
 export default function Voice() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Tone of voice' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Tone of voice"
         title="Tone of voice."
         lede="If positioning explains what the business is, tone of voice shapes how that message is delivered. It is one of the main reasons a company can say something accurate and still fail to land it properly."
       />
+
+      <section className="container-page pb-12 max-w-prose">
+        <h2 className="h-section text-aqualogic-ink">How to use it</h2>
+        <p className="body-prose mt-4">
+          The homepage should sound clear and confident. The About story should sound grounded and
+          credible. Service pages should feel practical and easy to follow rather than overloaded
+          with jargon. Case studies should sound outcome-led and evidence-based. Recruitment pages
+          should sound human and honest rather than generic.
+        </p>
+        <p className="body-prose mt-4">
+          Different channels do not all need to sound identical, but they should all feel like
+          they come from the same brand. Tone of voice is not the same as messaging: messaging is
+          what Aqualogic needs to say, tone of voice is how it should say it.
+        </p>
+      </section>
 
       <section className="container-page pb-14">
         <p className="eyebrow mb-3">Aqualogic should sound</p>
@@ -83,20 +106,6 @@ export default function Voice() {
         </div>
       </section>
 
-      <section className="container-page pb-20 max-w-prose">
-        <h2 className="h-section text-aqualogic-ink">In practice</h2>
-        <p className="body-prose mt-4">
-          The homepage should sound clear and confident. The About story should sound grounded and
-          credible. Service pages should feel practical and easy to follow rather than overloaded
-          with jargon. Case studies should sound outcome-led and evidence-based. Recruitment pages
-          should sound human and honest rather than generic.
-        </p>
-        <p className="body-prose mt-4">
-          Different channels do not all need to sound identical, but they should all feel like
-          they come from the same brand. Tone of voice is not the same as messaging: messaging is
-          what Aqualogic needs to say, tone of voice is how it should say it.
-        </p>
-      </section>
     </BrandFrame>
   );
 }

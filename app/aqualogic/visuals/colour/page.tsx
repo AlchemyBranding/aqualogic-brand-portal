@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { SwatchGrid } from '@/components/SwatchGrid';
 import { brandMeta } from '@/lib/brand-tokens';
@@ -10,6 +11,14 @@ export default function AqualogicColour() {
   const meta = brandMeta.aqualogic;
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Visuals' },
+          { label: 'Colour' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Visuals / Colour"
         title="Colour."

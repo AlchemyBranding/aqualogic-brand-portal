@@ -12,15 +12,17 @@ type Props = {
 const navByBrand: Record<BrandKey, { label: string; href: string }[]> = {
   aqualogic: [
     { label: 'Strategy', href: '/aqualogic/strategy' },
-    { label: 'Positioning', href: '/aqualogic/positioning' },
     { label: 'Voice', href: '/aqualogic/voice' },
     { label: 'Visuals', href: '/aqualogic/visuals/logo' },
+    { label: 'Case studies', href: '/case-studies' },
     { label: 'Downloads', href: '/aqualogic/downloads' }
   ],
   sustec: [
-    { label: 'About', href: '/sustec/about' },
-    { label: 'Architecture', href: '/sustec/architecture' },
-    { label: 'Visuals', href: '/sustec/visuals/logo' },
+    { label: 'About', href: '/sustec#about' },
+    { label: 'Strategy', href: '/sustec#group-strategy' },
+    { label: 'Architecture', href: '/sustec#architecture' },
+    { label: 'Heritage', href: '/sustec#heritage' },
+    { label: 'Visual identity', href: '/sustec#visual-identity' },
     { label: 'Downloads', href: '/sustec/downloads' }
   ],
   group: [
@@ -47,6 +49,8 @@ export function BrandFrame({ brand, children, showFooter = true }: Props) {
             >
               {brand === 'aqualogic' ? (
                 <BrandLogo brand="aqualogic" variant="mark" height={32} fallbackToText={false} />
+              ) : brand === 'sustec' ? (
+                <BrandLogo brand="sustec" variant="mark" height={32} fallbackToText={false} />
               ) : null}
               <span className="eyebrow group-hover:text-aqualogic-ink transition">
                 Sustec Group Brand Portal

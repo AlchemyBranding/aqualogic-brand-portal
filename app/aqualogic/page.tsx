@@ -1,44 +1,53 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { NavTile } from '@/components/NavTile';
 import { BrandLogo } from '@/components/BrandLogo';
 
 export const metadata = { title: 'Aqualogic — Brand portal' };
 
+// Reorganised so each tile group has 3-4 clear entries, each entry is the
+// single best landing point for that theme rather than a flat dump of every
+// language page.
 const groups = [
   {
-    eyebrow: 'Language elements',
-    description: 'How Aqualogic is described, expressed and explained.',
+    eyebrow: 'Strategy and story',
+    description: 'How Aqualogic is positioned, expressed and explained.',
     tiles: [
-      { href: '/aqualogic/strategy', title: 'Strategy', desc: 'Executive summary, business context, market position.' },
-      { href: '/aqualogic/positioning', title: 'Positioning', desc: 'The integrated water conservation and demand management story.' },
-      { href: '/aqualogic/strapline', title: 'Strapline', desc: '"Intelligent water conservation" and how to use it.' },
-      { href: '/aqualogic/purpose', title: 'Purpose, Vision, Mission', desc: 'Why we exist, where we are going, what we do.' },
-      { href: '/aqualogic/values', title: 'Values and behaviours', desc: 'Trust, Ingenuity, Excellence, Collaboration, Agility.' },
-      { href: '/aqualogic/voice', title: 'Tone of voice', desc: 'Clear, confident, practical, human.' },
-      { href: '/aqualogic/messaging', title: 'Messaging framework', desc: 'Core message and four supporting pillars.' },
-      { href: '/aqualogic/audience', title: 'Audience and personas', desc: 'Client, recruitment, reputation.' },
-      { href: '/aqualogic/heritage', title: 'Heritage', desc: 'From Flow Control to today.' },
-      { href: '/aqualogic/architecture', title: 'Brand architecture', desc: 'Relationship to Sustec.' }
+      { href: '/aqualogic/strategy', title: 'Strategy', desc: 'Executive summary, business context, market position and the strengths-gaps-opportunities read.' },
+      { href: '/aqualogic/positioning', title: 'Positioning and strapline', desc: 'The integrated water conservation and demand management story, and "Intelligent water conservation".', secondaryHref: '/aqualogic/strapline' },
+      { href: '/aqualogic/purpose', title: 'Purpose, Vision and Mission', desc: 'Why we exist, where we are going, what we do.' },
+      { href: '/aqualogic/heritage', title: 'Heritage', desc: 'From Flow Control in 1979 to today.' }
     ]
   },
   {
-    eyebrow: 'Visual elements',
+    eyebrow: 'How we sound and behave',
+    description: 'Voice, values, messaging and the audiences they need to land with.',
+    tiles: [
+      { href: '/aqualogic/voice', title: 'Tone of voice', desc: 'Clear, confident, practical, human.' },
+      { href: '/aqualogic/values', title: 'Values and behaviours', desc: 'Trust, Ingenuity, Excellence, Collaboration, Agility.' },
+      { href: '/aqualogic/messaging', title: 'Messaging framework', desc: 'Core message and four supporting pillars.' },
+      { href: '/aqualogic/audience', title: 'Audience and personas', desc: 'Client and delivery, recruitment, reputation and growth.' }
+    ]
+  },
+  {
+    eyebrow: 'Visual identity',
     description: 'How Aqualogic looks.',
     tiles: [
-      { href: '/aqualogic/visuals/logo', title: 'Logo', desc: 'Lockup, mark, clearspace, usage.' },
-      { href: '/aqualogic/visuals/colour', title: 'Colour', desc: 'Live swatches with HEX and RGB values.' },
-      { href: '/aqualogic/visuals/typography', title: 'Typography', desc: 'Manrope, weights and pairings.' },
-      { href: '/aqualogic/visuals/imagery', title: 'Imagery', desc: 'Photography and imagery direction.' }
+      { href: '/aqualogic/visuals/logo', title: 'Logo', desc: 'Lockup, mark, clearspace, usage rules.' },
+      { href: '/aqualogic/visuals/colour', title: 'Colour', desc: 'Live swatches with HEX, RGB and usage notes.' },
+      { href: '/aqualogic/visuals/typography', title: 'Typography', desc: 'Manrope, weights, scale and pairings.' },
+      { href: '/aqualogic/visuals/imagery', title: 'Imagery', desc: 'Photography direction and dos and donts.' }
     ]
   },
   {
     eyebrow: 'For internal teams',
     description: 'Working with the Aqualogic brand day to day.',
     tiles: [
+      { href: '/aqualogic/architecture', title: 'Brand architecture', desc: 'How Aqualogic relates to Sustec.' },
       { href: '/aqualogic/employer-brand', title: 'Employer brand', desc: 'Established, growing, human, full of opportunity.' },
-      { href: '/linkedin', title: 'LinkedIn setup', desc: 'Personal profile, banners, bio, tagging.' },
-      { href: '/aqualogic/downloads', title: 'Downloads', desc: 'Logos, marketing kit, banners, photography.' },
-      { href: '/aqualogic/recommendations', title: 'Recommendations', desc: 'Where the existing guidelines are thin and what to add.' }
+      { href: '/linkedin', title: 'LinkedIn setup', desc: 'Personal profile, banners, professional headline, company page treatment.' },
+      { href: '/case-studies', title: 'Case studies', desc: 'Submit a project and browse the case study library.' },
+      { href: '/aqualogic/downloads', title: 'Downloads', desc: 'Logos, marketing kit, banners, photography, headshots.' }
     ]
   }
 ];
@@ -46,7 +55,9 @@ const groups = [
 export default function AqualogicHome() {
   return (
     <BrandFrame brand="aqualogic">
-      <section className="container-page pt-16 md:pt-24 pb-14">
+      <Breadcrumbs items={[{ label: 'Portal', href: '/' }, { label: 'Aqualogic' }]} />
+
+      <section className="container-page pt-10 pb-14">
         <p className="eyebrow mb-8">Operating brand</p>
         <h1 className="sr-only">Aqualogic</h1>
         <BrandLogo

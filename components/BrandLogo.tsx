@@ -26,7 +26,11 @@ const PATHS: Record<Brand, Partial<Record<Variant, string>>> = {
     // "Reverse on dark" preview where the panel context makes sense.
     reverse: '/assets/aqualogic/logos/aqualogic-logo-reverse-wordmark-white.svg'
   },
-  sustec: {},
+  sustec: {
+    mark: '/assets/sustec/logos/sustec-mark-fullcolour.svg',
+    lockup: '/assets/sustec/logos/sustec-logo-primary-fullcolour.svg',
+    reverse: '/assets/sustec/logos/sustec-logo-reverse-white.svg'
+  },
   group: {}
 };
 

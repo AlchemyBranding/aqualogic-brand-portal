@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
 import { isSanityConfigured } from '@/lib/sanity-client';
@@ -26,6 +27,13 @@ export default function SubmitCaseStudy({
 
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Case studies', href: '/case-studies' },
+          { label: 'Submit' }
+        ]}
+      />
       <PageHeader
         eyebrow="Case studies / Submit"
         title="Submit a case study."

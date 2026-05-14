@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 
 export const metadata = { title: 'Messaging framework — Aqualogic' };
@@ -29,11 +30,41 @@ const pillars = [
 export default function Messaging() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Messaging framework' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Messaging framework"
         title="Messaging framework."
         lede="If positioning defines the space Aqualogic occupies, messaging defines the things the business needs people to understand, believe and remember. A clear hierarchy of what to say first, what to say next, and what proof needs to sit behind those claims."
       />
+
+      <section className="container-page pb-12 grid md:grid-cols-2 gap-10">
+        <div>
+          <h2 className="h-section text-aqualogic-ink">How it works on the website</h2>
+          <p className="body-prose mt-4">
+            The homepage should lead with the core message and make the business easier to place
+            immediately. Then use the pillars to guide the order in which the story unfolds: first
+            establish Aqualogic as an integrated water conservation and demand management business,
+            then show how that translates into practical delivery, then reinforce trust and
+            credibility, and finally bring through the more human and agile side of the brand.
+          </p>
+        </div>
+        <div>
+          <h2 className="h-section text-aqualogic-ink">How it works in marketing</h2>
+          <p className="body-prose mt-4">
+            The framework should act as a filter rather than a script. Not every campaign, post or
+            piece of content needs to repeat the same sentence, but everything should reinforce
+            the same central story. Contract wins, case studies, thought leadership, recruitment
+            content, leadership commentary and sector updates should all be linked back to one of
+            the key pillars rather than being pushed out as isolated pieces of activity.
+          </p>
+        </div>
+      </section>
 
       <section className="container-page pb-12">
         <div className="rounded-3xl bg-aqualogic-ink text-white p-8 md:p-12">
@@ -59,29 +90,6 @@ export default function Messaging() {
             </li>
           ))}
         </ol>
-      </section>
-
-      <section className="container-page pb-20 grid md:grid-cols-2 gap-10">
-        <div>
-          <h2 className="h-section text-aqualogic-ink">How it works on the website</h2>
-          <p className="body-prose mt-4">
-            The homepage should lead with the core message and make the business easier to place
-            immediately. Then use the pillars to guide the order in which the story unfolds: first
-            establish Aqualogic as an integrated water conservation and demand management business,
-            then show how that translates into practical delivery, then reinforce trust and
-            credibility, and finally bring through the more human and agile side of the brand.
-          </p>
-        </div>
-        <div>
-          <h2 className="h-section text-aqualogic-ink">How it works in marketing</h2>
-          <p className="body-prose mt-4">
-            The framework should act as a filter rather than a script. Not every campaign, post or
-            piece of content needs to repeat the same sentence, but everything should reinforce
-            the same central story. Contract wins, case studies, thought leadership, recruitment
-            content, leadership commentary and sector updates should all be linked back to one of
-            the key pillars rather than being pushed out as isolated pieces of activity.
-          </p>
-        </div>
       </section>
 
       <section className="container-page pb-20">

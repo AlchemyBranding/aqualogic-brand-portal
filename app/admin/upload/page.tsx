@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
 import { isSanityConfigured } from '@/lib/sanity-client';
@@ -13,6 +14,7 @@ export default function UploadPage({ searchParams }: { searchParams: { status?: 
   const configured = isSanityConfigured();
   return (
     <BrandFrame brand="group">
+      <Breadcrumbs items={[{ label: 'Portal', href: '/' }, { label: 'Admin' }, { label: 'Photo upload' }]} />
       <PageHeader
         eyebrow="Admin / Photo upload"
         title="Photography library."

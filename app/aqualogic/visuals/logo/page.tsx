@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
 import { getAssets, type AssetFile } from '@/lib/assets';
@@ -30,6 +31,14 @@ export default function AqualogicLogo() {
 
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Visuals' },
+          { label: 'Logo' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Visuals / Logo"
         title="Logo."

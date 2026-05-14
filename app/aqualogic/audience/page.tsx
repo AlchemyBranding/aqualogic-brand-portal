@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 
 export const metadata = { title: 'Audience and personas — Aqualogic' };
@@ -39,6 +40,13 @@ const personas = [
 export default function Audience() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Audience and personas' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Audience"
         title="Audience and personas."

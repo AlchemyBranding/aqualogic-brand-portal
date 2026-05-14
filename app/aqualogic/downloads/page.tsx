@@ -1,6 +1,9 @@
+import Link from 'next/link';
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { DownloadCard } from '@/components/DownloadCard';
+import { Callout } from '@/components/Callout';
 import { getAssets } from '@/lib/assets';
 
 export const metadata = { title: 'Downloads — Aqualogic' };
@@ -10,30 +13,125 @@ export default function AqualogicDownloads() {
   const kit = getAssets('assets/aqualogic/marketing-kit');
   const banners = getAssets('assets/aqualogic/banners');
   const photos = getAssets('assets/aqualogic/photography');
+  const headshots = getAssets('assets/aqualogic/headshots');
   const icons = getAssets('assets/aqualogic/icons');
 
   const groups = [
-    { label: 'Logos', files: logos, empty: 'No logo files yet. See /aqualogic/visuals/logo for expected variants and naming.' },
-    { label: 'Marketing kit', files: kit, empty: 'No decks, templates or one-pagers yet.' },
-    { label: 'Banners', files: banners, empty: 'No LinkedIn banners or signatures yet.' },
-    { label: 'Photography', files: photos, empty: 'No photography uploaded yet. Add via /admin/upload (Sanity).' },
-    { label: 'Icons', files: icons, empty: 'No icon system defined yet. See Recommendations.' }
+    {
+      label: 'Logos',
+      files: logos,
+      note:
+        'Use SVG for screens and vector destinations (decks, web, signage). Use PNG only where vector is not supported. See the logo guidelines for clearspace, minimum size and what not to do.',
+      guideLink: { href: '/aqualogic/visuals/logo', label: 'Open logo guidelines' },
+      empty: 'No logo files yet. Drop them into /public/assets/aqualogic/logos.'
+    },
+    {
+      label: 'Marketing kit',
+      files: kit,
+      empty: 'No decks, templates or one-pagers yet.'
+    },
+    {
+      label: 'Banners',
+      files: banners,
+      note: 'LinkedIn banners are sized to LinkedIn’s spec of 1584×396 px.',
+      empty: 'No LinkedIn banners or signatures yet.'
+    },
+    {
+      label: 'Photography',
+      files: photos,
+      empty: 'No photography uploaded yet.'
+    },
+    {
+      label: 'Headshots',
+      files: headshots,
+      note: 'Approved leadership and team headshots, when supplied.',
+      empty: 'No headshots uploaded yet. These will appear here once available.'
+    },
+    {
+      label: 'Icons',
+      files: icons,
+      empty: 'No icon system defined yet.'
+    }
   ];
 
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Downloads' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Downloads"
         title="Downloads."
-        lede="All Aqualogic brand assets in one place. Files are read from the asset folders at build time, so anything dropped in appears automatically with no code changes."
-      />
+        lede="Approved Aqualogic brand assets for use by the business. Refer to the brand guidelines for correct logo, colour, typography and imagery usage."
+      >
+        <div className="flex flex-wrap items-center gap-3">
+          <Link
+            href="/aqualogic/visuals/logo"
+            className="inline-flex items-center gap-2 rounded-xl bg-aqualogic-ink text-white px-5 py-3 text-sm font-semibold hover:bg-aqualogic-cyan transition-colors"
+          >
+            Logo guidelines
+          </Link>
+          <Link
+            href="/aqualogic/visuals/colour"
+            className="inline-flex items-center gap-2 rounded-xl border border-aqualogic-ink text-aqualogic-ink px-5 py-3 text-sm font-semibold hover:bg-aqualogic-ink hover:text-white transition-colors"
+          >
+            Colour
+          </Link>
+          <Link
+            href="/aqualogic/visuals/typography"
+            className="inline-flex items-center gap-2 rounded-xl border border-aqualogic-ink text-aqualogic-ink px-5 py-3 text-sm font-semibold hover:bg-aqualogic-ink hover:text-white transition-colors"
+          >
+            Typography
+          </Link>
+        </div>
+      </PageHeader>
+
+      <section className="container-page pb-10">
+        <Callout title="Quick recap" variant="note">
+          <ul className="space-y-1 mt-1">
+            <li>
+              <strong>SVG</strong> &mdash; use for screen, decks, signage, anywhere vector is
+              supported. Scales without loss.
+            </li>
+            <li>
+              <strong>PNG</strong> &mdash; use only where vector is not supported. Reverse and
+              white-only variants are supplied with transparent backgrounds so they can drag onto
+              any colour surface.
+            </li>
+            <li>
+              <strong>Reverse</strong> &mdash; for use on Ink, Black or other dark surfaces only.
+              Not for placement on Paper.
+            </li>
+            <li>
+              Keep clearspace around the lockup equal to the width of the letter &ldquo;u&rdquo;
+              in the wordmark.
+            </li>
+          </ul>
+        </Callout>
+      </section>
 
       <div className="container-page pb-20 space-y-12">
         {groups.map((g) => (
           <section key={g.label}>
-            <header className="mb-5 flex items-end justify-between">
-              <h2 className="h-section text-aqualogic-ink">{g.label}</h2>
-              <p className="text-sm text-grey-graphite">{g.files.length} file{g.files.length === 1 ? '' : 's'}</p>
+            <header className="mb-5 flex items-end justify-between gap-4 flex-wrap">
+              <div>
+                <h2 className="h-section text-aqualogic-ink">{g.label}</h2>
+                {g.note && (
+                  <p className="text-sm text-grey-graphite mt-2 max-w-prose">{g.note}</p>
+                )}
+              </div>
+              <div className="flex items-center gap-4 text-sm">
+                <p className="text-grey-graphite">{g.files.length} file{g.files.length === 1 ? '' : 's'}</p>
+                {g.guideLink && (
+                  <Link href={g.guideLink.href} className="text-aqualogic-cyan font-semibold hover:underline">
+                    {g.guideLink.label} &rarr;
+                  </Link>
+                )}
+              </div>
             </header>
             {g.files.length === 0 ? (
               <p className="text-sm text-grey-space italic">{g.empty}</p>

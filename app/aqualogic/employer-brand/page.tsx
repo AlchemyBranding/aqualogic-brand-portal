@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 
 export const metadata = { title: 'Employer brand — Aqualogic' };
@@ -36,6 +37,13 @@ const themes = [
 export default function EmployerBrand() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Employer brand' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Employer brand"
         title="Employer brand."

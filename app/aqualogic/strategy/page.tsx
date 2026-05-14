@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Section } from '@/components/Section';
 import { Callout } from '@/components/Callout';
@@ -16,6 +17,13 @@ const jumps = [
 export default function AqualogicStrategy() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Strategy' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Strategy"
         title="Strategy."

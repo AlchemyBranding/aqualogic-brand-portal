@@ -23,9 +23,15 @@ export default function HomePage() {
             href="/sustec"
             className="group rounded-3xl bg-sustec-blue text-white p-8 md:p-12 flex flex-col min-h-[280px] focus-ring focus-visible:ring-sustec-green transition-shadow hover:shadow-[0_18px_40px_rgba(0,146,210,0.35)]"
           >
-            <p className="eyebrow text-white/80 mb-4">Group brand</p>
-            <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">Sustec</h2>
-            <p className="mt-4 text-white/85 max-w-prose">
+            <p className="eyebrow text-white/80 mb-6">Group brand</p>
+            <h2 className="sr-only">Sustec</h2>
+            <BrandLogo
+              brand="sustec"
+              variant="reverse"
+              className="h-14 md:h-20 w-auto self-start"
+              fallbackToText={true}
+            />
+            <p className="mt-6 text-white/85 max-w-prose">
               The parent brand that supports, connects and future-proofs a portfolio of operating
               businesses, while letting each one keep its market identity.
             </p>
@@ -60,21 +66,26 @@ export default function HomePage() {
       </section>
 
       <section className="container-page pb-20">
-        <div className="grid gap-6 md:grid-cols-3">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
           <CrossLink
             title="LinkedIn guidance"
-            description="Personal profile setup, banners, bio copy, tagging."
+            description="Personal profile, banners, professional headline, company page."
             href="/linkedin"
           />
           <CrossLink
             title="Case studies"
-            description="Submit and review case study material for marketing use."
+            description="Submit a project and browse the case study library."
             href="/case-studies"
           />
           <CrossLink
-            title="Downloads"
-            description="Logos, marketing kit, banners, photography."
+            title="Aqualogic downloads"
+            description="Logos, marketing kit, banners, photography, headshots."
             href="/aqualogic/downloads"
+          />
+          <CrossLink
+            title="Sustec downloads"
+            description="Group brand assets: logos, marketing kit and more."
+            href="/sustec/downloads"
           />
         </div>
       </section>

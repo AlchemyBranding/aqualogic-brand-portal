@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
 
@@ -7,6 +8,14 @@ export const metadata = { title: 'Imagery — Aqualogic' };
 export default function AqualogicImagery() {
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Visuals' },
+          { label: 'Imagery' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Visuals / Imagery"
         title="Imagery."

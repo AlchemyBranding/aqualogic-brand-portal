@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
 import { brandMeta } from '@/lib/brand-tokens';
@@ -19,6 +20,14 @@ export default function AqualogicTypography() {
   const meta = brandMeta.aqualogic;
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs
+        items={[
+          { label: 'Portal', href: '/' },
+          { label: 'Aqualogic', href: '/aqualogic' },
+          { label: 'Visuals' },
+          { label: 'Typography' }
+        ]}
+      />
       <PageHeader
         eyebrow="Aqualogic / Visuals / Typography"
         title="Typography."

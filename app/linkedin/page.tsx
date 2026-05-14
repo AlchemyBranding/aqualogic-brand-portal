@@ -1,4 +1,5 @@
 import { BrandFrame } from '@/components/BrandFrame';
+import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
 import { DownloadCard } from '@/components/DownloadCard';
@@ -44,6 +45,7 @@ export default function LinkedInGuidance() {
 
   return (
     <BrandFrame brand="aqualogic">
+      <Breadcrumbs items={[{ label: 'Portal', href: '/' }, { label: 'LinkedIn guidance' }]} />
       <PageHeader
         eyebrow="LinkedIn guidance"
         title="LinkedIn guidance."
