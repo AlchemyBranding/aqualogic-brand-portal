@@ -1,5 +1,6 @@
 import { BrandFrame } from '@/components/BrandFrame';
 import { NavTile } from '@/components/NavTile';
+import { BrandLogo } from '@/components/BrandLogo';
 
 export const metadata = { title: 'Aqualogic — Brand portal' };
 
@@ -45,12 +46,16 @@ const groups = [
 export default function AqualogicHome() {
   return (
     <BrandFrame brand="aqualogic">
-      <section className="container-page pt-20 md:pt-28 pb-14">
-        <p className="eyebrow mb-5">Operating brand</p>
-        <h1 className="h-display text-aqualogic-ink max-w-[18ch]">
-          Aqualogic.
-        </h1>
-        <p className="mt-6 text-aqualogic-cyan font-semibold text-xl tracking-tight">
+      <section className="container-page pt-16 md:pt-24 pb-14">
+        <p className="eyebrow mb-8">Operating brand</p>
+        <h1 className="sr-only">Aqualogic</h1>
+        <BrandLogo
+          brand="aqualogic"
+          variant="lockup"
+          className="h-24 md:h-32 lg:h-40 w-auto"
+          fallbackToText={true}
+        />
+        <p className="mt-8 text-aqualogic-cyan font-semibold text-xl tracking-tight">
           Intelligent water conservation.
         </p>
         <p className="lede mt-6 max-w-prose">

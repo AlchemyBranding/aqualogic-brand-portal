@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { brandMeta, type BrandKey } from '@/lib/brand-tokens';
+import { BrandLogo } from '@/components/BrandLogo';
 
 type Props = {
   brand: BrandKey;
@@ -36,10 +37,19 @@ export function BrandFrame({ brand, children, showFooter = true }: Props) {
   return (
     <div className={`${meta.bodyClass} min-h-screen flex flex-col bg-aqualogic-paper`}>
       <header className="border-b border-grey-smoke/60 bg-white/70 backdrop-blur">
-        <div className="container-page flex items-center justify-between py-5">
+        <div className="container-page flex items-center justify-between py-4">
           <div className="flex items-center gap-3">
-            <Link href="/" className="eyebrow hover:text-aqualogic-ink transition">
-              Sustec Group Brand Portal
+            <Link
+              href="/"
+              aria-label="Sustec Group brand portal home"
+              className="flex items-center gap-3 group"
+            >
+              {brand === 'aqualogic' ? (
+                <BrandLogo brand="aqualogic" variant="mark" height={32} fallbackToText={false} />
+              ) : null}
+              <span className="eyebrow group-hover:text-aqualogic-ink transition">
+                Sustec Group Brand Portal
+              </span>
             </Link>
             {brand !== 'group' && (
               <>

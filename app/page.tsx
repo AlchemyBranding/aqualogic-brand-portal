@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { BrandFrame } from '@/components/BrandFrame';
+import { BrandLogo } from '@/components/BrandLogo';
 
 export default function HomePage() {
   return (
@@ -39,9 +40,15 @@ export default function HomePage() {
             href="/aqualogic"
             className="group rounded-3xl bg-aqualogic-ink text-white p-8 md:p-12 flex flex-col min-h-[280px] focus-ring focus-visible:ring-aqualogic-cyan transition-shadow hover:shadow-[0_18px_40px_rgba(0,182,219,0.25)]"
           >
-            <p className="eyebrow text-aqualogic-sky mb-4">Operating brand</p>
-            <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">Aqualogic</h2>
-            <p className="mt-4 text-aqualogic-sky/90 max-w-prose">
+            <p className="eyebrow text-aqualogic-sky mb-6">Operating brand</p>
+            <h2 className="sr-only">Aqualogic</h2>
+            <BrandLogo
+              brand="aqualogic"
+              variant="reverse"
+              className="h-14 md:h-20 w-auto self-start"
+              fallbackToText={true}
+            />
+            <p className="mt-6 text-aqualogic-sky/90 max-w-prose">
               Intelligent water conservation. An integrated water conservation and demand
               management business, working across the water journey from source to tap.
             </p>
