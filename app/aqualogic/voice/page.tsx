@@ -53,7 +53,7 @@ export default function Voice() {
         <ul role="list" className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
           {traits.map((t) => (
             <li key={t.word} className="rounded-3xl bg-aqualogic-ink text-white p-8">
-              <p className="text-5xl font-extrabold text-aqualogic-cyan">{t.word}.</p>
+              <p className="text-5xl lg:text-4xl font-extrabold tracking-tight text-aqualogic-cyan">{t.word}.</p>
               <p className="mt-4 text-sm text-aqualogic-sky/90 leading-relaxed">{t.desc}</p>
             </li>
           ))}
