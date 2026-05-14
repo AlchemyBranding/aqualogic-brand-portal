@@ -17,10 +17,10 @@ A running list of everything the portal has flagged for the client team to provi
 
 These appear in the site footer and on the LinkedIn page. Update via `lib/external-links.ts`:
 
-- [ ] Sustec website URL
-- [ ] Aqualogic website URL
-- [ ] Aqualogic LinkedIn URL
-- [ ] Sustec LinkedIn URL
+- [x] Sustec website URL — `https://sustec.uk/`
+- [x] Aqualogic website URL — `https://aqualogic-wc.com/`
+- [x] Aqualogic LinkedIn URL — `https://www.linkedin.com/company/aqualogic-wc-ltd/`
+- [x] Sustec LinkedIn URL — **N/A**, Sustec has no public LinkedIn presence
 - [ ] Internal intranet URL
 
 ## Asset folders awaiting files

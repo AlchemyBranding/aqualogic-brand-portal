@@ -1,15 +1,19 @@
-// One place to manage outbound links. Update these once the client provides them.
+// One place to manage outbound links. Update these if URLs change.
 // Items marked NEEDS-URL are flagged in FLAGS.md.
 
 export const externalLinks = {
-  sustecWebsite: { label: 'Sustec website', href: '#', flagged: true },
-  aqualogicWebsite: { label: 'Aqualogic website', href: '#', flagged: true },
+  sustecWebsite: { label: 'Sustec website', href: 'https://sustec.uk/', flagged: false },
+  aqualogicWebsite: {
+    label: 'Aqualogic website',
+    href: 'https://aqualogic-wc.com/',
+    flagged: false
+  },
   aqualogicLinkedIn: {
     label: 'Aqualogic on LinkedIn',
-    href: '#',
-    flagged: true
+    href: 'https://www.linkedin.com/company/aqualogic-wc-ltd/',
+    flagged: false
   },
-  sustecLinkedIn: { label: 'Sustec on LinkedIn', href: '#', flagged: true },
+  // Sustec does not currently have a LinkedIn presence. Intentionally omitted.
   intranet: { label: 'Internal intranet', href: '#', flagged: true }
 } as const;
 

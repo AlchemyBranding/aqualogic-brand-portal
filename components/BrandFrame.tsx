@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { brandMeta, type BrandKey } from '@/lib/brand-tokens';
 import { BrandLogo } from '@/components/BrandLogo';
+import { externalLinks } from '@/lib/external-links';
 
 type Props = {
   brand: BrandKey;
@@ -108,10 +109,40 @@ function BrandFooter({ brand }: { brand: BrandKey }) {
         <div>
           <p className="eyebrow mb-3">External</p>
           <ul className="space-y-2 text-grey-graphite">
-            <li>Sustec website <span className="pill ml-2">URL needed</span></li>
-            <li>Aqualogic website <span className="pill ml-2">URL needed</span></li>
-            <li>Aqualogic LinkedIn <span className="pill ml-2">URL needed</span></li>
-            <li>Internal intranet <span className="pill ml-2">URL needed</span></li>
+            <li>
+              <a
+                href={externalLinks.sustecWebsite.href}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-aqualogic-ink"
+              >
+                {externalLinks.sustecWebsite.label}
+              </a>
+            </li>
+            <li>
+              <a
+                href={externalLinks.aqualogicWebsite.href}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-aqualogic-ink"
+              >
+                {externalLinks.aqualogicWebsite.label}
+              </a>
+            </li>
+            <li>
+              <a
+                href={externalLinks.aqualogicLinkedIn.href}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-aqualogic-ink"
+              >
+                {externalLinks.aqualogicLinkedIn.label}
+              </a>
+            </li>
+            <li>
+              {externalLinks.intranet.label}{' '}
+              <span className="pill ml-2">URL needed</span>
+            </li>
           </ul>
         </div>
       </div>

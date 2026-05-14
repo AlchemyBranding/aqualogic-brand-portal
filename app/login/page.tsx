@@ -19,10 +19,28 @@ export default function LoginPage({ searchParams }: { searchParams: SearchParams
           <p className="lede max-w-prose">
             The working brand bible for Sustec Group and its operating businesses,
             including Aqualogic. This space is for internal teams. Please sign in
-            with the master password supplied by Alchemy.
+            with the master password supplied by{' '}
+            <a
+              href="https://www.alchemybranding.studio"
+              target="_blank"
+              rel="noreferrer"
+              className="text-aqualogic-cyan underline-offset-2 hover:underline"
+            >
+              Alchemy
+            </a>
+            .
           </p>
           <p className="mt-6 text-sm text-grey-graphite">
-            Trouble accessing? Contact your point of contact at Alchemy.
+            Trouble accessing? Contact your point of contact at{' '}
+            <a
+              href="https://www.alchemybranding.studio"
+              target="_blank"
+              rel="noreferrer"
+              className="text-aqualogic-cyan underline-offset-2 hover:underline"
+            >
+              Alchemy
+            </a>
+            .
           </p>
         </section>
 

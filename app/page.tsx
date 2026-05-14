@@ -13,7 +13,7 @@ export default function HomePage() {
         <p className="lede mt-8 max-w-prose">
           This portal is for internal teams across Sustec and its operating companies, starting
           with Aqualogic. It is the live source of truth for how each brand should look, sound and
-          be used. It replaces the old InDesign documents, and it grows as the group grows.
+          be used.
         </p>
       </section>
 
@@ -21,17 +21,15 @@ export default function HomePage() {
         <div className="grid gap-6 md:grid-cols-2">
           <Link
             href="/sustec"
-            className="group rounded-3xl border border-grey-smoke bg-white p-8 md:p-12 flex flex-col min-h-[280px] focus-ring focus-visible:ring-aqualogic-cyan transition-shadow hover:shadow-[0_18px_40px_rgba(0,146,210,0.12)]"
+            className="group rounded-3xl bg-sustec-blue text-white p-8 md:p-12 flex flex-col min-h-[280px] focus-ring focus-visible:ring-sustec-green transition-shadow hover:shadow-[0_18px_40px_rgba(0,146,210,0.35)]"
           >
-            <p className="eyebrow mb-4">Group brand</p>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-aqualogic-ink leading-tight">
-              Sustec
-            </h2>
-            <p className="mt-4 text-grey-graphite max-w-prose">
+            <p className="eyebrow text-white/80 mb-4">Group brand</p>
+            <h2 className="text-3xl md:text-4xl font-extrabold leading-tight">Sustec</h2>
+            <p className="mt-4 text-white/85 max-w-prose">
               The parent brand that supports, connects and future-proofs a portfolio of operating
               businesses, while letting each one keep its market identity.
             </p>
-            <span aria-hidden className="mt-auto pt-10 text-aqualogic-cyan font-semibold">
+            <span aria-hidden className="mt-auto pt-10 text-sustec-green font-semibold">
               Open Sustec area &rarr;
             </span>
           </Link>
