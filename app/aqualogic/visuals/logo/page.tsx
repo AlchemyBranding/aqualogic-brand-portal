@@ -80,14 +80,35 @@ export default function AqualogicLogo() {
         </section>
       )}
 
-      <section className="container-page pb-14 max-w-prose">
-        <h2 className="h-section text-aqualogic-ink">Clearspace</h2>
-        <p className="body-prose mt-4">
-          Ensure the logo is never placed too close to the edge of a document or to other elements.
-          The X factor is measured using the width of the letter &ldquo;u&rdquo; from the logo and
-          must be applied to all four sides. For the logo mark, half of the symbol defines the
-          X factor.
-        </p>
+      <section className="container-page pb-14 grid md:grid-cols-2 gap-10">
+        <div className="max-w-prose">
+          <h2 className="h-section text-aqualogic-ink">Clearspace</h2>
+          <p className="body-prose mt-4">
+            Ensure the logo is never placed too close to the edge of a document or to other elements.
+            The X factor is measured using the width of the letter &ldquo;u&rdquo; from the logo and
+            must be applied to all four sides. For the logo mark, half of the symbol defines the
+            X factor.
+          </p>
+        </div>
+        <div className="max-w-prose">
+          <h2 className="h-section text-aqualogic-ink">Minimum size</h2>
+          <p className="body-prose mt-4">
+            Below the minimum size the wordmark loses legibility and the mark can blur on screen.
+          </p>
+          <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-2 text-sm">
+            <dt className="font-semibold text-aqualogic-ink">Lockup, digital</dt>
+            <dd className="font-mono text-grey-graphite">120 px wide</dd>
+            <dt className="font-semibold text-aqualogic-ink">Lockup, print</dt>
+            <dd className="font-mono text-grey-graphite">30 mm wide</dd>
+            <dt className="font-semibold text-aqualogic-ink">Mark, digital</dt>
+            <dd className="font-mono text-grey-graphite">24 px wide</dd>
+            <dt className="font-semibold text-aqualogic-ink">Mark, print</dt>
+            <dd className="font-mono text-grey-graphite">8 mm wide</dd>
+          </dl>
+          <p className="text-xs text-grey-graphite mt-3">
+            For favicons and very small app icons the mark may be used down to 16 px.
+          </p>
+        </div>
       </section>
 
       <section className="container-page pb-14">

@@ -29,7 +29,9 @@ const PATHS: Record<Brand, Partial<Record<Variant, string>>> = {
   sustec: {
     mark: '/assets/sustec/logos/sustec-mark-fullcolour.svg',
     lockup: '/assets/sustec/logos/sustec-logo-primary-fullcolour.svg',
-    reverse: '/assets/sustec/logos/sustec-logo-reverse-white.svg'
+    // True transparent reverse: all-white lockup, no background panel.
+    // Generated from the primary by swapping the brand colours for white.
+    reverse: '/assets/sustec/logos/sustec-logo-reverse-wordmark-white.svg'
   },
   group: {}
 };

@@ -151,9 +151,24 @@ function BrandFooter({ brand }: { brand: BrandKey }) {
         </div>
       </div>
       <div className="border-t border-grey-smoke/60">
-        <div className="container-page py-4 text-xs text-grey-space flex justify-between">
+        <div className="container-page py-4 text-xs text-grey-space flex flex-wrap items-center justify-between gap-3">
           <span>&copy; Sustec Group. Internal brand portal.</span>
-          <span>Maintained by Alchemy.</span>
+          <span className="flex items-center gap-2">
+            <span>Maintained by</span>
+            <a
+              href="https://www.alchemybranding.studio"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Alchemy Branding Studio"
+              className="inline-flex items-center"
+            >
+              <img
+                src="/alchemy.png"
+                alt="Alchemy"
+                className="h-5 w-auto"
+              />
+            </a>
+          </span>
         </div>
       </div>
     </footer>
