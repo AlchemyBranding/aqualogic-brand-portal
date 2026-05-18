@@ -1,8 +1,6 @@
 import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
-import { Section } from '@/components/Section';
-import { Callout } from '@/components/Callout';
 import { JumpLinks } from '@/components/JumpLinks';
 
 export const metadata = { title: 'Strategy — Aqualogic' };
@@ -159,14 +157,6 @@ export default function AqualogicStrategy() {
               </div>
             </div>
 
-            <div className="mt-8">
-              <Callout title="From the workshop" variant="quote">
-                Aqualogic &ldquo;operates in silence&rdquo;. The brand should not need to out-noise
-                competitors. The aim is to be clearer about where the business is genuinely strong,
-                where that strength is currently under-communicated, and to repeat one central
-                story consistently enough that audiences start to recognise it.
-              </Callout>
-            </div>
           </section>
         </article>
         <aside className="hidden lg:block">

@@ -14,7 +14,7 @@ const groups = [
     description: 'How Aqualogic is positioned, expressed and explained.',
     tiles: [
       { href: '/aqualogic/strategy', title: 'Strategy', desc: 'Executive summary, business context, market position and the strengths-gaps-opportunities read.' },
-      { href: '/aqualogic/positioning', title: 'Positioning and strapline', desc: 'The integrated water conservation and demand management story, and "Intelligent water conservation".', secondaryHref: '/aqualogic/strapline' },
+      { href: '/aqualogic/positioning', title: 'Positioning and strapline', desc: 'The integrated water conservation and demand management story, and "Intelligent water conservation".' },
       { href: '/aqualogic/purpose', title: 'Purpose, Vision and Mission', desc: 'Why we exist, where we are going, what we do.' },
       { href: '/aqualogic/heritage', title: 'Heritage', desc: 'From Flow Control in 1979 to today.' }
     ]

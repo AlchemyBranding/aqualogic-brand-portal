@@ -42,6 +42,7 @@ Get in touch about leakage detection, demand management, customer-side delivery,
 
 export default function LinkedInGuidance() {
   const aqualogicBanners = getAssets('assets/aqualogic/banners');
+  const socialIcons = getAssets('assets/aqualogic/social-icons');
 
   return (
     <BrandFrame brand="aqualogic">
@@ -170,6 +171,39 @@ export default function LinkedInGuidance() {
             and it will appear here automatically.
           </Callout>
         )}
+      </section>
+
+      <section className="container-page pb-14">
+        <h2 className="h-section text-aqualogic-ink">Company avatar (square)</h2>
+        <p className="text-sm text-grey-graphite mt-2 max-w-prose">
+          The square icon used on the Aqualogic LinkedIn company page and other social profile
+          pictures. 400&times;400&nbsp;px. Use the reversed (on Ink) version as the default; the
+          on-white version is available for lighter contexts.
+        </p>
+        <div className="mt-6 grid gap-5 md:grid-cols-2">
+          {socialIcons.length === 0 ? (
+            <DownloadCard
+              title="Aqualogic LinkedIn avatar"
+              description="400×400 px. Square company icon."
+              comingSoon
+            />
+          ) : (
+            socialIcons.map((s) => (
+              <DownloadCard
+                key={s.fileName}
+                title={s.name}
+                description={
+                  /on-ink/i.test(s.fileName)
+                    ? 'Reversed avatar. White mark on Ink. Use as the default LinkedIn avatar.'
+                    : /on-white/i.test(s.fileName)
+                      ? 'Aqua Cyan mark on white. Use for lighter contexts.'
+                      : 'Approved Aqualogic social avatar. 400×400 px.'
+                }
+                asset={s}
+              />
+            ))
+          )}
+        </div>
       </section>
 
       <section className="bg-aqualogic-ink text-white">

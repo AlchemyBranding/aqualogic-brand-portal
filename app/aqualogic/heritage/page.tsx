@@ -29,9 +29,9 @@ export default function Heritage() {
         lede="Aqualogic's heritage is one of its strongest credibility assets. What matters most is continuity: practical water conservation, reducing waste and solving real operational problems, evolved over time into a broader business spanning leak detection, technical services, pressure management, digital capability, water efficiency and demand management."
       />
 
-      <section className="container-page pb-12 max-w-prose">
+      <section className="container-page pb-12">
         <h2 className="h-section text-aqualogic-ink">How to use heritage</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           Use it as a credibility layer rather than a repeated headline. On the homepage, heritage
           should act as a trust signal. On the About page, the fuller story should be told
           properly. In recruitment, the story is not simply that Aqualogic has existed for a long

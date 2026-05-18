@@ -90,9 +90,9 @@ export default function Audience() {
         ))}
       </section>
 
-      <section className="container-page pb-20 max-w-prose">
+      <section className="container-page pb-20">
         <h2 className="h-section text-aqualogic-ink">How these personas should be used</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           These personas should be used to make content and messaging more relevant, not more
           complicated. They do not need to become fictional characters with invented details.
           Their purpose is practical: who the website needs to speak to first, what proof matters
@@ -100,7 +100,7 @@ export default function Audience() {
           which channels, and where recruitment, reputation and commercial messaging need to
           diverge.
         </p>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           The website should prioritise the client and delivery audience first, while still
           supporting recruitment and wider reputation. Marketing should then use the same audience
           structure to plan content more deliberately, so different channels and stories are doing

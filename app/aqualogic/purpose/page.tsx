@@ -20,15 +20,15 @@ export default function PurposeVisionMission() {
         lede="Three statements doing different jobs. Purpose explains why Aqualogic exists. Vision sets the future the business is working towards. Mission explains what the business does, who it does it for and how."
       />
 
-      <section className="container-page pb-12 max-w-prose">
+      <section className="container-page pb-12">
         <h2 className="h-section text-aqualogic-ink">How to use these statements</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           They will only be useful if they are adopted internally. They need to become part of how
           Aqualogic introduces itself, briefs its teams and trains its leaders to speak
           consistently. Use them in induction, leadership materials, company overview decks,
           internal communications and future updates to the brand guidelines.
         </p>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           On the website, the purpose and vision should sit more naturally within the About story
           and wider company narrative, while the mission should shape the clearer explanation of
           what Aqualogic does and how it creates value.

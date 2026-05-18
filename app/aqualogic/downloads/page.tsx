@@ -12,6 +12,7 @@ export default function AqualogicDownloads() {
   const logos = getAssets('assets/aqualogic/logos');
   const kit = getAssets('assets/aqualogic/marketing-kit');
   const banners = getAssets('assets/aqualogic/banners');
+  const socialIcons = getAssets('assets/aqualogic/social-icons');
   const photos = getAssets('assets/aqualogic/photography');
   const headshots = getAssets('assets/aqualogic/headshots');
   const icons = getAssets('assets/aqualogic/icons');
@@ -35,6 +36,12 @@ export default function AqualogicDownloads() {
       files: banners,
       note: 'LinkedIn banners are sized to LinkedIn’s spec of 1584×396 px.',
       empty: 'No LinkedIn banners or signatures yet.'
+    },
+    {
+      label: 'Social icons',
+      files: socialIcons,
+      note: 'Square avatars sized for LinkedIn and other social profile pictures (400×400 px). Reversed (on Ink) and on-white variants supplied.',
+      empty: 'No social icons yet.'
     },
     {
       label: 'Photography',

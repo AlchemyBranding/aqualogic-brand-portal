@@ -56,15 +56,15 @@ export default function Voice() {
         lede="If positioning explains what the business is, tone of voice shapes how that message is delivered. It is one of the main reasons a company can say something accurate and still fail to land it properly."
       />
 
-      <section className="container-page pb-12 max-w-prose">
+      <section className="container-page pb-12">
         <h2 className="h-section text-aqualogic-ink">How to use it</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           The homepage should sound clear and confident. The About story should sound grounded and
           credible. Service pages should feel practical and easy to follow rather than overloaded
           with jargon. Case studies should sound outcome-led and evidence-based. Recruitment pages
           should sound human and honest rather than generic.
         </p>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           Different channels do not all need to sound identical, but they should all feel like
           they come from the same brand. Tone of voice is not the same as messaging: messaging is
           what Aqualogic needs to say, tone of voice is how it should say it.

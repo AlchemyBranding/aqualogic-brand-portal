@@ -1,7 +1,6 @@
 import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
-import { Callout } from '@/components/Callout';
 import { getAssets, type AssetFile } from '@/lib/assets';
 import { DownloadCard } from '@/components/DownloadCard';
 
@@ -25,7 +24,6 @@ function LogoPreview({ asset, placeholder }: { asset?: AssetFile; placeholder: s
 export default function AqualogicLogo() {
   const logos = getAssets('assets/aqualogic/logos');
   const primary = logos.find((l) => l.variant === 'Primary');
-  const mono = logos.find((l) => l.variant === 'Monochrome');
   const reverse = logos.find((l) => l.variant === 'Reverse');
   const mark = logos.find((l) => l.variant === 'Mark');
 
@@ -111,20 +109,14 @@ export default function AqualogicLogo() {
         </div>
       </section>
 
-      <section className="container-page pb-14">
+      <section className="container-page pb-20">
         <h2 className="eyebrow mb-6">Variants available in the portal</h2>
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-5 md:grid-cols-2">
           <DownloadCard
             title="Primary (full colour)"
             description="Aqua Cyan + Ink. Use on Paper or Cloud backgrounds."
             asset={primary}
             comingSoon={!primary}
-          />
-          <DownloadCard
-            title="Monochrome"
-            description="Single black or single Ink. Use where one-colour print is required."
-            asset={mono}
-            comingSoon={!mono}
           />
           <DownloadCard
             title="Reverse"
@@ -133,15 +125,6 @@ export default function AqualogicLogo() {
             comingSoon={!reverse}
           />
         </div>
-      </section>
-
-      <section className="container-page pb-20">
-        <Callout title="Flagged" variant="flag">
-          The existing brand guideline doc defines the lockup and mark with clearspace rules,
-          but does not formally publish mono, reverse or single-colour variants. Recommend adding
-          these (see Recommendations below) and dropping the files into
-          <code className="px-1 py-0.5 mx-1 bg-amber-100 rounded text-xs">/public/assets/aqualogic/logos</code>.
-        </Callout>
       </section>
     </BrandFrame>
   );

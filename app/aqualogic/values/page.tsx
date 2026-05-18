@@ -53,9 +53,9 @@ export default function Values() {
         lede="Values matter because they turn the brand from something Aqualogic says into something the business does. Behaviours are the practical expression of those values. Values set the standard. Behaviours make the standard visible."
       />
 
-      <section className="container-page pb-12 max-w-prose">
+      <section className="container-page pb-12">
         <h2 className="h-section text-aqualogic-ink">How to use them</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           As operating tools, not decorative language. Use them to shape recruitment, leadership,
           development, recognition and internal communication. In marketing, the values should act
           as tone and content filters &mdash; Trust through proof-led communication, Ingenuity
@@ -63,7 +63,7 @@ export default function Values() {
           Collaboration through team and client stories, Agility through responsiveness and pace.
         </p>
         <h2 className="h-section text-aqualogic-ink mt-10">Why this set works</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           This set balances external credibility with internal truth. Trust, Ingenuity and
           Excellence give Aqualogic a strong core around confidence, thinking and standards.
           Collaboration and Agility add the cultural and commercial qualities that make the

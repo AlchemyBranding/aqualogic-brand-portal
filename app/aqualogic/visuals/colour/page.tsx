@@ -24,9 +24,9 @@ export default function AqualogicColour() {
         lede="The Aqualogic palette anchors the brand visually. Aqua Cyan brings the freshness and clarity of the strapline, Ink provides depth and authority, Sky is a softer support tone, and Paper is the neutral surface most copy sits on."
       />
 
-      <section className="container-page pb-12 max-w-prose">
+      <section className="container-page pb-12">
         <h2 className="h-section text-aqualogic-ink">How to use the palette</h2>
-        <ul className="body-prose mt-4 space-y-3">
+        <ul className="body-prose mt-4 space-y-3 max-w-prose">
           <li><strong>Ink (#0C2C3A)</strong> &mdash; primary text colour. Use for body, headings and on Paper backgrounds.</li>
           <li><strong>Aqua Cyan (#00B6DB)</strong> &mdash; accent colour for links, calls to action, the strapline, infographics and selective highlights.</li>
           <li><strong>Sky (#6AC2D8)</strong> &mdash; soft support tone for tinted surfaces, illustrations, secondary callouts. Avoid as a primary text colour: contrast on Paper is too low.</li>
@@ -73,9 +73,9 @@ export default function AqualogicColour() {
         </p>
       </section>
 
-      <section className="container-page pb-20 max-w-prose">
+      <section className="container-page pb-20">
         <h2 className="h-section text-aqualogic-ink">Print and digital</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           For <strong>digital</strong> work, use HEX. For <strong>print</strong>, use CMYK (uncoated
           stocks tend toward duller, more saturated equivalents; check the proof). For brand-critical
           print runs, request Pantone matches against a fan deck rather than calculated equivalents.

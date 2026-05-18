@@ -62,16 +62,16 @@ export default function EmployerBrand() {
         </ul>
       </section>
 
-      <section className="container-page pb-14 max-w-prose">
+      <section className="container-page pb-14">
         <h2 className="h-section text-aqualogic-ink">Honest, not perfect</h2>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           The employer story needs to stay honest. Different parts of the business experience work
           differently, and growth is increasing the need for stronger systems, management
           consistency and clearer internal communication. The strongest direction is not to present
           Aqualogic as perfect &mdash; it is to present it as established, growing, human and full
           of opportunity.
         </p>
-        <p className="body-prose mt-4">
+        <p className="body-prose mt-4 max-w-prose">
           Career development came through as one of the most useful parts of the discussion, not
           because it was described in abstract terms, but because there were real examples to point
           to &mdash; engineers developing into project managers, supervisor roles being filled from
