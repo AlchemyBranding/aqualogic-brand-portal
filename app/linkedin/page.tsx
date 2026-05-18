@@ -40,9 +40,52 @@ Aqualogic is a Sustec company. Sustec is the group brand behind a growing portfo
 
 Get in touch about leakage detection, demand management, customer-side delivery, network support, data and technology, and water efficiency programmes.`;
 
+type BannerMeta = { title: string; description: string; order: number };
+
+const BANNER_RULES: { match: RegExp; meta: BannerMeta }[] = [
+  {
+    match: /linkedin-personal/i,
+    meta: { title: 'LinkedIn personal banner', description: 'For individual LinkedIn profiles. 1584×396 px.', order: 1 }
+  },
+  {
+    match: /linkedin-company/i,
+    meta: { title: 'LinkedIn company banner', description: 'For the Aqualogic LinkedIn company page. 1128×191 px.', order: 2 }
+  },
+  {
+    match: /twitter|^aqualogic-x[-_]/i,
+    meta: { title: 'X / Twitter header', description: 'For the Aqualogic X (Twitter) profile. 1500×500 px.', order: 3 }
+  },
+  {
+    match: /email-header/i,
+    meta: { title: 'Email header strip', description: 'For the top of email newsletters and signatures. 1200×300 px.', order: 4 }
+  },
+  {
+    match: /web-hero/i,
+    meta: { title: 'Web hero', description: 'For website hero panels. 1920×600 px.', order: 5 }
+  },
+  {
+    match: /endorsement-bar/i,
+    meta: { title: 'Endorsement bar', description: 'Narrow strip for use as a footer or endorsement bar. 1920×220 px.', order: 6 }
+  },
+  {
+    match: /safe-zone/i,
+    meta: { title: 'Safe-zone reference (LinkedIn)', description: 'Reference grid showing where to position content relative to the LinkedIn avatar overlay. For designer use, not for publishing.', order: 99 }
+  }
+];
+
+function metaFor(fileName: string): BannerMeta {
+  const hit = BANNER_RULES.find((r) => r.match.test(fileName));
+  return hit?.meta ?? { title: fileName, description: 'Approved Aqualogic banner.', order: 50 };
+}
+
 export default function LinkedInGuidance() {
   const aqualogicBanners = getAssets('assets/aqualogic/banners');
   const socialIcons = getAssets('assets/aqualogic/social-icons');
+  const socialPosts = getAssets('assets/aqualogic/social-posts');
+
+  const sortedBanners = [...aqualogicBanners].sort(
+    (a, b) => metaFor(a.fileName).order - metaFor(b.fileName).order
+  );
 
   return (
     <BrandFrame brand="aqualogic">
@@ -142,43 +185,32 @@ export default function LinkedInGuidance() {
       <section className="container-page pb-14">
         <h2 className="h-section text-aqualogic-ink">Banner downloads</h2>
         <p className="text-sm text-grey-graphite mt-2 max-w-prose">
-          Approved Aqualogic LinkedIn banners. Use the personal banner on individual profiles
-          (1584&times;396&nbsp;px) and the company banner on the Aqualogic LinkedIn page
-          (1128&times;191&nbsp;px).
+          Approved Aqualogic banner artwork for LinkedIn (personal and company), X / Twitter,
+          email headers, the website hero and the endorsement bar. The two LinkedIn banners are at
+          the top.
         </p>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
-          {aqualogicBanners.length === 0 ? (
+          {sortedBanners.length === 0 ? (
             <DownloadCard
               title="Aqualogic LinkedIn banner"
               description="1584×396 px. Approved Aqualogic banner for personal profiles."
               comingSoon
             />
           ) : (
-            aqualogicBanners.map((b) => {
-              const isCompany = /company/i.test(b.fileName);
-              const isPersonal = /personal/i.test(b.fileName);
-              const title = isCompany
-                ? 'Aqualogic LinkedIn company banner'
-                : isPersonal
-                  ? 'Aqualogic LinkedIn personal banner'
-                  : b.name;
-              const description = isCompany
-                ? 'For the Aqualogic LinkedIn company page. 1128×191 px.'
-                : isPersonal
-                  ? 'For personal LinkedIn profiles. 1584×396 px.'
-                  : 'Approved Aqualogic LinkedIn banner.';
+            sortedBanners.map((b) => {
+              const m = metaFor(b.fileName);
               return (
                 <DownloadCard
                   key={b.fileName}
-                  title={title}
-                  description={description}
+                  title={m.title}
+                  description={m.description}
                   asset={b}
                 />
               );
             })
           )}
         </div>
-        {aqualogicBanners.length === 0 && (
+        {sortedBanners.length === 0 && (
           <Callout title="Awaiting artwork" variant="flag">
             Drop final banner artwork into
             <code className="px-1 py-0.5 mx-1 bg-amber-100 rounded text-xs">/public/assets/aqualogic/banners</code>
@@ -219,6 +251,41 @@ export default function LinkedInGuidance() {
           )}
         </div>
       </section>
+
+      {socialPosts.length > 0 && (
+        <section className="container-page pb-14">
+          <h2 className="h-section text-aqualogic-ink">Example social posts</h2>
+          <p className="text-sm text-grey-graphite mt-2 max-w-prose">
+            Finished post artwork that demonstrates how the brand applies across social. Use these
+            as reference for tone, hierarchy and layout, or click any thumbnail to open at full
+            size. New examples appear here automatically as they&rsquo;re added.
+          </p>
+          <ul role="list" className="mt-6 grid gap-4 grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+            {socialPosts.map((p) => (
+              <li key={p.fileName}>
+                <a
+                  href={p.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="block group rounded-2xl overflow-hidden border border-grey-smoke bg-grey-cloud/40 focus-ring focus-visible:ring-aqualogic-cyan"
+                >
+                  <div className="aspect-square bg-grey-cloud overflow-hidden">
+                    <img
+                      src={p.href}
+                      alt=""
+                      loading="lazy"
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+                    />
+                  </div>
+                  <div className="p-3">
+                    <p className="text-xs text-grey-graphite truncate">{p.name}</p>
+                  </div>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )}
 
       <section className="bg-aqualogic-ink text-white">
         <div className="container-page py-14 md:py-20">

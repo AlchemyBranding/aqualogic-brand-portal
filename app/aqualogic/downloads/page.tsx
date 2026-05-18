@@ -13,6 +13,7 @@ export default function AqualogicDownloads() {
   const kit = getAssets('assets/aqualogic/marketing-kit');
   const banners = getAssets('assets/aqualogic/banners');
   const socialIcons = getAssets('assets/aqualogic/social-icons');
+  const socialPosts = getAssets('assets/aqualogic/social-posts');
   const photos = getAssets('assets/aqualogic/photography');
   const headshots = getAssets('assets/aqualogic/headshots');
   const icons = getAssets('assets/aqualogic/icons');
@@ -34,14 +35,20 @@ export default function AqualogicDownloads() {
     {
       label: 'Banners',
       files: banners,
-      note: 'LinkedIn banners are sized to LinkedIn’s spec of 1584×396 px.',
-      empty: 'No LinkedIn banners or signatures yet.'
+      note: 'Approved banner artwork sized for LinkedIn (personal and company), X/Twitter, email headers, the website hero and the endorsement bar. Filename dimensions tell you which is which.',
+      empty: 'No banners yet.'
     },
     {
       label: 'Social icons',
       files: socialIcons,
       note: 'Square avatars sized for LinkedIn and other social profile pictures (400×400 px). Reversed (on Ink) and on-white variants supplied.',
       empty: 'No social icons yet.'
+    },
+    {
+      label: 'Social post examples',
+      files: socialPosts,
+      note: 'Finished post artwork that demonstrates how the brand applies across social. Use as reference for tone, hierarchy and layout, or download to reuse.',
+      empty: 'No social post examples yet.'
     },
     {
       label: 'Photography',
