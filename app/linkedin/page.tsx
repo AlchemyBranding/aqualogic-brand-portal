@@ -52,24 +52,12 @@ const BANNER_RULES: { match: RegExp; meta: BannerMeta }[] = [
     meta: { title: 'LinkedIn company banner', description: 'For the Aqualogic LinkedIn company page. 1128×191 px.', order: 2 }
   },
   {
-    match: /twitter|^aqualogic-x[-_]/i,
-    meta: { title: 'X / Twitter header', description: 'For the Aqualogic X (Twitter) profile. 1500×500 px.', order: 3 }
-  },
-  {
     match: /email-header/i,
-    meta: { title: 'Email header strip', description: 'For the top of email newsletters and signatures. 1200×300 px.', order: 4 }
-  },
-  {
-    match: /web-hero/i,
-    meta: { title: 'Web hero', description: 'For website hero panels. 1920×600 px.', order: 5 }
+    meta: { title: 'Email header strip', description: 'For the top of email newsletters and signatures. 1200×300 px.', order: 3 }
   },
   {
     match: /endorsement-bar/i,
-    meta: { title: 'Endorsement bar', description: 'Narrow strip for use as a footer or endorsement bar. 1920×220 px.', order: 6 }
-  },
-  {
-    match: /safe-zone/i,
-    meta: { title: 'Safe-zone reference (LinkedIn)', description: 'Reference grid showing where to position content relative to the LinkedIn avatar overlay. For designer use, not for publishing.', order: 99 }
+    meta: { title: 'Endorsement bar', description: 'Narrow strip for use as a footer or endorsement bar. 1920×220 px.', order: 4 }
   }
 ];
 
@@ -185,9 +173,8 @@ export default function LinkedInGuidance() {
       <section className="container-page pb-14">
         <h2 className="h-section text-aqualogic-ink">Banner downloads</h2>
         <p className="text-sm text-grey-graphite mt-2 max-w-prose">
-          Approved Aqualogic banner artwork for LinkedIn (personal and company), X / Twitter,
-          email headers, the website hero and the endorsement bar. The two LinkedIn banners are at
-          the top.
+          Approved Aqualogic banner artwork for LinkedIn (personal and company), email headers
+          and the endorsement bar. The two LinkedIn banners are at the top.
         </p>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           {sortedBanners.length === 0 ? (
