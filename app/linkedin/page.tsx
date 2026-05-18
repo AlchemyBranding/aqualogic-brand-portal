@@ -142,9 +142,9 @@ export default function LinkedInGuidance() {
       <section className="container-page pb-14">
         <h2 className="h-section text-aqualogic-ink">Banner downloads</h2>
         <p className="text-sm text-grey-graphite mt-2 max-w-prose">
-          Alchemy has supplied approved Aqualogic LinkedIn banners for the team to use. Download
-          the appropriate file below. Sized to LinkedIn&rsquo;s personal-profile spec of
-          1584&times;396&nbsp;px.
+          Approved Aqualogic LinkedIn banners. Use the personal banner on individual profiles
+          (1584&times;396&nbsp;px) and the company banner on the Aqualogic LinkedIn page
+          (1128&times;191&nbsp;px).
         </p>
         <div className="mt-6 grid gap-5 md:grid-cols-2">
           {aqualogicBanners.length === 0 ? (
@@ -154,14 +154,28 @@ export default function LinkedInGuidance() {
               comingSoon
             />
           ) : (
-            aqualogicBanners.map((b) => (
-              <DownloadCard
-                key={b.fileName}
-                title={b.name}
-                description="Approved Aqualogic LinkedIn banner. 1584×396 px."
-                asset={b}
-              />
-            ))
+            aqualogicBanners.map((b) => {
+              const isCompany = /company/i.test(b.fileName);
+              const isPersonal = /personal/i.test(b.fileName);
+              const title = isCompany
+                ? 'Aqualogic LinkedIn company banner'
+                : isPersonal
+                  ? 'Aqualogic LinkedIn personal banner'
+                  : b.name;
+              const description = isCompany
+                ? 'For the Aqualogic LinkedIn company page. 1128×191 px.'
+                : isPersonal
+                  ? 'For personal LinkedIn profiles. 1584×396 px.'
+                  : 'Approved Aqualogic LinkedIn banner.';
+              return (
+                <DownloadCard
+                  key={b.fileName}
+                  title={title}
+                  description={description}
+                  asset={b}
+                />
+              );
+            })
           )}
         </div>
         {aqualogicBanners.length === 0 && (
