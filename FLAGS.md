@@ -58,7 +58,9 @@ I can't authenticate to Dropbox from this environment. Please download from the 
 
 ## Sanity (Phase 1.5)
 
-The portal is wired end-to-end. Until env vars are set, `/studio`, `/case-studies` and `/admin/upload` render a setup-needed notice.
+The portal is wired end-to-end. Until env vars are set, `/studio`, `/case-studies`, `/news` and `/admin/upload` render a setup-needed notice.
+
+Schemas defined: `caseStudy`, `newsArticle`, `photo`.
 
 - [ ] Create a project at sanity.io (free tier)
 - [ ] Set `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION` in Vercel + `.env.local`

@@ -47,6 +47,7 @@ const groups = [
       { href: '/aqualogic/employer-brand', title: 'Employer brand', desc: 'Established, growing, human, full of opportunity.' },
       { href: '/linkedin', title: 'LinkedIn setup', desc: 'Personal profile, banners, professional headline, company page treatment.' },
       { href: '/case-studies', title: 'Case studies', desc: 'Submit a project and browse the case study library.' },
+      { href: '/news', title: 'News', desc: 'Submit and browse news articles, press releases, sector commentary and coverage.' },
       { href: '/aqualogic/downloads', title: 'Downloads', desc: 'Logos, marketing kit, banners, photography, headshots.' }
     ]
   }

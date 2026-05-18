@@ -15,6 +15,7 @@ const navByBrand: Record<BrandKey, { label: string; href: string }[]> = {
     { label: 'Voice', href: '/aqualogic/voice' },
     { label: 'Visuals', href: '/aqualogic/visuals/logo' },
     { label: 'Case studies', href: '/case-studies' },
+    { label: 'News', href: '/news' },
     { label: 'Downloads', href: '/aqualogic/downloads' }
   ],
   sustec: [
@@ -29,7 +30,8 @@ const navByBrand: Record<BrandKey, { label: string; href: string }[]> = {
     { label: 'Sustec', href: '/sustec' },
     { label: 'Aqualogic', href: '/aqualogic' },
     { label: 'LinkedIn', href: '/linkedin' },
-    { label: 'Case studies', href: '/case-studies' }
+    { label: 'Case studies', href: '/case-studies' },
+    { label: 'News', href: '/news' }
   ]
 };
 

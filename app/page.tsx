@@ -66,7 +66,7 @@ export default function HomePage() {
       </section>
 
       <section className="container-page pb-20">
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           <CrossLink
             title="LinkedIn guidance"
             description="Personal profile, banners, professional headline, company page."
@@ -76,6 +76,11 @@ export default function HomePage() {
             title="Case studies"
             description="Submit a project and browse the case study library."
             href="/case-studies"
+          />
+          <CrossLink
+            title="News"
+            description="Submit and browse news, press releases, sector commentary and coverage."
+            href="/news"
           />
           <CrossLink
             title="Aqualogic downloads"
