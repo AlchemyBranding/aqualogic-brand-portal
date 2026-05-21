@@ -25,6 +25,60 @@ export default function SubmitCaseStudy({
   const configured = isSanityConfigured();
   const submitted = searchParams.status === 'ok';
 
+  if (submitted) {
+    return (
+      <BrandFrame brand="aqualogic">
+        <Breadcrumbs
+          items={[
+            { label: 'Portal', href: '/' },
+            { label: 'Case studies', href: '/case-studies' },
+            { label: 'Submitted' }
+          ]}
+        />
+        <section className="container-page pt-16 md:pt-24 pb-12">
+          <div className="max-w-3xl">
+            <span
+              aria-hidden
+              className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-aqualogic-cyan/15 text-aqualogic-cyan"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
+                <polyline points="20 6 9 17 4 12" />
+              </svg>
+            </span>
+            <p className="eyebrow mt-6">Case studies</p>
+            <h1 className="h-display text-aqualogic-ink mt-3">Thank you.</h1>
+            <p className="lede mt-6 max-w-prose">
+              Your case study has been submitted and is now in the library as <strong>pending
+              review</strong>. We&rsquo;ll review it shortly and use it for website content,
+              social, email marketing and sales materials.
+            </p>
+            <p className="text-sm text-grey-graphite mt-4 max-w-prose">
+              Need to add another? Submit a separate entry for each project so each gets the
+              attention it deserves.
+            </p>
+          </div>
+        </section>
+
+        <section className="container-page pb-20">
+          <div className="grid gap-4 sm:grid-cols-2 max-w-3xl">
+            <Link
+              href="/case-studies/submit"
+              className="inline-flex items-center justify-center gap-2 rounded-xl bg-aqualogic-ink text-white px-5 py-3 text-sm font-semibold hover:bg-aqualogic-cyan transition-colors"
+            >
+              Submit another case study
+            </Link>
+            <Link
+              href="/case-studies"
+              className="inline-flex items-center justify-center gap-2 rounded-xl border border-aqualogic-ink text-aqualogic-ink px-5 py-3 text-sm font-semibold hover:bg-aqualogic-ink hover:text-white transition-colors"
+            >
+              View the case study library
+            </Link>
+          </div>
+        </section>
+      </BrandFrame>
+    );
+  }
+
   return (
     <BrandFrame brand="aqualogic">
       <Breadcrumbs
@@ -37,7 +91,7 @@ export default function SubmitCaseStudy({
       <PageHeader
         eyebrow="Case studies / Submit"
         title="Submit a case study."
-        lede="Use this form to capture a project for Alchemy to turn into social, web or sales content. Submissions land in the case study library as pending review."
+        lede="Use this form to capture a project for the case study library. Submissions land as pending review and feed website content, social, email marketing and sales materials."
       />
 
       {!configured && (
@@ -45,15 +99,6 @@ export default function SubmitCaseStudy({
           <Callout title="Sanity not configured" variant="flag">
             The form will render, but submissions cannot be saved until the Sanity project is
             connected. See the README for setup steps.
-          </Callout>
-        </section>
-      )}
-
-      {submitted && (
-        <section className="container-page pb-10">
-          <Callout title="Submission received" variant="note">
-            Thank you. The case study is now visible in the library as pending review. Alchemy
-            will follow up.
           </Callout>
         </section>
       )}
