@@ -5,6 +5,13 @@ const AUTH_COOKIE = 'portal_auth';
 export function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
+  // Temporary public-access kill switch. Set PORTAL_PUBLIC=true on the
+  // environment (Vercel or .env.local) to bypass the password gate entirely.
+  // Remove the env var (or set to anything other than 'true') to re-enable.
+  if (process.env.PORTAL_PUBLIC === 'true') {
+    return NextResponse.next();
+  }
+
   // Public routes
   if (
     pathname === '/login' ||
