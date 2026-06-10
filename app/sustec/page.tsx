@@ -33,13 +33,6 @@ const positioningLines = [
   'Founded by experienced industry operators.'
 ];
 
-const buyAndBuild = [
-  { label: 'Acquisition 1', body: 'Water consultancy with significant brand reputation. Targeted for Jan-27 inclusion.' },
-  { label: 'Acquisition 2', body: 'Leakage technical services organisation with strong brand reputation. Targeted for Jan-27 inclusion.' },
-  { label: 'Acquisition 3', body: 'Water repair and maintenance contractor. Sustec already holds a 20% equity stake. Envisaged Sept-27.' },
-  { label: 'Acquisitions 4 & 5', body: 'A wastewater services provider and a similar-size competitor for market strengthening. Targets not yet identified.' }
-];
-
 export default function SustecHome() {
   const meta = brandMeta.sustec;
 
@@ -169,17 +162,26 @@ export default function SustecHome() {
           <p className="eyebrow mb-3 text-sustec-blue">04 &mdash; Group strategy</p>
           <h2 className="h-section text-aqualogic-ink">Group strategy.</h2>
           <p className="lede mt-3 max-w-prose">
-            Sustec is the platform behind a deliberate buy-and-build strategy, targeting a group
-            annual turnover of more than &pound;50m through three to five complementary SMEs in
-            water and adjacent sectors. The aim is to identify strong organisations and help them
-            become stronger.
+            Sustec is the platform for a deliberate buy-and-build strategy, focused on building a
+            high-quality group with annual turnover exceeding &pound;50m through the acquisition
+            of three to five complementary SMEs across water and adjacent sectors.
+          </p>
+          <p className="body-prose mt-5 max-w-prose">
+            The approach is targeted and disciplined: identifying strong, well-run organisations
+            with established reputations, and integrating them into a cohesive group that enhances
+            overall capability, resilience, and market reach.
+          </p>
+          <p className="body-prose mt-4 max-w-prose">
+            At its core, the strategy is about strengthening what already works: providing the
+            structure, capital, and strategic direction to enable each business to scale,
+            collaborate, and deliver greater collective value within a unified platform.
           </p>
           <div className="mt-8 grid md:grid-cols-2 gap-10">
             <div>
               <h3 className="h-sub text-aqualogic-ink">Strategic intent</h3>
               <ul className="body-prose mt-3 space-y-2 max-w-prose">
                 <li>Identify and engage complementary organisations.</li>
-                <li>Acquire three to five SMEs.</li>
+                <li>Acquire three to five complementary SMEs.</li>
                 <li>Target a group annual turnover greater than &pound;50m.</li>
                 <li>Expand group services for added value.</li>
                 <li>Diversify across sectors for risk mitigation.</li>
@@ -198,21 +200,6 @@ export default function SustecHome() {
                 repair and maintenance, and adjacent renewables markets.
               </p>
             </div>
-          </div>
-          <div className="mt-10">
-            <p className="eyebrow mb-4 text-sustec-blue">Buy &amp; build pipeline</p>
-            <ul role="list" className="grid gap-4 md:grid-cols-2">
-              {buyAndBuild.map((a) => (
-                <li key={a.label} className="rounded-2xl bg-white border border-grey-smoke p-5">
-                  <p className="font-mono text-sustec-blue font-bold">{a.label}</p>
-                  <p className="text-sm text-grey-arsenic mt-2 leading-relaxed">{a.body}</p>
-                </li>
-              ))}
-            </ul>
-            <p className="mt-5 text-xs text-grey-graphite">
-              Pipeline detail is drawn from the Aqualogic Information Memorandum and is
-              commercially sensitive. Internal use only.
-            </p>
           </div>
         </div>
       </section>
