@@ -9,37 +9,21 @@ type Props = {
   showFooter?: boolean;
 };
 
-const navByBrand: Record<BrandKey, { label: string; href: string }[]> = {
-  aqualogic: [
-    { label: 'Strategy', href: '/aqualogic/strategy' },
-    { label: 'Voice', href: '/aqualogic/voice' },
-    { label: 'Visuals', href: '/aqualogic/visuals/logo' },
-    { label: 'Case studies', href: '/case-studies' },
-    { label: 'News', href: '/news' },
-    { label: 'Downloads', href: '/aqualogic/downloads' }
-  ],
-  sustec: [
-    { label: 'About', href: '/sustec#about' },
-    { label: 'Strategy', href: '/sustec#group-strategy' },
-    { label: 'Architecture', href: '/sustec#architecture' },
-    { label: 'Heritage', href: '/sustec#heritage' },
-    { label: 'Visual identity', href: '/sustec#visual-identity' },
-    { label: 'Downloads', href: '/sustec/downloads' }
-  ],
-  group: [
-    { label: 'Sustec', href: '/sustec' },
-    { label: 'Aqualogic', href: '/aqualogic' },
-    { label: 'LinkedIn', href: '/linkedin' },
-    { label: 'Case studies', href: '/case-studies' },
-    { label: 'News', href: '/news' },
-    { label: 'Aqualogic downloads', href: '/aqualogic/downloads' },
-    { label: 'Sustec downloads', href: '/sustec/downloads' }
-  ]
-};
+// One shared main navigation used on every page (group home and all brand
+// pages) so the top nav is consistent across the portal.
+const mainNav: { label: string; href: string }[] = [
+  { label: 'Sustec', href: '/sustec' },
+  { label: 'Aqualogic', href: '/aqualogic' },
+  { label: 'LinkedIn', href: '/linkedin' },
+  { label: 'Case studies', href: '/case-studies' },
+  { label: 'News', href: '/news' },
+  { label: 'Aqualogic downloads', href: '/aqualogic/downloads' },
+  { label: 'Sustec downloads', href: '/sustec/downloads' }
+];
 
 export function BrandFrame({ brand, children, showFooter = true }: Props) {
   const meta = brandMeta[brand];
-  const nav = navByBrand[brand];
+  const nav = mainNav;
 
   return (
     <div className={`${meta.bodyClass} min-h-screen flex flex-col bg-aqualogic-paper`}>
