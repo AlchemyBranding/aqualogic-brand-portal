@@ -11,6 +11,7 @@ export const metadata = { title: 'Downloads — Aqualogic' };
 
 export default function AqualogicDownloads() {
   const logos = getAssets('assets/aqualogic/logos');
+  const templates = getAssets('assets/aqualogic/templates');
   const banners = getAssets('assets/aqualogic/banners');
   const socialIcons = getAssets('assets/aqualogic/social-icons');
   const socialPosts = getAssets('assets/aqualogic/social-posts');
@@ -26,6 +27,12 @@ export default function AqualogicDownloads() {
         'Use SVG for screens and vector destinations (decks, web, signage). Use PNG only where vector is not supported. See the logo guidelines for clearspace, minimum size and what not to do.',
       guideLink: { href: '/aqualogic/visuals/logo', label: 'Open logo guidelines' },
       empty: 'No logo files yet. Drop them into /public/assets/aqualogic/logos.'
+    },
+    {
+      label: 'Templates',
+      files: templates,
+      note: 'Editable Word and PowerPoint templates — letterhead, reports, proposal and presentation decks — pre-set with Aqualogic brand styling. Download, then save your own copy.',
+      empty: 'No templates yet.'
     },
     {
       label: 'Banners',
