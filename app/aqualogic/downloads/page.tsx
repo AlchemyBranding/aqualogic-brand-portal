@@ -82,7 +82,7 @@ export default function AqualogicDownloads() {
       <PageHeader
         eyebrow="Aqualogic / Downloads"
         title="Downloads."
-        lede="Approved Aqualogic brand assets for use by the business. Refer to the brand guidelines for correct logo, colour, typography and imagery usage."
+        lede="Approved Aqualogic brand assets and ready-to-use working templates for the whole business — logos, banners and imagery alongside editable letterhead, report and presentation templates. Refer to the brand guidelines for correct logo, colour, typography and imagery usage."
       >
         <div className="flex flex-wrap items-center gap-3">
           <Link
