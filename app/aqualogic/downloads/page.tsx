@@ -3,6 +3,7 @@ import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { DownloadCard } from '@/components/DownloadCard';
+import { DownloadSection } from '@/components/DownloadSection';
 import { Callout } from '@/components/Callout';
 import { getAssets } from '@/lib/assets';
 
@@ -128,25 +129,16 @@ export default function AqualogicDownloads() {
         </Callout>
       </section>
 
-      <div className="container-page pb-20 space-y-12">
+      <div className="container-page pb-20 divide-y divide-grey-smoke">
         {groups.map((g) => (
-          <section key={g.label}>
-            <header className="mb-5 flex items-end justify-between gap-4 flex-wrap">
-              <div>
-                <h2 className="h-section text-aqualogic-ink">{g.label}</h2>
-                {g.note && (
-                  <p className="text-sm text-grey-graphite mt-2 max-w-prose">{g.note}</p>
-                )}
-              </div>
-              <div className="flex items-center gap-4 text-sm">
-                <p className="text-grey-graphite">{g.files.length} file{g.files.length === 1 ? '' : 's'}</p>
-                {g.guideLink && (
-                  <Link href={g.guideLink.href} className="text-aqualogic-cyan font-semibold hover:underline">
-                    {g.guideLink.label} &rarr;
-                  </Link>
-                )}
-              </div>
-            </header>
+          <DownloadSection
+            key={g.label}
+            label={g.label}
+            count={g.files.length}
+            note={g.note}
+            guideLink={g.guideLink}
+            defaultOpen={g.files.length > 0}
+          >
             {g.files.length === 0 ? (
               <p className="text-sm text-grey-space italic">{g.empty}</p>
             ) : (
@@ -162,7 +154,7 @@ export default function AqualogicDownloads() {
                 ))}
               </ul>
             )}
-          </section>
+          </DownloadSection>
         ))}
       </div>
     </BrandFrame>
