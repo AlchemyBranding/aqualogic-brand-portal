@@ -1,219 +1,182 @@
 # Collaborator setup — Aqualogic / Sustec brand portal
 
-Welcome. This guide gets you set up to edit the brand portal with Claude Code,
-exactly the way the original author (Dave) does: edit locally, push to GitHub,
-and Vercel deploys automatically.
+Welcome. This guide gets you set up to edit the brand portal using Claude Code,
+the simple way: no Terminal, no installing anything, no fiddly setup.
 
-**This file is written to be handed to Claude Code.** Open Claude Code, point it
-at this file, and say:
+**This file is written to be handed to Claude Code.** Open Claude Code and say:
 
-> Read COLLABORATOR-SETUP.md and walk me through it step by step.
+> Read COLLABORATOR-SETUP.md and take me through it step by step.
 
-Claude Code will do most of the work. The parts that need a human (creating a
-GitHub account, accepting an invite) are clearly marked **DO THIS YOURSELF**.
-
----
-
-## What you're working with
-
-- **Code**: a Next.js website, in the GitHub repo `AlchemyBranding/aqualogic-brand-portal`.
-- **Hosting**: Vercel. Every push to the `main` branch deploys automatically to
-  `sustecgroupportal.com`. You do not touch Vercel directly.
-- **Content** (case studies, news, photos): a Sanity database, edited at
-  `sustecgroupportal.com/studio`. That's separate from the code and is handled
-  with a Sanity login, not through this repo.
-
-You will be editing the **code and copy** of the site.
+Your Claude Code will do all the technical work. You'll only ever need to talk to
+it in plain English, plus a couple of quick clicks to grant access. Dave is
+available throughout, so if anything asks for a permission only he can give, just
+ask him.
 
 ---
 
-## The one golden rule
+## The promise: you will never touch the Terminal
 
-**Do NOT work inside the Dropbox copy of this project.**
+You do **not** need to open the Terminal app, type any commands, or learn any
+code. You talk to your Claude Code in normal English ("change this heading to
+that", "fix the wording on the Sustec page"), and it makes the change and puts it
+live for you.
 
-You can see the project files in the shared Dropbox folder
-(`Alchemy Team/CLAUDE_CODE/aqualogic-brand-portal`). It is tempting to just edit
-them there. **Don't.** This project is a Git repository, and Git repositories
-inside Dropbox corrupt themselves when two people use them at once — Dropbox
-grabs files mid-write, creates "conflicted copy" duplicates, and breaks Git's
-internal state.
-
-Instead, you will make your **own clone** in a normal folder outside Dropbox, and
-you and Dave will sync through GitHub. That is exactly what Git is designed for,
-and it is safe.
-
-The Dropbox copy is still useful for one thing: it contains the `.env.local` file
-with the keys you need (see Step 4). You copy that one file out, and otherwise
-leave the Dropbox copy alone.
+If at any point something tells you to open a Terminal, stop — that's not the
+path we're using. Ask Dave or ask your Claude Code to use the GitHub connector
+instead.
 
 ---
 
-## Before you start — prerequisites
+## What you'll be doing
 
-You need three things:
+You'll be editing the **website's pages and wording**. Anything you change goes
+live automatically at **sustecgroupportal.com** about a minute and a half later.
 
-1. **Claude Code** — you have this already.
-2. **Dropbox access** to the shared `Alchemy Team` folder — you have this already.
-3. **A free GitHub account** — set this up now if you don't have one.
-
-### DO THIS YOURSELF: create a GitHub account
-
-1. Go to <https://github.com/signup>
-2. Create a free account (no card needed). Takes about two minutes.
-3. Note your **GitHub username**.
-4. **Send your GitHub username to Dave.** He will add you as a collaborator on
-   the repo. You cannot clone it until he does.
-5. You'll get an email invite from GitHub titled something like *"AlchemyBranding
-   invited you to AlchemyBranding/aqualogic-brand-portal"*. **Click the link in
-   that email and accept.** Do not continue until you've accepted.
+(Two things are handled separately and you don't need them for this: the
+**case studies / news content** is edited in a different place called the Studio
+with its own login, and the **hosting settings** live in Vercel. Neither is part
+of this setup.)
 
 ---
 
-## Setup steps (Claude Code does these)
+## Before you start — one quick account
 
-> Claude Code: run these in order. Stop and tell the user if any step fails
-> rather than continuing. Adapt paths to the user's operating system.
+The only thing you need to create is a **free GitHub account**. GitHub is where
+the website's code lives. It's free and takes two minutes.
 
-### Step 1 — Confirm GitHub access
+### Do this yourself (Dave can help)
 
-Check the user is authenticated with GitHub and can see the repo. If the GitHub
-CLI (`gh`) is installed, run `gh auth status` and
-`gh repo view AlchemyBranding/aqualogic-brand-portal`. If `gh` is not installed,
-that's fine — a plain `git clone` in Step 3 will prompt for login. If the clone
-later fails with "repository not found" or a permission error, it almost always
-means the collaborator invite hasn't been accepted yet — send the user back to
-*"DO THIS YOURSELF: create a GitHub account"*, step 5.
+1. Go to <https://github.com/signup> and create a free account (no card needed).
+2. Note your **GitHub username**.
+3. **Send your username to Dave.** He'll add you to the project so you have
+   access. You can't connect to it until he does — and he's on hand to do it
+   right away.
+4. You'll get an email from GitHub inviting you to
+   *AlchemyBranding/aqualogic-brand-portal*. **Click the link and accept it.**
 
-### Step 2 — Choose a working folder OUTSIDE Dropbox
-
-Pick a normal local folder, **not** inside any Dropbox path. Good choices:
-
-- Windows: `C:\Users\<you>\projects\`
-- macOS: `~/projects/`
-
-Create it if it doesn't exist. Confirm the chosen path is not under a Dropbox
-folder before continuing.
-
-### Step 3 — Clone the repository
-
-```
-git clone https://github.com/AlchemyBranding/aqualogic-brand-portal.git
-```
-
-Run this inside the working folder from Step 2. You should end up with
-`<working folder>/aqualogic-brand-portal`. This is now your personal working copy.
-
-### Step 4 — Copy the environment file from Dropbox
-
-The repo deliberately does **not** include the secret keys (Sanity credentials,
-the site password). They live in a file called `.env.local`, which is present in
-the **Dropbox** copy of the project but is excluded from Git.
-
-Find the Dropbox copy of `.env.local`. Its path will look like:
-
-```
-<the user's Dropbox folder>/Alchemy Team/CLAUDE_CODE/aqualogic-brand-portal/.env.local
-```
-
-The exact Dropbox folder name varies per person (it might be "Dropbox",
-"<Company> Dropbox", etc.), so search for it rather than assuming the path. Copy
-that single `.env.local` file into the root of the new clone from Step 3
-(`<working folder>/aqualogic-brand-portal/.env.local`).
-
-If you genuinely cannot find it in Dropbox, stop and ask the user to get the
-`.env.local` contents from Dave through a secure channel (a password manager
-share — not plain email or chat). Do not proceed without it, or the local
-preview and the forms won't work.
-
-### Step 5 — Install dependencies
-
-In the clone folder:
-
-```
-npm install
-```
-
-This downloads everything the project needs. It can take a minute or two.
-
-### Step 6 — Verify it works
-
-Start the local dev server and confirm the site loads:
-
-```
-npm run dev
-```
-
-Open the local URL it prints (usually `http://localhost:3000`). You should see
-the login page. Log in with the `SITE_PASSWORD` value from the `.env.local` file
-you copied. If the portal loads, you're set up correctly. Stop the dev server
-when done (Ctrl+C).
+That's the only account you need to make.
 
 ---
 
-## Your daily workflow from now on
+## Step 1 — Connect the GitHub connector
 
-This mirrors exactly how Dave works:
+This is the one connector that matters. It's how your Claude Code reads the
+website and saves your changes. You haven't connected any connectors yet, so
+here's how — and your Claude Code will guide you through the exact screen for
+your version.
 
-1. **Before you start editing**, pull the latest changes so you have Dave's most
-   recent work:
-   ```
-   git pull
-   ```
-2. **Make your changes** with Claude Code, in your clone (never in Dropbox).
-3. **When happy, commit and push:**
-   ```
-   git add -A
-   git commit -m "Describe what you changed"
-   git push
-   ```
-4. Vercel automatically deploys within about 90 seconds. The live site at
-   `sustecgroupportal.com` updates itself. You don't need to touch Vercel.
+**Ask your Claude Code:**
 
-That's the whole loop: `pull` → edit → `commit` → `push` → it's live.
+> Help me connect the GitHub connector. Show me where the connector settings are
+> in my version of Claude Code, then walk me through turning on GitHub and
+> signing in with my GitHub account.
 
----
+When it opens the sign-in, **log in with the same GitHub account** you just
+created, and approve access. If GitHub asks about access to the
+**AlchemyBranding** organisation or the **aqualogic-brand-portal** project, allow
+it. If a button there can only be approved by an account owner, ask Dave — he can
+approve it in a few seconds.
 
-## Working alongside Dave (etiquette)
+> Note for Claude Code: walk the user through enabling the GitHub connector in
+> their specific Claude Code surface (desktop app, web, CLI, or IDE — adapt to
+> whichever they're using). After it's connected, confirm you can access the
+> repository `AlchemyBranding/aqualogic-brand-portal` by reading a file from it
+> (for example this one, or `README.md`). Only continue once that read succeeds.
+> If it fails with a permissions or "not found" error, the most likely cause is
+> that the GitHub invite hasn't been accepted yet — send the user back to the
+> "Before you start" section, step 4, and let them know Dave can confirm the
+> invite was sent.
 
-You're both pushing to the same `main` branch. To avoid clashes:
-
-- **Always `git pull` before you start a session.** This grabs his latest work.
-- If your `git push` is rejected with a message about the remote being ahead, it
-  just means Dave pushed something while you were working. Run `git pull`, let
-  Claude Code resolve any overlap, then push again. Claude Code handles this
-  routinely.
-- For occasional edits by two people this is rarely an issue. If you both end up
-  working heavily at the same time, ask Dave to set up a simple branch-per-change
-  habit — but that's overkill for now.
+That's the only connector you need. (If you'd also like your Claude Code to be
+able to check that your changes went live, you can connect the **Vercel**
+connector too, but it's optional — skip it for now if you prefer.)
 
 ---
 
-## Safety — do's and don'ts
+## What you do NOT need
 
-**Do**
-- Keep your working copy outside Dropbox.
-- `git pull` at the start of every session.
-- Write a short, clear commit message each time so Dave can see what changed.
+Because you're working through the GitHub connector, you can ignore all of this:
 
-**Don't**
-- Don't edit the Dropbox copy of the project. It will cause corruption.
-- Don't commit or share the `.env.local` file. It contains live secret keys and
-  is intentionally excluded from Git. Keep it only in your local clone.
-- Don't paste the contents of `.env.local` into chats, emails, or documents.
-- Don't change anything in the Vercel or Sanity dashboards unless you and Dave
-  have agreed on it — those control the live hosting and content.
+- **No Terminal**, ever.
+- **No copying anything from Dropbox.** You don't need the project files in
+  Dropbox for any of this — leave that folder alone.
+- **No secret keys / no `.env.local` file.** The live website already has
+  everything it needs. You're only editing wording and pages.
+- **No installing software** and no "npm" anything.
 
 ---
 
-## If something goes wrong
+## Step 2 — How you make a change (the everyday loop)
 
-- **"Repository not found" on clone** → the GitHub invite hasn't been accepted.
-  Check your email, accept it, try again.
-- **The site loads but case study / news forms or the Studio say "not
-  configured"** → the `.env.local` file is missing or wasn't copied into the
-  clone. Redo Step 4.
-- **`git push` is rejected** → run `git pull` first, then push again.
-- **Anything else** → ask your Claude Code to read the project `README.md`, which
-  documents the full setup, or check with Dave.
+Once the GitHub connector is on, this is the whole routine:
 
-Welcome aboard.
+1. **Tell your Claude Code what you want**, in plain English. For example:
+   > On the Sustec page, change the strapline to "..."
+
+   or
+
+   > Fix the typo in the second paragraph of the Aqualogic values page.
+
+2. Your Claude Code finds the right place in the website, makes the change, and
+   **saves it to GitHub** for you (it will describe what it changed — have a quick
+   read so you're happy).
+
+3. About **90 seconds later** the change is live. Open
+   **sustecgroupportal.com**, refresh, and you'll see it.
+
+4. Not quite right? Just tell your Claude Code — "actually make it say X
+   instead" — and it'll update it again.
+
+That's it. Ask → it changes → it's live → check it.
+
+---
+
+## Is this safe? Yes
+
+- If a change ever has a mistake in it that the website can't build, **the live
+  site simply doesn't update** — it stays exactly as it was, on the last good
+  version. It won't go down or break. Dave can take a look if a change you
+  expected doesn't appear.
+- Anything you change can be undone in seconds — just ask your Claude Code to
+  "undo the last change".
+- You're only editing wording and pages. You can't accidentally break the
+  hosting or lose content this way.
+
+The one thing to avoid: don't change settings inside the **Vercel** or **Sanity**
+dashboards unless you and Dave have agreed on it. Those control the live hosting
+and the content database. Editing the website's wording through Claude Code, as
+above, is completely safe.
+
+---
+
+## Working alongside Dave
+
+You'll both be editing the same website. Your Claude Code always works from the
+latest version when it reads through the connector, so most of the time this just
+works. Two simple habits keep it smooth:
+
+- **Give Dave a quick heads-up when you're about to do a batch of edits**, so you
+  aren't both changing the same page at the same moment.
+- If your Claude Code ever says a change "conflicts" with something newer, don't
+  worry — tell it to "get the latest and try again", and it sorts itself out. Dave
+  can also untangle anything in seconds.
+
+---
+
+## If you get stuck
+
+- **Ask Dave** — he's available throughout and can grant any access you're
+  missing.
+- **Ask your Claude Code** to re-read this file, or to "check the README in the
+  project" for more detail.
+- If GitHub or a connector won't let you in, it's almost always the invite not
+  being accepted yet (check your email) or an organisation approval Dave needs to
+  click.
+
+Welcome aboard — once the GitHub connector is on, you're ready to go.
+
+---
+
+*Note: Dave also keeps a full copy of this project set up on his own machine for
+local previews. You don't need that — the connector approach above is the simple,
+safe path and covers everything you'll need to edit.*
