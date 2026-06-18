@@ -20,3 +20,7 @@ source-docs
 # Editor
 .vscode
 .idea
+
+# Local doc-to-PDF helper (not part of the app)
+.md2pdf.py
+.collab.html
