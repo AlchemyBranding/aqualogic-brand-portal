@@ -5,9 +5,18 @@ import { PageHeader } from '@/components/PageHeader';
 import { DownloadCard } from '@/components/DownloadCard';
 import { DownloadSection } from '@/components/DownloadSection';
 import { Callout } from '@/components/Callout';
-import { getAssets } from '@/lib/assets';
+import { getAssets, getSubfolders, type AssetFile } from '@/lib/assets';
 
 export const metadata = { title: 'Downloads — Aqualogic' };
+
+type DownloadGroup = {
+  label: string;
+  files: AssetFile[];
+  note?: string;
+  guideLink?: { href: string; label: string };
+  empty?: string;
+  subgroups?: { label: string; files: AssetFile[] }[];
+};
 
 export default function AqualogicDownloads() {
   const logos = getAssets('assets/aqualogic/logos');
@@ -16,10 +25,13 @@ export default function AqualogicDownloads() {
   const socialIcons = getAssets('assets/aqualogic/social-icons');
   const socialPosts = getAssets('assets/aqualogic/social-posts');
   const photos = getAssets('assets/aqualogic/photography');
+  const photoSubgroups = getSubfolders('assets/aqualogic/photography')
+    .map((name) => ({ label: name, files: getAssets(`assets/aqualogic/photography/${name}`) }))
+    .filter((s) => s.files.length > 0);
   const headshots = getAssets('assets/aqualogic/headshots');
   const icons = getAssets('assets/aqualogic/icons');
 
-  const groups = [
+  const groups: DownloadGroup[] = [
     {
       label: 'Logos',
       files: logos,
@@ -55,6 +67,8 @@ export default function AqualogicDownloads() {
     {
       label: 'Photography',
       files: photos,
+      note: 'Approved Aqualogic photography. Browse the general set below, or open a folder to see product, premises, staff, vehicle and stock imagery.',
+      subgroups: photoSubgroups,
       empty: 'No photography uploaded yet.'
     },
     {
@@ -131,32 +145,52 @@ export default function AqualogicDownloads() {
       </section>
 
       <div className="container-page pb-20 divide-y divide-grey-smoke">
-        {groups.map((g) => (
-          <DownloadSection
-            key={g.label}
-            label={g.label}
-            count={g.files.length}
-            note={g.note}
-            guideLink={g.guideLink}
-          >
-            {g.files.length === 0 ? (
-              <p className="text-sm text-grey-space italic">{g.empty}</p>
-            ) : (
-              <ul role="list" className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {g.files.map((f) => (
-                  <li key={f.fileName}>
-                    <DownloadCard
-                      title={f.name}
-                      description={f.variant ? `${f.variant} variant` : undefined}
-                      asset={f}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </DownloadSection>
-        ))}
+        {groups.map((g) => {
+          const subTotal = g.subgroups?.reduce((n, s) => n + s.files.length, 0) ?? 0;
+          const hasSubgroups = !!g.subgroups && g.subgroups.length > 0;
+          return (
+            <DownloadSection
+              key={g.label}
+              label={g.label}
+              count={g.files.length + subTotal}
+              note={g.note}
+              guideLink={g.guideLink}
+            >
+              {g.files.length > 0 && <FileGrid files={g.files} />}
+
+              {hasSubgroups && (
+                <div className={g.files.length > 0 ? 'mt-8' : ''}>
+                  {g.subgroups!.map((sg) => (
+                    <DownloadSection key={sg.label} label={sg.label} count={sg.files.length} nested>
+                      <FileGrid files={sg.files} />
+                    </DownloadSection>
+                  ))}
+                </div>
+              )}
+
+              {g.files.length === 0 && !hasSubgroups && (
+                <p className="text-sm text-grey-space italic">{g.empty}</p>
+              )}
+            </DownloadSection>
+          );
+        })}
       </div>
     </BrandFrame>
+  );
+}
+
+function FileGrid({ files }: { files: AssetFile[] }) {
+  return (
+    <ul role="list" className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {files.map((f) => (
+        <li key={f.fileName}>
+          <DownloadCard
+            title={f.name}
+            description={f.variant ? `${f.variant} variant` : undefined}
+            asset={f}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }
