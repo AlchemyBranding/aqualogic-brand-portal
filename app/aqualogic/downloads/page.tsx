@@ -137,7 +137,6 @@ export default function AqualogicDownloads() {
             count={g.files.length}
             note={g.note}
             guideLink={g.guideLink}
-            defaultOpen={g.files.length > 0}
           >
             {g.files.length === 0 ? (
               <p className="text-sm text-grey-space italic">{g.empty}</p>
