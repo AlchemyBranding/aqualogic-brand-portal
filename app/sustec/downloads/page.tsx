@@ -2,22 +2,29 @@ import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { DownloadCard } from '@/components/DownloadCard';
-import { getAssets } from '@/lib/assets';
+import { DownloadSection } from '@/components/DownloadSection';
+import { getAssets, type AssetFile } from '@/lib/assets';
 
 export const metadata = { title: 'Downloads — Sustec' };
 
+type DownloadGroup = { label: string; files: AssetFile[]; note?: string };
+
 export default function SustecDownloads() {
   const logos = getAssets('assets/sustec/logos');
-  const kit = getAssets('assets/sustec/marketing-kit');
+  const templates = getAssets('assets/sustec/templates');
   const banners = getAssets('assets/sustec/banners');
   const photos = getAssets('assets/sustec/photography');
 
-  const groups = [
-    { label: 'Logos', files: logos, empty: 'No logo files yet. See /sustec/visuals/logo for expected variants and naming.' },
-    { label: 'Marketing kit', files: kit, empty: 'No decks, templates or brochures yet.' },
-    { label: 'Banners', files: banners, empty: 'No LinkedIn banners or signatures yet.' },
-    { label: 'Photography', files: photos, empty: 'No photography uploaded yet.' }
-  ];
+  const groups: DownloadGroup[] = [
+    { label: 'Logos', files: logos },
+    {
+      label: 'Templates',
+      files: templates,
+      note: 'Editable Word and PowerPoint templates set up with Sustec brand styling. Download, then save your own copy.'
+    },
+    { label: 'Banners', files: banners },
+    { label: 'Photography', files: photos }
+  ].filter((g) => g.files.length > 0);
 
   return (
     <BrandFrame brand="sustec">
@@ -34,29 +41,21 @@ export default function SustecDownloads() {
         lede="Approved Sustec brand assets for use by the business. Refer to the Sustec visual identity section for correct logo, colour and typography use."
       />
 
-      <div className="container-page pb-20 space-y-12">
+      <div className="container-page pb-20 divide-y divide-grey-smoke">
         {groups.map((g) => (
-          <section key={g.label}>
-            <header className="mb-5 flex items-end justify-between">
-              <h2 className="h-section text-aqualogic-ink">{g.label}</h2>
-              <p className="text-sm text-grey-graphite">{g.files.length} file{g.files.length === 1 ? '' : 's'}</p>
-            </header>
-            {g.files.length === 0 ? (
-              <p className="text-sm text-grey-space italic">{g.empty}</p>
-            ) : (
-              <ul role="list" className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {g.files.map((f) => (
-                  <li key={f.fileName}>
-                    <DownloadCard
-                      title={f.name}
-                      description={f.variant ? `${f.variant} variant` : undefined}
-                      asset={f}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
+          <DownloadSection key={g.label} label={g.label} count={g.files.length} note={g.note}>
+            <ul role="list" className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {g.files.map((f) => (
+                <li key={f.fileName}>
+                  <DownloadCard
+                    title={f.name}
+                    description={f.variant ? `${f.variant} variant` : undefined}
+                    asset={f}
+                  />
+                </li>
+              ))}
+            </ul>
+          </DownloadSection>
         ))}
       </div>
     </BrandFrame>
