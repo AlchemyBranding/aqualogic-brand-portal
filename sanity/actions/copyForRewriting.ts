@@ -1,6 +1,5 @@
 import { CopyIcon } from '@sanity/icons';
 import type { DocumentActionComponent, SanityDocument } from 'sanity';
-import { useToast } from 'sanity';
 
 const CASE_STUDY_SERVICE_CATEGORY: Record<string, string> = {
   'leakage-detection': 'Leakage detection',
@@ -118,7 +117,6 @@ type Formatter = (doc: Record<string, unknown>) => string;
 
 function buildCopyAction(label: string, format: Formatter): DocumentActionComponent {
   const action: DocumentActionComponent = (props) => {
-    const toast = useToast();
     const source = (props.draft ?? props.published) as SanityDocument | null;
 
     return {
@@ -126,19 +124,15 @@ function buildCopyAction(label: string, format: Formatter): DocumentActionCompon
       icon: CopyIcon,
       onHandle: async () => {
         if (!source) {
-          toast.push({ status: 'warning', title: 'Nothing to copy yet — fill in the fields first.' });
+          window.alert('Nothing to copy yet — fill in the fields first.');
           props.onComplete();
           return;
         }
         try {
           await navigator.clipboard.writeText(format(source as unknown as Record<string, unknown>));
-          toast.push({
-            status: 'success',
-            title: 'Submission copied to clipboard',
-            description: 'Paste it into your Claude project to rewrite.'
-          });
+          window.alert('Submission copied to clipboard.\n\nPaste it into your Claude project to rewrite.');
         } catch {
-          toast.push({ status: 'error', title: 'Could not copy to clipboard — try again or copy manually.' });
+          window.alert('Could not copy to clipboard — try again or copy manually.');
         }
         props.onComplete();
       }
