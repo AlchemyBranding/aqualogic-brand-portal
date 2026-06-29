@@ -1,4 +1,3 @@
-import { CopyIcon } from '@sanity/icons';
 import type { DocumentActionComponent, SanityDocument } from 'sanity';
 
 const CASE_STUDY_SERVICE_CATEGORY: Record<string, string> = {
@@ -121,7 +120,6 @@ function buildCopyAction(label: string, format: Formatter): DocumentActionCompon
 
     return {
       label,
-      icon: CopyIcon,
       onHandle: async () => {
         if (!source) {
           window.alert('Nothing to copy yet — fill in the fields first.');
