@@ -53,7 +53,7 @@ export async function submitCaseStudy(formData: FormData) {
     redirect('/case-studies/submit?error=save-failed');
   }
 
-  redirect('/case-studies/submit?status=ok');
+  redirect('/case-studies/submit/thanks');
 }
 
 function str(form: FormData, key: string): string {

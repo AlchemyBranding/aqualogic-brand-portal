@@ -3,6 +3,7 @@ import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
+import { SubmitButton } from '@/components/SubmitButton';
 import { isSanityConfigured } from '@/lib/sanity-client';
 import { submitCaseStudy } from './actions';
 
@@ -20,64 +21,9 @@ const categories = [
 export default function SubmitCaseStudy({
   searchParams
 }: {
-  searchParams: { status?: string; error?: string };
+  searchParams: { error?: string };
 }) {
   const configured = isSanityConfigured();
-  const submitted = searchParams.status === 'ok';
-
-  if (submitted) {
-    return (
-      <BrandFrame brand="aqualogic">
-        <Breadcrumbs
-          items={[
-            { label: 'Portal', href: '/' },
-            { label: 'Case studies', href: '/case-studies' },
-            { label: 'Submitted' }
-          ]}
-        />
-        <section className="container-page pt-16 md:pt-24 pb-12">
-          <div className="max-w-3xl">
-            <span
-              aria-hidden
-              className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-aqualogic-cyan/15 text-aqualogic-cyan"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </span>
-            <p className="eyebrow mt-6">Case studies</p>
-            <h1 className="h-display text-aqualogic-ink mt-3">Thank you.</h1>
-            <p className="lede mt-6 max-w-prose">
-              Your case study has been submitted and is now in the library as <strong>pending
-              review</strong>. We&rsquo;ll review it shortly and use it for website content,
-              social, email marketing and sales materials.
-            </p>
-            <p className="text-sm text-grey-graphite mt-4 max-w-prose">
-              Need to add another? Submit a separate entry for each project so each gets the
-              attention it deserves.
-            </p>
-          </div>
-        </section>
-
-        <section className="container-page pb-20">
-          <div className="grid gap-4 sm:grid-cols-2 max-w-3xl">
-            <Link
-              href="/case-studies/submit"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-aqualogic-ink text-white px-5 py-3 text-sm font-semibold hover:bg-aqualogic-cyan transition-colors"
-            >
-              Submit another case study
-            </Link>
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-aqualogic-ink text-aqualogic-ink px-5 py-3 text-sm font-semibold hover:bg-aqualogic-ink hover:text-white transition-colors"
-            >
-              View the case study library
-            </Link>
-          </div>
-        </section>
-      </BrandFrame>
-    );
-  }
 
   return (
     <BrandFrame brand="aqualogic">
@@ -138,13 +84,9 @@ export default function SubmitCaseStudy({
           )}
 
           <div className="flex items-center gap-4 pt-2">
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 rounded-xl bg-aqualogic-ink text-white px-6 py-3 font-semibold hover:bg-aqualogic-cyan transition-colors disabled:opacity-50"
-              disabled={!configured}
-            >
+            <SubmitButton disabled={!configured} pendingLabel="Submitting — please wait…">
               Submit case study
-            </button>
+            </SubmitButton>
             <Link href="/case-studies" className="text-sm text-grey-graphite hover:text-aqualogic-ink">
               Back to case studies
             </Link>

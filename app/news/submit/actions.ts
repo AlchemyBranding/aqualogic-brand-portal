@@ -42,7 +42,7 @@ export async function submitNewsArticle(formData: FormData) {
     redirect('/news/submit?error=save-failed');
   }
 
-  redirect('/news/submit?status=ok');
+  redirect('/news/submit/thanks');
 }
 
 function str(form: FormData, key: string): string {
