@@ -45,7 +45,7 @@ export async function submitCaseStudy(formData: FormData) {
       submittedByName: str(formData, 'submittedByName'),
       submittedByEmail: str(formData, 'submittedByEmail'),
       submittedAt: new Date().toISOString(),
-      status: 'pending-review'
+      status: 'submitted'
     });
 
     revalidatePath('/case-studies');

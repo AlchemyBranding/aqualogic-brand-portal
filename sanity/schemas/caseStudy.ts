@@ -6,7 +6,8 @@ export const caseStudy = defineType({
   type: 'document',
   groups: [
     { name: 'core', title: 'Core' },
-    { name: 'story', title: 'Story' },
+    { name: 'story', title: 'Story (raw submission)' },
+    { name: 'rewrite', title: 'Rewritten copy (brand-aligned)' },
     { name: 'media', title: 'Media' },
     { name: 'meta', title: 'Submission metadata' }
   ],
@@ -81,6 +82,15 @@ export const caseStudy = defineType({
     }),
 
     defineField({
+      name: 'rewrittenCopy',
+      title: 'Rewritten copy',
+      type: 'text',
+      rows: 16,
+      group: 'rewrite',
+      description: 'The brand-aligned rewrite that will be uploaded to WordPress. Write or paste the full case study here as flowing prose. The original submission stays in the Story tab for reference.'
+    }),
+
+    defineField({
       name: 'heroImage',
       title: 'Hero image',
       type: 'image',
@@ -120,13 +130,21 @@ export const caseStudy = defineType({
       group: 'meta',
       options: {
         list: [
-          { title: 'Pending review', value: 'pending-review' },
-          { title: 'Approved', value: 'approved' },
-          { title: 'Published', value: 'published' }
+          { title: 'Submitted', value: 'submitted' },
+          { title: 'Rewriting', value: 'rewriting' },
+          { title: 'In WordPress draft', value: 'in-wordpress' },
+          { title: 'Live on website', value: 'live' }
         ],
         layout: 'radio'
       },
-      initialValue: 'pending-review'
+      initialValue: 'submitted'
+    }),
+    defineField({
+      name: 'liveUrl',
+      title: 'Live URL',
+      type: 'url',
+      group: 'meta',
+      description: 'Link to the published case study on the Aqualogic website. Fill in once status is set to Live.'
     })
   ],
   preview: {
@@ -134,7 +152,7 @@ export const caseStudy = defineType({
     prepare({ title, client, status, media }) {
       return {
         title: title ?? 'Untitled case study',
-        subtitle: `${client ?? '—'} • ${status ?? 'pending-review'}`,
+        subtitle: `${client ?? '—'} • ${status ?? 'submitted'}`,
         media
       };
     }

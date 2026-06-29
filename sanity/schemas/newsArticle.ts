@@ -6,7 +6,8 @@ export const newsArticle = defineType({
   type: 'document',
   groups: [
     { name: 'core', title: 'Core' },
-    { name: 'body', title: 'Body' },
+    { name: 'body', title: 'Body (raw submission)' },
+    { name: 'rewrite', title: 'Rewritten copy (brand-aligned)' },
     { name: 'media', title: 'Media' },
     { name: 'meta', title: 'Submission metadata' }
   ],
@@ -91,6 +92,24 @@ export const newsArticle = defineType({
       description: 'Full article copy. Leave empty for external coverage; link via Source URL instead.'
     }),
     defineField({
+      name: 'rewrittenSummary',
+      title: 'Rewritten summary',
+      type: 'text',
+      rows: 4,
+      group: 'rewrite',
+      description: 'The brand-aligned summary that will appear on the WordPress tile. Leave the original submission Summary as a reference.',
+      validation: (r) => r.max(400)
+    }),
+    defineField({
+      name: 'rewrittenBody',
+      title: 'Rewritten body',
+      type: 'text',
+      rows: 16,
+      group: 'rewrite',
+      description: 'The brand-aligned full article that will be uploaded to WordPress. The original submission stays in the Body tab for reference.'
+    }),
+
+    defineField({
       name: 'heroImage',
       title: 'Hero image',
       type: 'image',
@@ -122,13 +141,21 @@ export const newsArticle = defineType({
       group: 'meta',
       options: {
         list: [
-          { title: 'Pending review', value: 'pending-review' },
-          { title: 'Approved', value: 'approved' },
-          { title: 'Published', value: 'published' }
+          { title: 'Submitted', value: 'submitted' },
+          { title: 'Rewriting', value: 'rewriting' },
+          { title: 'In WordPress draft', value: 'in-wordpress' },
+          { title: 'Live on website', value: 'live' }
         ],
         layout: 'radio'
       },
-      initialValue: 'pending-review'
+      initialValue: 'submitted'
+    }),
+    defineField({
+      name: 'liveUrl',
+      title: 'Live URL',
+      type: 'url',
+      group: 'meta',
+      description: 'Link to the published article on the Aqualogic website. Fill in once status is set to Live.'
     })
   ],
   preview: {
@@ -136,7 +163,7 @@ export const newsArticle = defineType({
     prepare({ title, source, status, media }) {
       return {
         title: title ?? 'Untitled article',
-        subtitle: `${source ?? '—'} • ${status ?? 'pending-review'}`,
+        subtitle: `${source ?? '—'} • ${status ?? 'submitted'}`,
         media
       };
     }
