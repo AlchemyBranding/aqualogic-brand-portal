@@ -1,4 +1,5 @@
-import type { DocumentActionComponent, SanityDocument } from 'sanity';
+// Formats a submitted case study or news article as a markdown block,
+// ready to paste into a Claude project for the brand-aligned rewrite.
 
 const CASE_STUDY_SERVICE_CATEGORY: Record<string, string> = {
   'leakage-detection': 'Leakage detection',
@@ -42,7 +43,7 @@ function formatSubmittedBy(doc: Record<string, unknown>): string | null {
   return `Submitted by: ${name}${email ? ` <${email}>` : ''}`;
 }
 
-function formatCaseStudy(doc: Record<string, unknown>): string {
+export function formatCaseStudy(doc: Record<string, unknown>): string {
   const galleryCount = Array.isArray(doc.gallery) ? doc.gallery.length : 0;
   const heroPresent = doc.heroImage ? 'yes' : 'no';
   const categorySlug = asString(doc.serviceCategory);
@@ -81,7 +82,7 @@ function formatCaseStudy(doc: Record<string, unknown>): string {
     .join('\n\n');
 }
 
-function formatNewsArticle(doc: Record<string, unknown>): string {
+export function formatNewsArticle(doc: Record<string, unknown>): string {
   const kind = asString(doc.kind);
   const kindLabel =
     kind === 'external' ? 'External coverage' : kind === 'internal' ? 'Internal article' : kind;
@@ -112,32 +113,11 @@ function formatNewsArticle(doc: Record<string, unknown>): string {
     .join('\n\n');
 }
 
-type Formatter = (doc: Record<string, unknown>) => string;
+export type SubmissionType = 'caseStudy' | 'newsArticle';
 
-function buildCopyAction(label: string, format: Formatter): DocumentActionComponent {
-  const action: DocumentActionComponent = (props) => {
-    const source = (props.draft ?? props.published) as SanityDocument | null;
-
-    return {
-      label,
-      onHandle: async () => {
-        if (!source) {
-          window.alert('Nothing to copy yet — fill in the fields first.');
-          props.onComplete();
-          return;
-        }
-        try {
-          await navigator.clipboard.writeText(format(source as unknown as Record<string, unknown>));
-          window.alert('Submission copied to clipboard.\n\nPaste it into your Claude project to rewrite.');
-        } catch {
-          window.alert('Could not copy to clipboard — try again or copy manually.');
-        }
-        props.onComplete();
-      }
-    };
-  };
-  return action;
+export function formatSubmission(
+  type: SubmissionType,
+  doc: Record<string, unknown>
+): string {
+  return type === 'caseStudy' ? formatCaseStudy(doc) : formatNewsArticle(doc);
 }
-
-export const copyCaseStudyForRewriting = buildCopyAction('Copy for rewriting', formatCaseStudy);
-export const copyNewsArticleForRewriting = buildCopyAction('Copy for rewriting', formatNewsArticle);
