@@ -3,6 +3,7 @@
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { getWriteClient } from '@/lib/sanity-client';
+import { notifySubmission } from '@/lib/notify';
 
 export async function submitCaseStudy(formData: FormData) {
   const client = getWriteClient();
@@ -51,6 +52,23 @@ export async function submitCaseStudy(formData: FormData) {
   } catch (err) {
     console.error('Case study submission failed', err);
     redirect('/case-studies/submit?error=save-failed');
+  }
+
+  try {
+    await notifySubmission({
+      type: 'caseStudy',
+      title: str(formData, 'title'),
+      submittedByName: str(formData, 'submittedByName'),
+      submittedByEmail: str(formData, 'submittedByEmail'),
+      context: {
+        Client: str(formData, 'client'),
+        'Service category': str(formData, 'serviceCategory'),
+        Region: str(formData, 'region'),
+        'Date completed': str(formData, 'dateCompleted'),
+      },
+    });
+  } catch (err) {
+    console.error('Case study notification failed', err);
   }
 
   redirect('/case-studies/submit/thanks');
