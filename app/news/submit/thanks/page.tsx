@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
+import { ScrollToTop } from '@/components/ScrollToTop';
 
 export const metadata = { title: 'News article submitted — Aqualogic' };
 
 export default function NewsThanks() {
   return (
     <BrandFrame brand="aqualogic">
+      <ScrollToTop />
       <Breadcrumbs
         items={[
           { label: 'Portal', href: '/' },
