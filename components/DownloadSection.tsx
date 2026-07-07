@@ -11,6 +11,8 @@ type Props = {
   defaultOpen?: boolean;
   /** Render as a second-tier sub-section (smaller heading, lighter chrome). */
   nested?: boolean;
+  /** Noun used in the count badge ("N files" by default). Pluralised automatically. */
+  itemNoun?: string;
   children: React.ReactNode;
 };
 
@@ -21,6 +23,7 @@ export function DownloadSection({
   guideLink,
   defaultOpen = false,
   nested = false,
+  itemNoun = 'file',
   children
 }: Props) {
   const [open, setOpen] = useState(defaultOpen);
@@ -54,7 +57,7 @@ export function DownloadSection({
               {label}
             </span>
             <span className="ml-auto text-sm text-grey-graphite whitespace-nowrap">
-              {count} file{count === 1 ? '' : 's'}
+              {count} {itemNoun}{count === 1 ? '' : 's'}
             </span>
           </button>
         </Heading>

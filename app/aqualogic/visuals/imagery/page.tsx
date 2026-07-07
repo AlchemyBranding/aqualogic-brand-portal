@@ -2,6 +2,7 @@ import type { AssetFile } from '@/lib/assets';
 import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
+import { DownloadSection } from '@/components/DownloadSection';
 import { getAssets, getSubfolders } from '@/lib/assets';
 
 export const metadata = { title: 'Imagery — Aqualogic' };
@@ -74,29 +75,24 @@ export default function AqualogicImagery() {
         </p>
       </section>
 
-      {photos.length > 0 && (
-        <section className="container-page pb-14">
-          <header className="mb-6 flex items-end justify-between gap-4 flex-wrap">
-            <h2 className="h-section text-aqualogic-ink">General</h2>
-            <p className="text-sm text-grey-graphite">
-              {photos.length} image{photos.length === 1 ? '' : 's'}
-            </p>
-          </header>
-          <PhotoGrid photos={photos} />
-        </section>
-      )}
+      <div className="container-page pb-14 divide-y divide-grey-smoke">
+        {photos.length > 0 && (
+          <DownloadSection label="General" count={photos.length} itemNoun="image">
+            <PhotoGrid photos={photos} />
+          </DownloadSection>
+        )}
 
-      {photoSubgroups.map((group) => (
-        <section key={group.label} className="container-page pb-14">
-          <header className="mb-6 flex items-end justify-between gap-4 flex-wrap">
-            <h2 className="h-section text-aqualogic-ink">{group.label}</h2>
-            <p className="text-sm text-grey-graphite">
-              {group.files.length} image{group.files.length === 1 ? '' : 's'}
-            </p>
-          </header>
-          <PhotoGrid photos={group.files} />
-        </section>
-      ))}
+        {photoSubgroups.map((group) => (
+          <DownloadSection
+            key={group.label}
+            label={group.label}
+            count={group.files.length}
+            itemNoun="image"
+          >
+            <PhotoGrid photos={group.files} />
+          </DownloadSection>
+        ))}
+      </div>
 
       <section className="container-page pb-24">
         <div className="rounded-2xl border border-grey-smoke bg-white p-6 md:p-8 max-w-3xl">
