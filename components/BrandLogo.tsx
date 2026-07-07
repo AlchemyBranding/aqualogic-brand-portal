@@ -1,6 +1,3 @@
-import fs from 'node:fs';
-import path from 'node:path';
-
 type Brand = 'aqualogic' | 'sustec' | 'group';
 type Variant = 'mark' | 'lockup' | 'reverse';
 
@@ -36,16 +33,6 @@ const PATHS: Record<Brand, Partial<Record<Variant, string>>> = {
   group: {}
 };
 
-const PUBLIC_ROOT = path.join(process.cwd(), 'public');
-
-function fileExists(relPath: string): boolean {
-  try {
-    return fs.statSync(path.join(PUBLIC_ROOT, relPath.replace(/^\//, ''))).isFile();
-  } catch {
-    return false;
-  }
-}
-
 export function BrandLogo({
   brand,
   variant = 'lockup',
@@ -54,9 +41,8 @@ export function BrandLogo({
   fallbackToText = true
 }: Props) {
   const src = PATHS[brand][variant];
-  const has = src ? fileExists(src) : false;
 
-  if (has && src) {
+  if (src) {
     return (
       <img
         src={src}
