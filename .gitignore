@@ -17,12 +17,8 @@ tsconfig.tsbuildinfo
 # Keep them out of the repo by default; share them via secure channels.
 source-docs
 
-# Aqualogic photography originals are too large for the Vercel deploy
-# (they exceeded the size limit). Keep them locally; the folder README is
-# tracked so the drop-spot stays documented. Serve photography another way
-# (e.g. the photo library) rather than committing originals here.
-public/assets/aqualogic/photography/*
-!public/assets/aqualogic/photography/README.md
+# Aqualogic photography — commit images no larger than 6MB each. Full-size
+# RAW/original files break Vercel deploys, so resize before adding.
 
 # Editor
 .vscode
