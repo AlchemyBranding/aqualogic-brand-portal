@@ -6,6 +6,8 @@ import { DownloadSection } from '@/components/DownloadSection';
 import { getAssets, type AssetFile } from '@/lib/assets';
 
 export const metadata = { title: 'Downloads — Sustec' };
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 type DownloadGroup = { label: string; files: AssetFile[]; note?: string };
 

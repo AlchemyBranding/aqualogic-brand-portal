@@ -8,6 +8,8 @@ import { Callout } from '@/components/Callout';
 import { getAssets, getSubfolders, type AssetFile } from '@/lib/assets';
 
 export const metadata = { title: 'Downloads — Aqualogic' };
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 type DownloadGroup = {
   label: string;

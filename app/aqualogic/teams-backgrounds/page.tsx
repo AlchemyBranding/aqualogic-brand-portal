@@ -6,6 +6,8 @@ import { DownloadCard } from '@/components/DownloadCard';
 import { getAssets } from '@/lib/assets';
 
 export const metadata = { title: 'Teams backgrounds — Aqualogic' };
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 type BackgroundMeta = { title: string; description: string; order: number };
 

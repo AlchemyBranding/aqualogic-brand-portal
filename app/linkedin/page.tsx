@@ -7,6 +7,8 @@ import { getAssets } from '@/lib/assets';
 import { externalLinks } from '@/lib/external-links';
 
 export const metadata = { title: 'LinkedIn guidance' };
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 // Sample professional headlines for personal profiles. None start with
 // "I work..." per the strategy doc, all reference "a Sustec company",

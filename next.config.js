@@ -13,10 +13,19 @@ const nextConfig = {
   // 250MB per-function limit.
   outputFileTracingExcludes: {
     '*': [
-      './public/assets/aqualogic/photography/**',
-      './public/assets/aqualogic/headshots/**',
-      './public/assets/sustec/photography/**'
+      'public/assets/aqualogic/photography/**/*',
+      'public/assets/aqualogic/headshots/**/*',
+      'public/assets/sustec/photography/**/*'
     ]
+  },
+  experimental: {
+    outputFileTracingExcludes: {
+      '*': [
+        'public/assets/aqualogic/photography/**/*',
+        'public/assets/aqualogic/headshots/**/*',
+        'public/assets/sustec/photography/**/*'
+      ]
+    }
   }
 };
 

@@ -5,6 +5,8 @@ import { PageHeader } from '@/components/PageHeader';
 import { getAssets, getSubfolders } from '@/lib/assets';
 
 export const metadata = { title: 'Imagery — Aqualogic' };
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 export default function AqualogicImagery() {
   const photos = getAssets('assets/aqualogic/photography');

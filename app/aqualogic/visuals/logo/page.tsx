@@ -5,6 +5,8 @@ import { getAssets, type AssetFile } from '@/lib/assets';
 import { DownloadCard } from '@/components/DownloadCard';
 
 export const metadata = { title: 'Logo — Aqualogic' };
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 function LogoPreview({ asset, placeholder }: { asset?: AssetFile; placeholder: string }) {
   if (!asset) {
