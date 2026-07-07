@@ -24,6 +24,7 @@ export default function AqualogicDownloads() {
   const banners = getAssets('assets/aqualogic/banners');
   const socialIcons = getAssets('assets/aqualogic/social-icons');
   const socialPosts = getAssets('assets/aqualogic/social-posts');
+  const teamsBackgrounds = getAssets('assets/aqualogic/teams-backgrounds');
   const photos = getAssets('assets/aqualogic/photography');
   const photoSubgroups = getSubfolders('assets/aqualogic/photography')
     .map((name) => ({ label: name, files: getAssets(`assets/aqualogic/photography/${name}`) }))
@@ -63,6 +64,13 @@ export default function AqualogicDownloads() {
       files: socialPosts,
       note: 'Finished post artwork that demonstrates how the brand applies across social. Use as reference for tone, hierarchy and layout, or download to reuse.',
       empty: 'No social post examples yet.'
+    },
+    {
+      label: 'Teams backgrounds',
+      files: teamsBackgrounds,
+      note: 'Approved 1920×1080 backgrounds for Microsoft Teams video calls. See the Teams backgrounds page for step-by-step install instructions.',
+      guideLink: { href: '/aqualogic/teams-backgrounds', label: 'Open Teams backgrounds guide' },
+      empty: 'No Teams backgrounds uploaded yet.'
     },
     {
       label: 'Photography',
