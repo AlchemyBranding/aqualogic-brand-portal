@@ -13,12 +13,12 @@ type BackgroundMeta = { title: string; description: string; order: number };
 
 const BACKGROUND_RULES: { match: RegExp; meta: BackgroundMeta }[] = [
   {
-    match: /hq-lounge/i,
-    meta: { title: 'HQ — Lounge', description: 'Aqualogic head office lounge. Warm, on-brand.', order: 1 }
+    match: /ty-dwr-lounge/i,
+    meta: { title: 'Tŷ Dŵr — Lounge', description: 'Aqualogic head office lounge. Warm, on-brand.', order: 1 }
   },
   {
-    match: /hq-wall/i,
-    meta: { title: 'HQ — Wall', description: 'Aqualogic head office branded wall. Confident, professional.', order: 2 }
+    match: /ty-dwr-meeting-room/i,
+    meta: { title: 'Tŷ Dŵr — Meeting room', description: 'Aqualogic head office meeting room. Confident, professional.', order: 2 }
   },
   {
     match: /photo/i,
@@ -76,8 +76,8 @@ export default function TeamsBackgrounds() {
         <Callout title="Which one to use?" variant="note">
           <ul className="space-y-1 mt-1">
             <li>
-              <strong>Client and external meetings</strong> — HQ Lounge, HQ Wall or Photographic
-              feel most professional and on-brand.
+              <strong>Client and external meetings</strong> — Tŷ Dŵr Lounge, Tŷ Dŵr Meeting
+              Room or Photographic feel most professional and on-brand.
             </li>
             <li>
               <strong>Internal meetings</strong> — any of the coloured brand backgrounds (Deep,
@@ -135,7 +135,7 @@ export default function TeamsBackgrounds() {
             <ul className="mt-3 space-y-2 text-grey-arsenic list-disc list-inside">
               <li>Keep your camera roughly at eye level — the background sits best when your head is centred.</li>
               <li>Avoid strong backlighting (a window behind you). The blur along your edges gives it away.</li>
-              <li>The HQ Lounge / Wall / Photographic options are best for external meetings. Coloured brand backgrounds are lower bandwidth and work for internal calls.</li>
+              <li>The Tŷ Dŵr Lounge / Meeting Room / Photographic options are best for external meetings. Coloured brand backgrounds are lower bandwidth and work for internal calls.</li>
               <li>If you don&rsquo;t see the background listed after upload, close Teams and re-open — occasionally the list needs a refresh.</li>
             </ul>
           </div>
