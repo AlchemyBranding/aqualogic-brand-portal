@@ -6,31 +6,240 @@ export const caseStudy = defineType({
   type: 'document',
   groups: [
     { name: 'core', title: 'Core' },
-    { name: 'story', title: 'Story (raw submission)' },
+    { name: 'intro', title: 'Intro' },
+    { name: 'results', title: 'Results' },
+    { name: 'story', title: 'Context / Challenge / Approach' },
+    { name: 'programme', title: 'Programme at a Glance' },
+    { name: 'endorsement', title: 'Endorsement' },
+    { name: 'proof', title: 'What this proves' },
+    { name: 'extras', title: 'Extras (internal)' },
     { name: 'rewrite', title: 'Rewritten copy (brand-aligned)' },
-    { name: 'media', title: 'Media' },
     { name: 'meta', title: 'Submission metadata' }
   ],
   fields: [
     defineField({
       name: 'title',
-      title: 'Title',
+      title: 'Project title (internal reference)',
+      description:
+        'Short internal name for this case study, e.g. "SWW smart meter rollout". Shown in the Sanity list; not published to the website.',
       type: 'string',
       group: 'core',
-      validation: (r) => r.required().min(5).max(140)
+      validation: (r) => r.required().min(3).max(140)
     }),
     defineField({
       name: 'client',
-      title: 'Client (water company)',
+      title: 'Client name',
+      description: 'The client name that will appear on the case study, e.g. "South West Water".',
       type: 'string',
       group: 'core',
       validation: (r) => r.required()
     }),
+
+    defineField({
+      name: 'introText',
+      title: 'Introduction text',
+      description: 'A short paragraph giving a brief overview of the entire project.',
+      type: 'text',
+      rows: 4,
+      group: 'intro'
+    }),
+    defineField({
+      name: 'clientLogo',
+      title: 'Client logo',
+      description: 'Client logo — where possible use a transparent PNG.',
+      type: 'image',
+      options: { hotspot: true },
+      group: 'intro'
+    }),
+    defineField({
+      name: 'heroImage',
+      title: 'Intro picture',
+      description: 'A headline image to appear alongside the introduction.',
+      type: 'image',
+      options: { hotspot: true },
+      group: 'intro'
+    }),
+
+    defineField({
+      name: 'results',
+      title: 'Results',
+      description:
+        'Up to four headline figures. Aim for at least three or four where possible.',
+      type: 'array',
+      group: 'results',
+      of: [
+        {
+          type: 'object',
+          name: 'resultItem',
+          title: 'Result',
+          fields: [
+            defineField({
+              name: 'figure',
+              title: 'Figure',
+              description: 'A figure or direct result, e.g. "175,000".',
+              type: 'string'
+            }),
+            defineField({
+              name: 'subtitle',
+              title: 'Subtitle',
+              description: 'Suffix to the figure, e.g. "Smart meters installed".',
+              type: 'string'
+            })
+          ],
+          preview: {
+            select: { figure: 'figure', subtitle: 'subtitle' },
+            prepare: ({ figure, subtitle }) => ({
+              title: figure || '—',
+              subtitle: subtitle || ''
+            })
+          }
+        }
+      ],
+      validation: (r) => r.max(4)
+    }),
+
+    defineField({
+      name: 'contextTitle',
+      title: 'Context — title',
+      description: 'A short headline introducing the context of the project.',
+      type: 'string',
+      group: 'story'
+    }),
+    defineField({
+      name: 'contextCopy',
+      title: 'Context — copy',
+      type: 'text',
+      rows: 5,
+      group: 'story'
+    }),
+
+    defineField({
+      name: 'challengeTitle',
+      title: 'Challenge — title',
+      description: 'A short headline introducing the challenge.',
+      type: 'string',
+      group: 'story'
+    }),
+    defineField({
+      name: 'challengeCopy',
+      title: 'Challenge — copy',
+      type: 'text',
+      rows: 5,
+      group: 'story'
+    }),
+
+    defineField({
+      name: 'approachTitle',
+      title: 'Approach — title',
+      description: 'A short headline introducing the approach taken.',
+      type: 'string',
+      group: 'story'
+    }),
+    defineField({
+      name: 'approachCopy',
+      title: 'Approach — copy',
+      type: 'text',
+      rows: 5,
+      group: 'story'
+    }),
+
+    defineField({
+      name: 'programmeTitle',
+      title: 'Programme title',
+      description: 'Short title for the "Programme at a Glance" area.',
+      type: 'string',
+      group: 'programme'
+    }),
+    defineField({
+      name: 'programmeRows',
+      title: 'Programme rows',
+      description:
+        'Up to six rows. Keep each entry short. Aim for at least four rows if you use this section.',
+      type: 'array',
+      group: 'programme',
+      of: [
+        {
+          type: 'object',
+          name: 'programmeRow',
+          title: 'Row',
+          fields: [
+            defineField({
+              name: 'rowTitle',
+              title: 'Row title',
+              description: 'e.g. "Client", "Location", "Scope".',
+              type: 'string'
+            }),
+            defineField({
+              name: 'rowCopy',
+              title: 'Row copy',
+              description: 'e.g. "South West Water".',
+              type: 'string'
+            })
+          ],
+          preview: {
+            select: { rowTitle: 'rowTitle', rowCopy: 'rowCopy' },
+            prepare: ({ rowTitle, rowCopy }) => ({
+              title: rowTitle || '—',
+              subtitle: rowCopy || ''
+            })
+          }
+        }
+      ],
+      validation: (r) => r.max(6)
+    }),
+    defineField({
+      name: 'programmeImage',
+      title: 'Programme image',
+      description: 'Optional additional image for the Programme at a Glance section.',
+      type: 'image',
+      options: { hotspot: true },
+      group: 'programme'
+    }),
+
+    defineField({
+      name: 'endorsementQuote',
+      title: 'Quote from client',
+      description: 'Client feedback. Keep this reasonably short.',
+      type: 'text',
+      rows: 4,
+      group: 'endorsement'
+    }),
+    defineField({
+      name: 'endorsementClientName',
+      title: 'Client name (for quote)',
+      description: 'Name of the person providing the feedback, e.g. "John Smith".',
+      type: 'string',
+      group: 'endorsement'
+    }),
+    defineField({
+      name: 'endorsementClientPosition',
+      title: 'Client position',
+      description: 'Role or company of the person providing feedback, e.g. "South West Water".',
+      type: 'string',
+      group: 'endorsement'
+    }),
+
+    defineField({
+      name: 'proofHeadline',
+      title: 'Proof — headline',
+      description: 'A short headline stating what the project proves.',
+      type: 'string',
+      group: 'proof'
+    }),
+    defineField({
+      name: 'proofCopy',
+      title: 'Proof — copy',
+      type: 'text',
+      rows: 5,
+      group: 'proof'
+    }),
+
     defineField({
       name: 'serviceCategory',
-      title: 'Service category',
+      title: 'Service category (optional)',
+      description: 'Kept for internal filtering. Not shown on the new website layout.',
       type: 'string',
-      group: 'core',
+      group: 'extras',
       options: {
         list: [
           { title: 'Leakage detection', value: 'leakage-detection' },
@@ -41,44 +250,27 @@ export const caseStudy = defineType({
           { title: 'Other', value: 'other' }
         ],
         layout: 'radio'
-      },
-      validation: (r) => r.required()
+      }
     }),
     defineField({
       name: 'region',
-      title: 'Region or location',
+      title: 'Region or location (optional)',
       type: 'string',
-      group: 'core'
+      group: 'extras'
     }),
     defineField({
       name: 'dateCompleted',
-      title: 'Date completed',
+      title: 'Date completed (optional)',
       type: 'date',
-      group: 'core'
-    }),
-
-    defineField({ name: 'challenge', title: 'Challenge', type: 'text', rows: 5, group: 'story' }),
-    defineField({ name: 'approach', title: 'Approach', type: 'text', rows: 5, group: 'story' }),
-    defineField({ name: 'solution', title: 'Solution', type: 'text', rows: 5, group: 'story' }),
-    defineField({
-      name: 'results',
-      title: 'Results (include metrics where possible)',
-      type: 'text',
-      rows: 5,
-      group: 'story'
+      group: 'extras'
     }),
     defineField({
-      name: 'quote',
-      title: 'Quote / testimonial',
-      type: 'text',
-      rows: 3,
-      group: 'story'
-    }),
-    defineField({
-      name: 'quoteAttribution',
-      title: 'Quote attribution',
-      type: 'string',
-      group: 'story'
+      name: 'gallery',
+      title: 'Additional images (optional)',
+      description: 'Any extra images that don’t belong to a specific section above.',
+      type: 'array',
+      of: [{ type: 'image', options: { hotspot: true } }],
+      group: 'extras'
     }),
 
     defineField({
@@ -87,22 +279,8 @@ export const caseStudy = defineType({
       type: 'text',
       rows: 16,
       group: 'rewrite',
-      description: 'The brand-aligned rewrite that will be uploaded to WordPress. Write or paste the full case study here as flowing prose. The original submission stays in the Story tab for reference.'
-    }),
-
-    defineField({
-      name: 'heroImage',
-      title: 'Hero image',
-      type: 'image',
-      options: { hotspot: true },
-      group: 'media'
-    }),
-    defineField({
-      name: 'gallery',
-      title: 'Gallery',
-      type: 'array',
-      of: [{ type: 'image', options: { hotspot: true } }],
-      group: 'media'
+      description:
+        'The brand-aligned rewrite that will be uploaded to WordPress. Write or paste the full case study here as flowing prose. The raw submission stays in the other tabs for reference.'
     }),
 
     defineField({

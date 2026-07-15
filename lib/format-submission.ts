@@ -36,6 +36,18 @@ function fmtSection(heading: string, body: unknown): string | null {
   return s ? `## ${heading}\n${s}` : null;
 }
 
+function fmtTitledSection(
+  heading: string,
+  title: unknown,
+  body: unknown
+): string | null {
+  const t = asString(title);
+  const b = asString(body);
+  if (!t && !b) return null;
+  const headline = t ? `## ${heading} — ${t}` : `## ${heading}`;
+  return b ? `${headline}\n${b}` : headline;
+}
+
 function formatSubmittedBy(doc: Record<string, unknown>): string | null {
   const name = asString(doc.submittedByName);
   const email = asString(doc.submittedByEmail);
@@ -43,11 +55,67 @@ function formatSubmittedBy(doc: Record<string, unknown>): string | null {
   return `Submitted by: ${name}${email ? ` <${email}>` : ''}`;
 }
 
+function formatResults(doc: Record<string, unknown>): string | null {
+  const raw = Array.isArray(doc.results) ? doc.results : [];
+  const items = raw
+    .map((r) => {
+      const obj = (r as Record<string, unknown>) ?? {};
+      const figure = asString(obj.figure);
+      const subtitle = asString(obj.subtitle);
+      if (!figure && !subtitle) return null;
+      if (figure && subtitle) return `- **${figure}** — ${subtitle}`;
+      return `- ${figure || subtitle}`;
+    })
+    .filter(Boolean) as string[];
+  if (!items.length) return null;
+  return `## Results\n${items.join('\n')}`;
+}
+
+function formatProgramme(doc: Record<string, unknown>): string | null {
+  const title = asString(doc.programmeTitle);
+  const raw = Array.isArray(doc.programmeRows) ? doc.programmeRows : [];
+  const rows = raw
+    .map((r) => {
+      const obj = (r as Record<string, unknown>) ?? {};
+      const rowTitle = asString(obj.rowTitle);
+      const rowCopy = asString(obj.rowCopy);
+      if (!rowTitle && !rowCopy) return null;
+      if (rowTitle && rowCopy) return `- **${rowTitle}:** ${rowCopy}`;
+      return `- ${rowTitle || rowCopy}`;
+    })
+    .filter(Boolean) as string[];
+  const imagePresent = doc.programmeImage ? 'yes' : 'no';
+  if (!title && !rows.length && imagePresent === 'no') return null;
+  const headline = title ? `## Programme at a Glance — ${title}` : '## Programme at a Glance';
+  const body = [
+    rows.length ? rows.join('\n') : null,
+    `Programme image: ${imagePresent}`
+  ]
+    .filter(Boolean)
+    .join('\n\n');
+  return `${headline}\n${body}`;
+}
+
+function formatEndorsement(doc: Record<string, unknown>): string | null {
+  const quote = asString(doc.endorsementQuote);
+  const name = asString(doc.endorsementClientName);
+  const position = asString(doc.endorsementClientPosition);
+  if (!quote && !name && !position) return null;
+  const attribution = [name, position].filter(Boolean).join(', ');
+  const body = quote ? `> ${quote}` : '';
+  const tag = attribution ? `— ${attribution}` : '';
+  return ['## Endorsement', body, tag].filter(Boolean).join('\n');
+}
+
 export function formatCaseStudy(doc: Record<string, unknown>): string {
   const galleryCount = Array.isArray(doc.gallery) ? doc.gallery.length : 0;
+  const clientLogoPresent = doc.clientLogo ? 'yes' : 'no';
   const heroPresent = doc.heroImage ? 'yes' : 'no';
+  const programmeImagePresent = doc.programmeImage ? 'yes' : 'no';
   const categorySlug = asString(doc.serviceCategory);
-  const categoryLabel = CASE_STUDY_SERVICE_CATEGORY[categorySlug] ?? categorySlug;
+  const categoryLabel = categorySlug
+    ? CASE_STUDY_SERVICE_CATEGORY[categorySlug] ?? categorySlug
+    : '';
 
   const meta = [
     fmtLine('Client', doc.client),
@@ -60,24 +128,24 @@ export function formatCaseStudy(doc: Record<string, unknown>): string {
     .filter(Boolean)
     .join('\n');
 
+  const intro = fmtSection('Intro', doc.introText);
+
   const sections = [
-    fmtSection('Challenge', doc.challenge),
-    fmtSection('Approach', doc.approach),
-    fmtSection('Solution', doc.solution),
-    fmtSection('Results', doc.results)
+    intro,
+    formatResults(doc),
+    fmtTitledSection('Context', doc.contextTitle, doc.contextCopy),
+    fmtTitledSection('Challenge', doc.challengeTitle, doc.challengeCopy),
+    fmtTitledSection('Approach', doc.approachTitle, doc.approachCopy),
+    formatProgramme(doc),
+    formatEndorsement(doc),
+    fmtTitledSection('What this proves', doc.proofHeadline, doc.proofCopy)
   ]
     .filter(Boolean)
     .join('\n\n');
 
-  const quoteBody = asString(doc.quote);
-  const quoteAttribution = asString(doc.quoteAttribution);
-  const quote = quoteBody
-    ? `## Quote\n> ${quoteBody}${quoteAttribution ? `\n— ${quoteAttribution}` : ''}`
-    : null;
+  const media = `## Media\nClient logo: ${clientLogoPresent}\nIntro picture: ${heroPresent}\nProgramme image: ${programmeImagePresent}\nAdditional images: ${galleryCount} image(s)`;
 
-  const media = `## Media\nHero image: ${heroPresent}\nGallery: ${galleryCount} image(s)`;
-
-  return [`# ${asString(doc.title) || 'Untitled case study'}`, meta, sections, quote, media]
+  return [`# ${asString(doc.title) || 'Untitled case study'}`, meta, sections, media]
     .filter(Boolean)
     .join('\n\n');
 }
