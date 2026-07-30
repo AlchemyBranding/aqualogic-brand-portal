@@ -65,7 +65,7 @@ Schemas defined: `caseStudy`, `newsArticle`, `photo`.
 - [ ] Create a project at sanity.io (free tier)
 - [ ] Set `NEXT_PUBLIC_SANITY_PROJECT_ID`, `NEXT_PUBLIC_SANITY_DATASET`, `NEXT_PUBLIC_SANITY_API_VERSION` in Vercel + `.env.local`
 - [ ] Generate a write token (Editor permissions) and set `SANITY_WRITE_TOKEN`
-- [ ] Optional: `ALCHEMY_NOTIFY_EMAIL` for submission notifications (notification email not yet wired)
+- [ ] Set `RESEND_API_KEY` and `NOTIFY_EMAIL` in Vercel to turn on submission notification emails (optional: `NOTIFY_FROM` once a domain is verified with Resend)
 
 ## Aqualogic brand guideline additions
 
@@ -97,4 +97,8 @@ Per the strategy, Sustec is the group brand and is deliberately quieter. Recomme
 
 ## Notification email
 
-The case study submission form does not yet send notification emails. Hook point: `ALCHEMY_NOTIFY_EMAIL` env var. Recommend wiring via Resend / Postmark / a Sanity webhook once a preference is chosen.
+Submission notifications are wired via Resend. The send happens in `lib/notify.ts`, called from both submit actions after a successful Sanity create. Set these env vars in Vercel to turn it on:
+
+- `RESEND_API_KEY` — from resend.com → API Keys
+- `NOTIFY_EMAIL` — where notifications are sent (currently `jessica@alchemybranding.studio`)
+- `NOTIFY_FROM` *(optional)* — defaults to `Aqualogic Portal <onboarding@resend.dev>`, Resend's sandbox sender. To send from a custom address, verify a domain in Resend then set this to e.g. `Aqualogic Portal <portal@alchemybranding.studio>`.

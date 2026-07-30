@@ -21,13 +21,15 @@ type CaseStudy = {
 
 // Example tiles shown when the library is empty, so the team can see how
 // a submitted and published case study will appear.
+type CaseStudyStatus = 'submitted' | 'rewriting' | 'in-wordpress' | 'live';
+
 const examples: Array<{
   id: string;
   title: string;
   client: string;
   serviceCategory: string;
   region: string;
-  status: 'pending-review' | 'approved' | 'published';
+  status: CaseStudyStatus;
   summary: string;
 }> = [
   {
@@ -36,7 +38,7 @@ const examples: Array<{
     client: 'South West Water',
     serviceCategory: 'smart-metering',
     region: 'South West',
-    status: 'published',
+    status: 'live',
     summary:
       'A two-year programme deploying smart meters across a previously under-monitored network, with a clear before-and-after view of consumption and leakage.'
   },
@@ -46,7 +48,7 @@ const examples: Array<{
     client: 'Southern Water',
     serviceCategory: 'demand-management',
     region: 'South East',
-    status: 'approved',
+    status: 'in-wordpress',
     summary:
       'Coordinated home water-efficiency audits across two lots. Repeatable approach delivered on time with measurable demand reduction.'
   },
@@ -56,7 +58,7 @@ const examples: Array<{
     client: 'Bristol Water',
     serviceCategory: 'leakage-detection',
     region: 'South West',
-    status: 'pending-review',
+    status: 'submitted',
     summary:
       'Data-led survey across a mature distribution network. Pinpointed losses that traditional methods had missed and prioritised them by impact.'
   }
@@ -133,7 +135,7 @@ export default async function CaseStudiesPage() {
                     client: c.client,
                     serviceCategory: c.serviceCategory ?? '',
                     region: c.region ?? '',
-                    status: (c.status as 'pending-review' | 'approved' | 'published') ?? 'pending-review',
+                    status: normaliseStatus(c.status),
                     summary: ''
                   }}
                 />
@@ -159,17 +161,31 @@ async function fetchCaseStudies(): Promise<CaseStudy[]> {
   }
 }
 
-const STATUS_LABEL: Record<string, string> = {
-  'pending-review': 'Pending review',
-  approved: 'Approved',
-  published: 'Published'
+const STATUS_LABEL: Record<CaseStudyStatus, string> = {
+  submitted: 'Submitted',
+  rewriting: 'Rewriting',
+  'in-wordpress': 'In WordPress draft',
+  live: 'Live on website'
 };
 
-const STATUS_STYLE: Record<string, string> = {
-  'pending-review': 'bg-amber-50 text-amber-900 border-amber-200',
-  approved: 'bg-aqualogic-sky/15 text-aqualogic-ink border-aqualogic-sky/40',
-  published: 'bg-emerald-50 text-emerald-900 border-emerald-200'
+const STATUS_STYLE: Record<CaseStudyStatus, string> = {
+  submitted: 'bg-amber-50 text-amber-900 border-amber-200',
+  rewriting: 'bg-violet-50 text-violet-900 border-violet-200',
+  'in-wordpress': 'bg-aqualogic-sky/15 text-aqualogic-ink border-aqualogic-sky/40',
+  live: 'bg-emerald-50 text-emerald-900 border-emerald-200'
 };
+
+const LEGACY_STATUS_MAP: Record<string, CaseStudyStatus> = {
+  'pending-review': 'submitted',
+  approved: 'rewriting',
+  published: 'live'
+};
+
+function normaliseStatus(value: string | undefined): CaseStudyStatus {
+  if (!value) return 'submitted';
+  if (value in STATUS_LABEL) return value as CaseStudyStatus;
+  return LEGACY_STATUS_MAP[value] ?? 'submitted';
+}
 
 function CaseStudyTile({
   item,
@@ -181,7 +197,7 @@ function CaseStudyTile({
     client: string;
     serviceCategory: string;
     region: string;
-    status: 'pending-review' | 'approved' | 'published';
+    status: CaseStudyStatus;
     summary: string;
   };
   isExample?: boolean;

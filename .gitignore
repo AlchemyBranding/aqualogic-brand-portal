@@ -17,6 +17,9 @@ tsconfig.tsbuildinfo
 # Keep them out of the repo by default; share them via secure channels.
 source-docs
 
+# Aqualogic photography — commit images no larger than 6MB each. Full-size
+# RAW/original files break Vercel deploys, so resize before adding.
+
 # Editor
 .vscode
 .idea

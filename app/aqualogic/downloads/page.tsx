@@ -5,20 +5,36 @@ import { PageHeader } from '@/components/PageHeader';
 import { DownloadCard } from '@/components/DownloadCard';
 import { DownloadSection } from '@/components/DownloadSection';
 import { Callout } from '@/components/Callout';
-import { getAssets } from '@/lib/assets';
+import { getAssets, getSubfolders, type AssetFile } from '@/lib/assets';
 
 export const metadata = { title: 'Downloads — Aqualogic' };
+export const dynamic = 'force-static';
+export const revalidate = false;
+
+type DownloadGroup = {
+  label: string;
+  files: AssetFile[];
+  note?: string;
+  guideLink?: { href: string; label: string };
+  empty?: string;
+  subgroups?: { label: string; files: AssetFile[] }[];
+};
 
 export default function AqualogicDownloads() {
   const logos = getAssets('assets/aqualogic/logos');
+  const templates = getAssets('assets/aqualogic/templates');
   const banners = getAssets('assets/aqualogic/banners');
   const socialIcons = getAssets('assets/aqualogic/social-icons');
   const socialPosts = getAssets('assets/aqualogic/social-posts');
+  const teamsBackgrounds = getAssets('assets/aqualogic/teams-backgrounds');
   const photos = getAssets('assets/aqualogic/photography');
+  const photoSubgroups = getSubfolders('assets/aqualogic/photography')
+    .map((name) => ({ label: name, files: getAssets(`assets/aqualogic/photography/${name}`) }))
+    .filter((s) => s.files.length > 0);
   const headshots = getAssets('assets/aqualogic/headshots');
   const icons = getAssets('assets/aqualogic/icons');
 
-  const groups = [
+  const groups: DownloadGroup[] = [
     {
       label: 'Logos',
       files: logos,
@@ -26,6 +42,12 @@ export default function AqualogicDownloads() {
         'Use SVG for screens and vector destinations (decks, web, signage). Use PNG only where vector is not supported. See the logo guidelines for clearspace, minimum size and what not to do.',
       guideLink: { href: '/aqualogic/visuals/logo', label: 'Open logo guidelines' },
       empty: 'No logo files yet. Drop them into /public/assets/aqualogic/logos.'
+    },
+    {
+      label: 'Templates',
+      files: templates,
+      note: 'Editable Word and PowerPoint templates — letterhead, reports, proposal and presentation decks — pre-set with Aqualogic brand styling. Download, then save your own copy.',
+      empty: 'No templates yet.'
     },
     {
       label: 'Banners',
@@ -46,8 +68,17 @@ export default function AqualogicDownloads() {
       empty: 'No social post examples yet.'
     },
     {
+      label: 'Teams backgrounds',
+      files: teamsBackgrounds,
+      note: 'Approved 1920×1080 backgrounds for Microsoft Teams video calls. See the Teams backgrounds page for step-by-step install instructions.',
+      guideLink: { href: '/aqualogic/teams-backgrounds', label: 'Open Teams backgrounds guide' },
+      empty: 'No Teams backgrounds uploaded yet.'
+    },
+    {
       label: 'Photography',
       files: photos,
+      note: 'Approved Aqualogic photography. Browse the general set below, or open a folder to see product, premises, staff, vehicle and stock imagery.',
+      subgroups: photoSubgroups,
       empty: 'No photography uploaded yet.'
     },
     {
@@ -75,7 +106,7 @@ export default function AqualogicDownloads() {
       <PageHeader
         eyebrow="Aqualogic / Downloads"
         title="Downloads."
-        lede="Approved Aqualogic brand assets for use by the business. Refer to the brand guidelines for correct logo, colour, typography and imagery usage."
+        lede="Approved Aqualogic brand assets and ready-to-use working templates for the whole business — logos, banners and imagery alongside editable letterhead, report and presentation templates. Refer to the brand guidelines for correct logo, colour, typography and imagery usage."
       >
         <div className="flex flex-wrap items-center gap-3">
           <Link
@@ -124,32 +155,52 @@ export default function AqualogicDownloads() {
       </section>
 
       <div className="container-page pb-20 divide-y divide-grey-smoke">
-        {groups.map((g) => (
-          <DownloadSection
-            key={g.label}
-            label={g.label}
-            count={g.files.length}
-            note={g.note}
-            guideLink={g.guideLink}
-          >
-            {g.files.length === 0 ? (
-              <p className="text-sm text-grey-space italic">{g.empty}</p>
-            ) : (
-              <ul role="list" className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-                {g.files.map((f) => (
-                  <li key={f.fileName}>
-                    <DownloadCard
-                      title={f.name}
-                      description={f.variant ? `${f.variant} variant` : undefined}
-                      asset={f}
-                    />
-                  </li>
-                ))}
-              </ul>
-            )}
-          </DownloadSection>
-        ))}
+        {groups.map((g) => {
+          const subTotal = g.subgroups?.reduce((n, s) => n + s.files.length, 0) ?? 0;
+          const hasSubgroups = !!g.subgroups && g.subgroups.length > 0;
+          return (
+            <DownloadSection
+              key={g.label}
+              label={g.label}
+              count={g.files.length + subTotal}
+              note={g.note}
+              guideLink={g.guideLink}
+            >
+              {g.files.length > 0 && <FileGrid files={g.files} />}
+
+              {hasSubgroups && (
+                <div className={g.files.length > 0 ? 'mt-8' : ''}>
+                  {g.subgroups!.map((sg) => (
+                    <DownloadSection key={sg.label} label={sg.label} count={sg.files.length} nested>
+                      <FileGrid files={sg.files} />
+                    </DownloadSection>
+                  ))}
+                </div>
+              )}
+
+              {g.files.length === 0 && !hasSubgroups && (
+                <p className="text-sm text-grey-space italic">{g.empty}</p>
+              )}
+            </DownloadSection>
+          );
+        })}
       </div>
     </BrandFrame>
+  );
+}
+
+function FileGrid({ files }: { files: AssetFile[] }) {
+  return (
+    <ul role="list" className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+      {files.map((f) => (
+        <li key={f.fileName}>
+          <DownloadCard
+            title={f.name}
+            description={f.variant ? `${f.variant} variant` : undefined}
+            asset={f}
+          />
+        </li>
+      ))}
+    </ul>
   );
 }

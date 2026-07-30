@@ -3,6 +3,7 @@ import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
+import { SubmitButton } from '@/components/SubmitButton';
 import { isSanityConfigured } from '@/lib/sanity-client';
 import { submitCaseStudy } from './actions';
 
@@ -20,64 +21,9 @@ const categories = [
 export default function SubmitCaseStudy({
   searchParams
 }: {
-  searchParams: { status?: string; error?: string };
+  searchParams: { error?: string };
 }) {
   const configured = isSanityConfigured();
-  const submitted = searchParams.status === 'ok';
-
-  if (submitted) {
-    return (
-      <BrandFrame brand="aqualogic">
-        <Breadcrumbs
-          items={[
-            { label: 'Portal', href: '/' },
-            { label: 'Case studies', href: '/case-studies' },
-            { label: 'Submitted' }
-          ]}
-        />
-        <section className="container-page pt-16 md:pt-24 pb-12">
-          <div className="max-w-3xl">
-            <span
-              aria-hidden
-              className="inline-flex items-center justify-center h-14 w-14 rounded-full bg-aqualogic-cyan/15 text-aqualogic-cyan"
-            >
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
-                <polyline points="20 6 9 17 4 12" />
-              </svg>
-            </span>
-            <p className="eyebrow mt-6">Case studies</p>
-            <h1 className="h-display text-aqualogic-ink mt-3">Thank you.</h1>
-            <p className="lede mt-6 max-w-prose">
-              Your case study has been submitted and is now in the library as <strong>pending
-              review</strong>. We&rsquo;ll review it shortly and use it for website content,
-              social, email marketing and sales materials.
-            </p>
-            <p className="text-sm text-grey-graphite mt-4 max-w-prose">
-              Need to add another? Submit a separate entry for each project so each gets the
-              attention it deserves.
-            </p>
-          </div>
-        </section>
-
-        <section className="container-page pb-20">
-          <div className="grid gap-4 sm:grid-cols-2 max-w-3xl">
-            <Link
-              href="/case-studies/submit"
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-aqualogic-ink text-white px-5 py-3 text-sm font-semibold hover:bg-aqualogic-cyan transition-colors"
-            >
-              Submit another case study
-            </Link>
-            <Link
-              href="/case-studies"
-              className="inline-flex items-center justify-center gap-2 rounded-xl border border-aqualogic-ink text-aqualogic-ink px-5 py-3 text-sm font-semibold hover:bg-aqualogic-ink hover:text-white transition-colors"
-            >
-              View the case study library
-            </Link>
-          </div>
-        </section>
-      </BrandFrame>
-    );
-  }
 
   return (
     <BrandFrame brand="aqualogic">
@@ -91,7 +37,7 @@ export default function SubmitCaseStudy({
       <PageHeader
         eyebrow="Case studies / Submit"
         title="Submit a case study."
-        lede="Use this form to capture a project for the case study library. Submissions land as pending review and feed website content, social, email marketing and sales materials."
+        lede="This form mirrors the case study layout on the new website — each section maps to a block on the page. Leave any section blank if it isn’t relevant; the website will hide empty sections automatically."
       />
 
       {!configured && (
@@ -104,28 +50,134 @@ export default function SubmitCaseStudy({
       )}
 
       <section className="container-page pb-20">
-        <form action={submitCaseStudy} className="grid gap-6 max-w-3xl">
-          <Field label="Title" name="title" required />
-          <Field label="Client (water company)" name="client" required />
-          <SelectField label="Service category" name="serviceCategory" options={categories} required />
+        <form action={submitCaseStudy} className="grid gap-10 max-w-3xl">
+          <SectionHeader
+            title="Project reference"
+            lede="For internal use — this doesn’t appear on the website."
+          />
+          <Field
+            label="Project title (internal reference)"
+            name="title"
+            required
+            hint='Short internal name, e.g. "SWW smart meter rollout".'
+          />
+
+          <SectionHeader
+            title="Intro"
+            lede="A short overview of the project, the client name, and two images."
+          />
+          <Textarea
+            label="Introduction text"
+            name="introText"
+            rows={4}
+            hint="A short paragraph giving a brief overview of the entire project."
+          />
+          <Field
+            label="Client name"
+            name="client"
+            required
+            hint='The client name, e.g. "South West Water".'
+          />
+          <ImageField
+            label="Client logo"
+            name="clientLogo"
+            accept="image/*"
+            hint="Where possible, use a transparent PNG."
+          />
+          <ImageField
+            label="Intro picture"
+            name="heroImage"
+            accept="image/*"
+            hint="A headline image to sit alongside the introduction."
+          />
+
+          <SectionHeader
+            title="Results"
+            lede="Up to four headline figures. Use fewer if needed, but aim for three or four where possible."
+          />
+          <ResultRow n={1} />
+          <ResultRow n={2} />
+          <ResultRow n={3} />
+          <ResultRow n={4} />
+
+          <SectionHeader
+            title="Context"
+            lede="A short headline plus copy setting the scene for the project."
+          />
+          <Field label="Context — title" name="contextTitle" hint="Keep this short." />
+          <Textarea label="Context — copy" name="contextCopy" rows={5} />
+
+          <SectionHeader title="Challenge" lede="What the client needed solving." />
+          <Field label="Challenge — title" name="challengeTitle" hint="Keep this short." />
+          <Textarea label="Challenge — copy" name="challengeCopy" rows={5} />
+
+          <SectionHeader title="Approach" lede="How Aqualogic tackled it." />
+          <Field label="Approach — title" name="approachTitle" hint="Keep this short." />
+          <Textarea label="Approach — copy" name="approachCopy" rows={5} />
+
+          <SectionHeader
+            title="Programme at a Glance (optional)"
+            lede="A two-column table highlighting key facts. Skip this section if it isn’t useful, otherwise fill in at least four rows. Keep each entry short."
+          />
+          <Field
+            label="Programme title"
+            name="programmeTitle"
+            hint='Short title for this area, e.g. "Programme at a glance".'
+          />
+          <ProgrammeRow n={1} exampleTitle="Client" exampleCopy="South West Water" />
+          <ProgrammeRow n={2} exampleTitle="Location" exampleCopy="South West of England" />
+          <ProgrammeRow n={3} exampleTitle="Scope" exampleCopy="Meter exchanges and retrofits" />
+          <ProgrammeRow n={4} exampleTitle="Meter technology" exampleCopy="Diehl Metering" />
+          <ProgrammeRow n={5} exampleTitle="Status" exampleCopy="Ongoing — year 3" />
+          <ProgrammeRow n={6} exampleTitle="—" exampleCopy="—" />
+          <ImageField
+            label="Programme image"
+            name="programmeImage"
+            accept="image/*"
+            hint="Optional additional image for this section."
+          />
+
+          <SectionHeader title="Endorsement" lede="A quote from the client." />
+          <Textarea
+            label="Quote from client"
+            name="endorsementQuote"
+            rows={3}
+            hint="Please keep the quote reasonably short."
+          />
+          <Field
+            label="Client name (for quote)"
+            name="endorsementClientName"
+            hint='e.g. "John Smith".'
+          />
+          <Field
+            label="Client position"
+            name="endorsementClientPosition"
+            hint='Their role or company, e.g. "South West Water".'
+          />
+
+          <SectionHeader
+            title="What this proves"
+            lede="A closing statement about what the project demonstrates."
+          />
+          <Field label="Proof — headline" name="proofHeadline" hint="Keep this short." />
+          <Textarea label="Proof — copy" name="proofCopy" rows={5} />
+
+          <SectionHeader
+            title="Extras (optional, internal)"
+            lede="Not shown on the new case study layout, but useful for filtering and admin."
+          />
+          <SelectField label="Service category" name="serviceCategory" options={categories} />
           <Field label="Region or location" name="region" />
           <Field label="Date completed" name="dateCompleted" type="date" />
-
-          <Textarea label="Challenge" name="challenge" rows={4} hint="What was the problem the client was facing?" />
-          <Textarea label="Approach" name="approach" rows={4} hint="What did we do to tackle it?" />
-          <Textarea label="Solution" name="solution" rows={4} hint="The work we delivered." />
-          <Textarea
-            label="Results"
-            name="results"
-            rows={4}
-            hint="Outcomes and metrics where possible: water saved, leaks found, performance change."
+          <ImageField
+            label="Additional images"
+            name="gallery"
+            accept="image/*"
+            multiple
+            hint="Any extra images that don’t belong to a specific section above."
           />
-          <Textarea label="Quote / testimonial (optional)" name="quote" rows={3} />
-          <Field label="Quote attribution (optional)" name="quoteAttribution" />
 
-          <ImageField label="Hero image" name="heroImage" accept="image/*" />
-          <ImageField label="Gallery images" name="gallery" accept="image/*" multiple />
-
+          <SectionHeader title="Your details" />
           <div className="grid sm:grid-cols-2 gap-6">
             <Field label="Submitted by — name" name="submittedByName" required />
             <Field label="Submitted by — email" name="submittedByEmail" type="email" required />
@@ -138,13 +190,9 @@ export default function SubmitCaseStudy({
           )}
 
           <div className="flex items-center gap-4 pt-2">
-            <button
-              type="submit"
-              className="inline-flex items-center gap-2 rounded-xl bg-aqualogic-ink text-white px-6 py-3 font-semibold hover:bg-aqualogic-cyan transition-colors disabled:opacity-50"
-              disabled={!configured}
-            >
+            <SubmitButton disabled={!configured} pendingLabel="Submitting — please wait…">
               Submit case study
-            </button>
+            </SubmitButton>
             <Link href="/case-studies" className="text-sm text-grey-graphite hover:text-aqualogic-ink">
               Back to case studies
             </Link>
@@ -152,6 +200,57 @@ export default function SubmitCaseStudy({
         </form>
       </section>
     </BrandFrame>
+  );
+}
+
+function SectionHeader({ title, lede }: { title: string; lede?: string }) {
+  return (
+    <div className="border-b border-grey-smoke pb-2 pt-2">
+      <h2 className="text-xl font-semibold text-aqualogic-ink">{title}</h2>
+      {lede && <p className="mt-1 text-sm text-grey-graphite">{lede}</p>}
+    </div>
+  );
+}
+
+function ResultRow({ n }: { n: number }) {
+  return (
+    <div className="grid sm:grid-cols-2 gap-6">
+      <Field
+        label={`Result ${n} — figure`}
+        name={`result${n}Figure`}
+        hint={n === 1 ? 'e.g. "175,000".' : undefined}
+      />
+      <Field
+        label={`Result ${n} — subtitle`}
+        name={`result${n}Subtitle`}
+        hint={n === 1 ? 'e.g. "Smart meters installed".' : undefined}
+      />
+    </div>
+  );
+}
+
+function ProgrammeRow({
+  n,
+  exampleTitle,
+  exampleCopy
+}: {
+  n: number;
+  exampleTitle: string;
+  exampleCopy: string;
+}) {
+  return (
+    <div className="grid sm:grid-cols-2 gap-6">
+      <Field
+        label={`Row ${n} — title`}
+        name={`row${n}Title`}
+        hint={n === 1 ? `e.g. "${exampleTitle}".` : undefined}
+      />
+      <Field
+        label={`Row ${n} — copy`}
+        name={`row${n}Copy`}
+        hint={n === 1 ? `e.g. "${exampleCopy}".` : undefined}
+      />
+    </div>
   );
 }
 
@@ -255,12 +354,14 @@ function ImageField({
   label,
   name,
   accept,
-  multiple
+  multiple,
+  hint
 }: {
   label: string;
   name: string;
   accept?: string;
   multiple?: boolean;
+  hint?: string;
 }) {
   return (
     <label className="block">
@@ -272,6 +373,7 @@ function ImageField({
         multiple={multiple}
         className="mt-2 w-full text-sm text-grey-graphite file:mr-4 file:rounded-xl file:border-0 file:bg-grey-cloud file:px-4 file:py-2 file:font-semibold file:text-aqualogic-ink hover:file:bg-grey-smoke"
       />
+      {hint && <span className="block text-xs text-grey-graphite mt-1">{hint}</span>}
     </label>
   );
 }

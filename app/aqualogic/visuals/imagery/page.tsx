@@ -1,12 +1,19 @@
+import type { AssetFile } from '@/lib/assets';
 import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
-import { getAssets } from '@/lib/assets';
+import { DownloadSection } from '@/components/DownloadSection';
+import { getAssets, getSubfolders } from '@/lib/assets';
 
 export const metadata = { title: 'Imagery — Aqualogic' };
+export const dynamic = 'force-static';
+export const revalidate = false;
 
 export default function AqualogicImagery() {
   const photos = getAssets('assets/aqualogic/photography');
+  const photoSubgroups = getSubfolders('assets/aqualogic/photography')
+    .map((name) => ({ label: name, files: getAssets(`assets/aqualogic/photography/${name}`) }))
+    .filter((s) => s.files.length > 0);
 
   return (
     <BrandFrame brand="aqualogic">
@@ -60,48 +67,75 @@ export default function AqualogicImagery() {
         </div>
       </section>
 
-      <section className="container-page pb-20">
-        <header className="mb-6 flex items-end justify-between gap-4 flex-wrap">
-          <div>
-            <h2 className="h-section text-aqualogic-ink">Photography library</h2>
-            <p className="text-grey-graphite mt-2 max-w-prose">
-              Approved Aqualogic photography. As more photography is created, it will be added
-              to the portal.
-            </p>
-          </div>
-          <p className="text-sm text-grey-graphite">
-            {photos.length} image{photos.length === 1 ? '' : 's'}
-          </p>
-        </header>
+      <section className="container-page pb-8">
+        <h2 className="h-section text-aqualogic-ink">Photography library</h2>
+        <p className="text-grey-graphite mt-2 max-w-prose">
+          Approved Aqualogic photography, browseable by category — product, staff,
+          vehicles, Ty Dwr and licensed stock imagery.
+        </p>
+      </section>
 
-        {photos.length === 0 ? (
-          <p className="text-sm text-grey-space italic">
-            No photography uploaded yet.
-          </p>
-        ) : (
-          <ul role="list" className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
-            {photos.map((p) => (
-              <li key={p.fileName}>
-                <a
-                  href={p.href}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="block group rounded-xl overflow-hidden border border-grey-smoke focus-ring focus-visible:ring-aqualogic-cyan"
-                >
-                  <div className="aspect-square bg-grey-cloud overflow-hidden">
-                    <img
-                      src={p.href}
-                      alt=""
-                      loading="lazy"
-                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
-                    />
-                  </div>
-                </a>
-              </li>
-            ))}
-          </ul>
+      <div className="container-page pb-14 divide-y divide-grey-smoke">
+        {photos.length > 0 && (
+          <DownloadSection label="General" count={photos.length} itemNoun="image">
+            <PhotoGrid photos={photos} />
+          </DownloadSection>
         )}
+
+        {photoSubgroups.map((group) => (
+          <DownloadSection
+            key={group.label}
+            label={group.label}
+            count={group.files.length}
+            itemNoun="image"
+          >
+            <PhotoGrid photos={group.files} />
+          </DownloadSection>
+        ))}
+      </div>
+
+      <section className="container-page pb-24">
+        <div className="rounded-2xl border border-grey-smoke bg-white p-6 md:p-8 max-w-3xl">
+          <h2 className="h-section text-aqualogic-ink">Video clips</h2>
+          <p className="text-grey-arsenic mt-3 leading-relaxed">
+            A library of Aqualogic video clips is available on request. The files are too large
+            to host on the portal directly. Email{' '}
+            <a
+              href="mailto:jessica@alchemybranding.studio?subject=Aqualogic%20video%20clips"
+              className="text-aqualogic-cyan underline underline-offset-4 hover:text-aqualogic-ink"
+            >
+              jessica@alchemybranding.studio
+            </a>{' '}
+            and we&rsquo;ll share a link.
+          </p>
+        </div>
       </section>
     </BrandFrame>
+  );
+}
+
+function PhotoGrid({ photos }: { photos: AssetFile[] }) {
+  return (
+    <ul role="list" className="grid gap-3 grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+      {photos.map((p) => (
+        <li key={p.href}>
+          <a
+            href={p.href}
+            target="_blank"
+            rel="noreferrer"
+            className="block group rounded-xl overflow-hidden border border-grey-smoke focus-ring focus-visible:ring-aqualogic-cyan"
+          >
+            <div className="aspect-square bg-grey-cloud overflow-hidden">
+              <img
+                src={p.href}
+                alt=""
+                loading="lazy"
+                className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+              />
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
   );
 }

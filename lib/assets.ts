@@ -42,12 +42,32 @@ export function getAssets(folder: string): AssetFile[] {
     return {
       name: prettify(baseName),
       fileName,
-      href: '/' + folder.split(path.sep).join('/') + '/' + fileName,
+      href: encodeURI('/' + folder.split(path.sep).join('/') + '/' + fileName),
       ext,
       sizeKb: Math.round((stat.size / 1024) * 10) / 10,
       variant: detectVariant(baseName)
     };
   });
+}
+
+/**
+ * Return the names of the immediate subfolders of /public/<folder>, sorted.
+ * Used to render a browseable sub-section per folder (e.g. photography).
+ */
+export function getSubfolders(folder: string): string[] {
+  const absolute = path.join(PUBLIC_ROOT, folder);
+  let entries: string[] = [];
+  try {
+    entries = fs.readdirSync(absolute);
+  } catch {
+    return [];
+  }
+  return entries
+    .filter((entry) => {
+      if (entry.startsWith('.')) return false;
+      return fs.statSync(path.join(absolute, entry)).isDirectory();
+    })
+    .sort((a, b) => a.localeCompare(b));
 }
 
 function prettify(slug: string) {

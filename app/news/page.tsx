@@ -21,6 +21,8 @@ type NewsArticle = {
   status: string;
 };
 
+type NewsStatus = 'submitted' | 'rewriting' | 'in-wordpress' | 'live';
+
 const examples: Array<{
   id: string;
   title: string;
@@ -30,7 +32,7 @@ const examples: Array<{
   sourceUrl?: string;
   publicationDate: string;
   summary: string;
-  status: 'pending-review' | 'approved' | 'published';
+  status: NewsStatus;
 }> = [
   {
     id: 'example-1',
@@ -39,7 +41,7 @@ const examples: Array<{
     category: 'company-news',
     source: 'Aqualogic press release',
     publicationDate: '2026-03-12',
-    status: 'published',
+    status: 'live',
     summary:
       'A new four-year framework with Horizon Water Infrastructure adds material capacity to the smart metering programme and extends Aqualogic’s national footprint.'
   },
@@ -51,7 +53,7 @@ const examples: Array<{
     source: 'Water Magazine',
     sourceUrl: 'https://example.com/water-magazine/amp8-integrated',
     publicationDate: '2026-02-04',
-    status: 'approved',
+    status: 'in-wordpress',
     summary:
       'A sector commentary on why the integrated water conservation and demand management approach lands harder on regulator targets than service-by-service procurement.'
   },
@@ -63,22 +65,36 @@ const examples: Array<{
     source: 'Utility Week',
     sourceUrl: 'https://example.com/utility-week',
     publicationDate: '2026-01-21',
-    status: 'pending-review',
+    status: 'submitted',
     summary:
       'External coverage covering the role of integrated demand management businesses in the sector’s AMP8 ramp-up. Aqualogic featured alongside three other sector leaders.'
   }
 ];
 
-const STATUS_LABEL: Record<string, string> = {
-  'pending-review': 'Pending review',
-  approved: 'Approved',
-  published: 'Published'
+const STATUS_LABEL: Record<NewsStatus, string> = {
+  submitted: 'Submitted',
+  rewriting: 'Rewriting',
+  'in-wordpress': 'In WordPress draft',
+  live: 'Live on website'
 };
-const STATUS_STYLE: Record<string, string> = {
-  'pending-review': 'bg-amber-50 text-amber-900 border-amber-200',
-  approved: 'bg-aqualogic-sky/15 text-aqualogic-ink border-aqualogic-sky/40',
-  published: 'bg-emerald-50 text-emerald-900 border-emerald-200'
+const STATUS_STYLE: Record<NewsStatus, string> = {
+  submitted: 'bg-amber-50 text-amber-900 border-amber-200',
+  rewriting: 'bg-violet-50 text-violet-900 border-violet-200',
+  'in-wordpress': 'bg-aqualogic-sky/15 text-aqualogic-ink border-aqualogic-sky/40',
+  live: 'bg-emerald-50 text-emerald-900 border-emerald-200'
 };
+
+const LEGACY_STATUS_MAP: Record<string, NewsStatus> = {
+  'pending-review': 'submitted',
+  approved: 'rewriting',
+  published: 'live'
+};
+
+function normaliseStatus(value: string | undefined): NewsStatus {
+  if (!value) return 'submitted';
+  if (value in STATUS_LABEL) return value as NewsStatus;
+  return LEGACY_STATUS_MAP[value] ?? 'submitted';
+}
 
 export default async function NewsPage() {
   const configured = isSanityConfigured();
@@ -154,7 +170,7 @@ export default async function NewsPage() {
                     sourceUrl: c.sourceUrl,
                     publicationDate: c.publicationDate ?? '',
                     summary: c.summary ?? '',
-                    status: (c.status as 'pending-review' | 'approved' | 'published') ?? 'pending-review'
+                    status: normaliseStatus(c.status)
                   }}
                 />
               </li>
@@ -192,7 +208,7 @@ function NewsTile({
     sourceUrl?: string;
     publicationDate: string;
     summary: string;
-    status: 'pending-review' | 'approved' | 'published';
+    status: NewsStatus;
   };
   isExample?: boolean;
 }) {
