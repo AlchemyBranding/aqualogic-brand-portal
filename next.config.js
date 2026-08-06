@@ -5,8 +5,15 @@
 // sibling digeo-collective project, same Sanity Studio v5 setup). Rather
 // than chase Sanity's shifting internal allowlist, Studio gets the
 // baseline security headers only, no CSP.
+//
+// script-src carries 'unsafe-inline' 'unsafe-eval' — required for Next.js
+// App Router client hydration (self.__next_f.push([...]) tags are streamed
+// inline into the HTML; blocking them leaves every interactive control
+// dead — accordions, mobile nav, forms — with no console error).
+// connect-src includes *.sanity.io so pages that read Sanity data can
+// reach the API / listen for updates over websocket.
 const csp =
-  "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://cdn.sanity.io; font-src 'self' https://fonts.gstatic.com; connect-src 'self'; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests";
+  "default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; img-src 'self' data: https://cdn.sanity.io; font-src 'self' https://fonts.gstatic.com; connect-src 'self' https://*.sanity.io wss://*.sanity.io; frame-ancestors 'none'; form-action 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests";
 
 const baselineSecurityHeaders = [
   {
