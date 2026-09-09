@@ -3,7 +3,7 @@ import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
 import { FullSwatchGrid } from '@/components/FullSwatch';
 import { ContrastMatrix } from '@/components/ContrastMatrix';
-import { aqualogicColours, grayscaleColours } from '@/lib/colour-systems';
+import { aqualogicColours, aqualogicExtendedColours, grayscaleColours } from '@/lib/colour-systems';
 
 export const metadata = { title: 'Colour — Aqualogic' };
 
@@ -43,6 +43,23 @@ export default function AqualogicColour() {
       </section>
 
       <section className="container-page pb-14">
+        <p className="eyebrow mb-6">Extended palette</p>
+        <p className="body-prose mb-6 max-w-prose">
+          Two deep tones for dark-background work &mdash; graphics, SharePoint and Teams banners,
+          and site-level applications such as T&#375; D&#373;r and Tower Quays. They sit outside the
+          primary palette on purpose: Aqua Cyan remains the Aqualogic blue, and these are
+          surfaces for it to sit on rather than alternatives to it.
+        </p>
+        <FullSwatchGrid swatches={aqualogicExtendedColours} columns={2} />
+        <ul className="body-prose mt-6 space-y-3 max-w-prose">
+          <li><strong>Backgrounds only.</strong> Do not use either tone for the logo, for body copy or as an accent colour.</li>
+          <li><strong>Set text in Paper or white.</strong> Both tones are dark enough to carry reversed text comfortably.</li>
+          <li><strong>Never against Ink.</strong> Both are too close to Ink (#0C2C3A) in depth to separate &mdash; and too close to each other to be used as a pair.</li>
+          <li><strong>Aqua Cyan works on Dark Blue only.</strong> On Dark Teal the contrast is too low to be legible.</li>
+        </ul>
+      </section>
+
+      <section className="container-page pb-14">
         <p className="eyebrow mb-6">Grayscale</p>
         <FullSwatchGrid swatches={grayscaleColours} columns={4} />
       </section>
@@ -60,6 +77,7 @@ export default function AqualogicColour() {
             foregrounds={aqualogicColours}
             backgrounds={[
               ...aqualogicColours.filter((c) => c.name !== 'Sky'),
+              ...aqualogicExtendedColours,
               grayscaleColours.find((c) => c.name === 'Phantom')!,
               grayscaleColours.find((c) => c.name === 'Black')!
             ]}

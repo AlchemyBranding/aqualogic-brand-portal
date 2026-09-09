@@ -71,6 +71,7 @@ Schemas defined: `caseStudy`, `newsArticle`, `photo`.
 
 These are structural gaps in the existing visual guidelines that the brand should address as it grows:
 
+- [ ] **Confirm the Dark Teal hex with Ben Rice.** Requested 2026-09-08 as `#156O82` — that contains the letter O, which is not valid hex. Implemented as `#156082` (dark teal, matches his description). Added alongside `#163E64` Dark Blue as an *extended surface palette* on `/aqualogic/visuals/colour`, deliberately separate from the primary four so Aqua Cyan stays the identity blue. Committed locally but **not pushed** until Ben confirms.
 - [ ] Publish logo mono / single-colour variants (reverse now supplied)
 - [ ] Define logo minimum size (px and mm)
 - [ ] Add RGB, CMYK, Pantone equivalents to the colour palette

@@ -17,7 +17,10 @@ const config: Config = {
           paper: '#FAFBFF',
           cyan: '#00B6DB',
           ink: '#0C2C3A',
-          sky: '#6AC2D8'
+          sky: '#6AC2D8',
+          // Extended surface tones — dark background fills only.
+          'dark-teal': '#156082',
+          'dark-blue': '#163E64'
         },
         // Sustec palette (from Sustec.pdf)
         sustec: {

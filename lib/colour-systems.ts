@@ -56,6 +56,25 @@ export const aqualogicColours: ColourSpec[] = [
   spec('Sky', '#6AC2D8', '305 C', 'Soft support tone. Avoid for primary text on Paper.')
 ];
 
+// Extended surface palette. Deliberately kept separate from the primary
+// palette above so Aqua Cyan and Ink remain the identity colours. These are
+// background fills only — added for dark-background graphics, SharePoint and
+// Teams banners, and site-level applications (Tŷ Dŵr, Tower Quays).
+export const aqualogicExtendedColours: ColourSpec[] = [
+  spec(
+    'Dark Teal',
+    '#156082',
+    '308 C',
+    'Background fill only. Use white or Paper text on it. Do not pair with Aqua Cyan text — contrast is too low.'
+  ),
+  spec(
+    'Dark Blue',
+    '#163E64',
+    '534 C',
+    'Background fill only, and the stronger of the two. The only extended tone Aqua Cyan can legibly sit on.'
+  )
+];
+
 export const sustecColours: ColourSpec[] = [
   spec('Paper', '#FAFBFF', 'White / 663 C', 'Default background.'),
   spec('Sustec Blue', '#0092D2', '2925 C', 'Primary brand colour. Use for the logo, key surfaces and headlines.'),
