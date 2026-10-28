@@ -17,7 +17,8 @@ function needsDarkPreview(fileName: string): boolean {
     f.includes('reverse') ||
     f.includes('on-ink') ||
     f.includes('on-dark') ||
-    f.includes('on-black')
+    f.includes('on-black') ||
+    f.includes('for-dark')
   );
 }
 

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { BrandFrame } from '@/components/BrandFrame';
 import { Breadcrumbs } from '@/components/Breadcrumbs';
 import { PageHeader } from '@/components/PageHeader';
@@ -8,31 +9,31 @@ const values = [
   {
     name: 'Trust',
     statement: 'We build confidence through transparency, reliability and doing what we say we will do.',
-    behaviours: ['Transparency', 'Accountability', 'Honesty', 'Dependability'],
+    behaviours: ['Delivers on commitments', 'Communicates openly and honestly', 'Acts with integrity'],
     note: 'Externally, clients need confidence in delivery, reliability and accountability. Internally, a growing business needs transparency and consistency.'
   },
   {
     name: 'Ingenuity',
     statement: 'We think practically, adapt intelligently and solve problems in ways that create better outcomes.',
-    behaviours: ['Curiosity', 'Adaptability', 'Practical problem-solving', 'Improvement'],
+    behaviours: ['Develops practical, innovative solutions', 'Identifies opportunities and constructively challenges existing approaches', 'Thinks creatively and explores innovation'],
     note: 'Stronger than generic innovation language. Captures how the business thinks, adapts and approaches problems in practice.'
   },
   {
     name: 'Excellence',
     statement: 'We set high standards, take pride in our work and deliver with consistency, care and quality.',
-    behaviours: ['Quality', 'Consistency', 'Ownership', 'Attention to detail'],
+    behaviours: ['Delivers safe, high-quality work and excellent customer service', 'Takes ownership and follows through', 'Learns and continuously improves'],
     note: 'Reinforces that the business expects a high standard from itself. Anchors performance, professionalism and pride in delivery.'
   },
   {
     name: 'Collaboration',
     statement: 'We work openly, support one another and build strong relationships that make us better together.',
-    behaviours: ['Openness', 'Support', 'Teamwork', 'Respect', 'Knowledge-sharing'],
+    behaviours: ['Collaborates effectively with others', 'Shares information and knowledge', 'Supports and develops others'],
     note: 'Reflects how the business works at its best. A more open and informal culture than larger corporates, with people wanting to work together rather than hide behind hierarchy.'
   },
   {
     name: 'Agility',
     statement: 'We stay responsive, adaptable and ready to move, so we can deliver where it matters most.',
-    behaviours: ['Responsiveness', 'Flexibility', 'Pace', 'Willingness to act'],
+    behaviours: ['Adapts quickly and constructively to changing client, customer and business needs', 'Embraces change and welcomes new ways of working', 'Makes timely, informed decisions without compromising safety or quality'],
     note: 'One of Aqualogic’s clearest commercial and cultural differentiators. Large enough to compete seriously, agile enough to react, support and move faster than more corporate competitors.'
   }
 ];
@@ -62,6 +63,14 @@ export default function Values() {
           through problem-solving and improvement stories, Excellence through delivery standards,
           Collaboration through team and client stories, Agility through responsiveness and pace.
         </p>
+        <p className="body-prose mt-4 max-w-prose">
+          The behaviours below are the final set approved by the senior leadership team. The
+          framework artwork, value icons and people programme logos are on the{' '}
+          <Link href="/aqualogic/employer-brand" className="text-aqualogic-cyan font-semibold hover:underline">
+            employer brand
+          </Link>{' '}
+          page.
+        </p>
         <h2 className="h-section text-aqualogic-ink mt-10">Why this set works</h2>
         <p className="body-prose mt-4 max-w-prose">
           This set balances external credibility with internal truth. Trust, Ingenuity and
@@ -75,15 +84,26 @@ export default function Values() {
       <section className="container-page pb-20 grid gap-6 md:grid-cols-2">
         {values.map((v) => (
           <article key={v.name} className="card flex flex-col">
-            <p className="eyebrow text-aqualogic-cyan mb-3">Value</p>
-            <h2 className="text-3xl font-extrabold text-aqualogic-ink">{v.name}</h2>
+            <div className="flex items-center justify-between gap-4">
+              <div>
+                <p className="eyebrow text-aqualogic-cyan mb-3">Value</p>
+                <h2 className="text-3xl font-extrabold text-aqualogic-ink">{v.name}</h2>
+              </div>
+              <img
+                src={`/assets/aqualogic/employer-brand/value-icons/${v.name}/aqualogic_${v.name.toLowerCase()}_icon-only_for-light-backgrounds.svg`}
+                alt=""
+                className="h-16 w-16 shrink-0"
+                loading="lazy"
+              />
+            </div>
             <p className="mt-4 text-aqualogic-ink font-medium leading-snug">
               &ldquo;{v.statement}&rdquo;
             </p>
             <p className="eyebrow mt-6 mb-2">Behaviours</p>
-            <ul className="flex flex-wrap gap-2">
+            <ul className="space-y-2">
               {v.behaviours.map((b) => (
-                <li key={b} className="pill">
+                <li key={b} className="flex gap-3 text-aqualogic-ink leading-snug">
+                  <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-aqualogic-cyan" />
                   {b}
                 </li>
               ))}

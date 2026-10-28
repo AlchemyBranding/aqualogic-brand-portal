@@ -55,6 +55,7 @@ const nextConfig = {
     '*': [
       'public/assets/aqualogic/photography/**/*',
       'public/assets/aqualogic/headshots/**/*',
+      'public/assets/aqualogic/employer-brand/**/*',
       'public/assets/sustec/photography/**/*'
     ]
   },
@@ -63,6 +64,7 @@ const nextConfig = {
       '*': [
         'public/assets/aqualogic/photography/**/*',
         'public/assets/aqualogic/headshots/**/*',
+        'public/assets/aqualogic/employer-brand/**/*',
         'public/assets/sustec/photography/**/*'
       ]
     }

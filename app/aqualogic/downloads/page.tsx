@@ -34,6 +34,31 @@ export default function AqualogicDownloads() {
   const headshots = getAssets('assets/aqualogic/headshots');
   const icons = getAssets('assets/aqualogic/icons');
 
+  // Employer brand artwork: one sub-section per folder. The framework order is
+  // fixed (wheel first) rather than alphabetical.
+  const EB = 'assets/aqualogic/employer-brand';
+  const frameworkFolders = [
+    'Values wheel',
+    'Values wheel building blocks',
+    'Value columns',
+    'Value columns building blocks',
+    'Connected flow',
+    'Connected flow building blocks'
+  ];
+  const toSubgroups = (base: string, names: string[]) =>
+    names
+      .map((name) => ({ label: name, files: getAssets(`${base}/${name}`) }))
+      .filter((s) => s.files.length > 0);
+  const frameworkSubgroups = toSubgroups(`${EB}/values-framework`, frameworkFolders);
+  const valueIconSubgroups = toSubgroups(
+    `${EB}/value-icons`,
+    ['Trust', 'Ingenuity', 'Excellence', 'Collaboration', 'Agility']
+  );
+  const programmeSubgroups = toSubgroups(
+    `${EB}/programme-logos`,
+    getSubfolders(`${EB}/programme-logos`)
+  );
+
   const groups: DownloadGroup[] = [
     {
       label: 'Logos',
@@ -91,6 +116,33 @@ export default function AqualogicDownloads() {
       label: 'Icons',
       files: icons,
       empty: 'No icon system defined yet.'
+    },
+    {
+      label: 'Employer brand: values framework',
+      files: [],
+      note:
+        'The values and behaviours framework in three formats: the values wheel, value columns and connected flow. Full artwork comes with its own background. Transparent versions drop straight onto slides (pick the light or dark slide version). Building blocks are the separate pieces for building your own layout. Use the light wheel for posters, print and onboarding packs, and the dark wheel for event screens, presentations and digital displays.',
+      guideLink: { href: '/aqualogic/employer-brand', label: 'Open employer brand' },
+      subgroups: frameworkSubgroups,
+      empty: 'No framework artwork uploaded yet.'
+    },
+    {
+      label: 'Employer brand: value icons',
+      files: [],
+      note:
+        'One icon for each of the five values, as icon only and icon with name, for light and dark backgrounds. Use SVG where you can, and PNG where vector is not supported.',
+      guideLink: { href: '/aqualogic/values', label: 'Open values and behaviours' },
+      subgroups: valueIconSubgroups,
+      empty: 'No value icons uploaded yet.'
+    },
+    {
+      label: 'Employer brand: programme logos',
+      files: [],
+      note:
+        'Logos for the people programme: Celebrating Success Awards, Values Awards, Long Service Awards (5, 10, 15 and 20 years), Aqua Impact, Aqua View and Aqua Connect. Each comes as full logo and icon only, for light and dark backgrounds. Celebrating Success Awards and Values Awards also have a simplified icon for small sizes, such as email signatures and intranet tiles.',
+      guideLink: { href: '/aqualogic/employer-brand', label: 'Open employer brand' },
+      subgroups: programmeSubgroups,
+      empty: 'No programme logos uploaded yet.'
     }
   ];
 
