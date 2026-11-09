@@ -48,6 +48,7 @@ const groups = [
       { href: '/linkedin', title: 'LinkedIn setup', desc: 'Personal profile, banners, professional headline, company page treatment.' },
       { href: '/case-studies', title: 'Case studies', desc: 'Submit a project and browse the case study library.' },
       { href: '/news', title: 'News', desc: 'Submit and browse news articles, press releases, sector commentary and coverage.' },
+      { href: '/aqualogic/aqua-summit-2026', title: 'Aqua Summit 2026', desc: 'Candid photos and headshots from the summit, ready to download.' },
       { href: '/aqualogic/teams-backgrounds', title: 'Teams backgrounds', desc: 'Approved Aqualogic backgrounds for Microsoft Teams video calls, with install instructions.' },
       { href: '/aqualogic/downloads', title: 'Downloads', desc: 'Logos, marketing kit, banners, photography, headshots.' }
     ]

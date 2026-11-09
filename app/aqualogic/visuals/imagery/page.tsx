@@ -71,7 +71,14 @@ export default function AqualogicImagery() {
         <h2 className="h-section text-aqualogic-ink">Photography library</h2>
         <p className="text-grey-graphite mt-2 max-w-prose">
           Approved Aqualogic photography, browseable by category — product, staff,
-          vehicles, Ty Dwr and licensed stock imagery.
+          vehicles, Ty Dwr and licensed stock imagery. Photos from the summit are on the{' '}
+          <a
+            href="/aqualogic/aqua-summit-2026"
+            className="text-aqualogic-cyan underline underline-offset-4 hover:text-aqualogic-ink"
+          >
+            Aqua Summit 2026
+          </a>{' '}
+          page.
         </p>
       </section>
 
