@@ -4,10 +4,13 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { getWriteClient } from '@/lib/sanity-client';
 import { notifySubmission } from '@/lib/notify';
+import { requireUser } from '@/lib/require-user';
 
 type SanityImageRef = { _type: 'image'; asset: { _type: 'reference'; _ref: string } };
 
 export async function submitCaseStudy(formData: FormData) {
+  // Signed-in staff only once Microsoft sign-in is switched on.
+  await requireUser('/case-studies/submit');
   const client = getWriteClient();
   if (!client) {
     redirect('/case-studies/submit?error=not-configured');

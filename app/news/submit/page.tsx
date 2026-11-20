@@ -6,6 +6,7 @@ import { Callout } from '@/components/Callout';
 import { SubmitButton } from '@/components/SubmitButton';
 import { isSanityConfigured } from '@/lib/sanity-client';
 import { submitNewsArticle } from './actions';
+import { requireUser } from '@/lib/require-user';
 
 export const metadata = { title: 'Submit a news article — Aqualogic' };
 
@@ -20,11 +21,12 @@ const categories = [
   { value: 'other', label: 'Other' }
 ];
 
-export default function SubmitNews({
+export default async function SubmitNews({
   searchParams
 }: {
   searchParams: { error?: string };
 }) {
+  await requireUser('/news/submit');
   const configured = isSanityConfigured();
 
   return (
