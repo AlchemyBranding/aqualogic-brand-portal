@@ -1,10 +1,18 @@
+import { redirect } from 'next/navigation';
+
 type SearchParams = { error?: string; from?: string };
 
 export const metadata = {
-  title: 'Sign in — Sustec Group Brand Portal'
+  title: 'Sign in | Sustec Group Brand Portal'
 };
 
+export const dynamic = 'force-dynamic';
+
 export default function LoginPage({ searchParams }: { searchParams: SearchParams }) {
+  // The shared password is retired once Microsoft sign-in is on.
+  if (process.env.SSO_ENABLED === 'true') {
+    redirect(searchParams.from ? `/sign-in?from=${encodeURIComponent(searchParams.from)}` : '/sign-in');
+  }
   const hasError = searchParams.error === '1';
   const from = searchParams.from ?? '/';
 

@@ -51,8 +51,11 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       // other organisations. Check the tenant again here as a second lock.
       const tenant = entraTenantId();
       if (!tenant || !p.tid || p.tid.toLowerCase() !== tenant || !p.oid) return false;
-      if (await isBlocked(p.oid)) return '/sign-in?error=removed';
-      await recordSignIn({ oid: p.oid, name: p.name ?? profileEmail(p), email: profileEmail(p) });
+      if (await isBlocked(p.oid).catch(() => false)) return '/sign-in?error=removed';
+      // A failed write to the user list must not stop someone signing in.
+      await recordSignIn({ oid: p.oid, name: p.name ?? profileEmail(p), email: profileEmail(p) }).catch((e) =>
+        console.error('[auth] could not record sign-in', e)
+      );
       return true;
     },
     async jwt({ token, profile }) {
@@ -66,8 +69,13 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
       // Existing session: every few minutes, make sure nobody removed them.
       if (token.oid && Date.now() - Number(token.checkedAt ?? 0) > RECHECK_MS) {
-        if (await isBlocked(String(token.oid))) return null;
-        token.checkedAt = Date.now();
+        try {
+          if (await isBlocked(String(token.oid))) return null;
+          token.checkedAt = Date.now();
+        } catch (e) {
+          // Sanity unreachable: keep the session and try again on the next request.
+          console.error('[auth] could not re-check access', e);
+        }
       }
       return token;
     },
