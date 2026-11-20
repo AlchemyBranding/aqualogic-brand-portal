@@ -5,12 +5,14 @@ import { PageHeader } from '@/components/PageHeader';
 import { Callout } from '@/components/Callout';
 import { isSanityConfigured } from '@/lib/sanity-client';
 import { uploadPhoto } from './actions';
+import { requireUser } from '@/lib/require-user';
 
 export const metadata = { title: 'Photo upload — Admin' };
 
 const categories = ['office', 'team', 'sites', 'equipment', 'events'];
 
-export default function UploadPage({ searchParams }: { searchParams: { status?: string; error?: string } }) {
+export default async function UploadPage({ searchParams }: { searchParams: { status?: string; error?: string } }) {
+  await requireUser('/admin/upload');
   const configured = isSanityConfigured();
   return (
     <BrandFrame brand="group">

@@ -4,8 +4,11 @@ import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { getWriteClient } from '@/lib/sanity-client';
 import { notifySubmission } from '@/lib/notify';
+import { requireUser } from '@/lib/require-user';
 
 export async function submitNewsArticle(formData: FormData) {
+  // Signed-in staff only once Microsoft sign-in is switched on.
+  await requireUser('/news/submit');
   const client = getWriteClient();
   if (!client) {
     redirect('/news/submit?error=not-configured');

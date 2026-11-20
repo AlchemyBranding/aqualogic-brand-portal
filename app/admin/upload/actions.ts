@@ -3,8 +3,11 @@
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { getWriteClient } from '@/lib/sanity-client';
+import { requireUser } from '@/lib/require-user';
 
 export async function uploadPhoto(formData: FormData) {
+  // Signed-in staff only once Microsoft sign-in is switched on.
+  await requireUser('/admin/upload');
   const client = getWriteClient();
   if (!client) {
     redirect('/admin/upload?error=not-configured');
