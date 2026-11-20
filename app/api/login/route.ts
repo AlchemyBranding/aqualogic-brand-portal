@@ -4,6 +4,10 @@ const COOKIE = 'portal_auth';
 const THIRTY_DAYS = 60 * 60 * 24 * 30;
 
 export async function POST(req: Request) {
+  // The shared password is retired once Microsoft sign-in is on.
+  if (process.env.SSO_ENABLED === 'true') {
+    return NextResponse.json({ ok: false, error: 'Please sign in with Microsoft.' }, { status: 404 });
+  }
   const form = await req.formData();
   const password = String(form.get('password') ?? '');
   const from = String(form.get('from') ?? '/');

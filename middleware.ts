@@ -1,16 +1,49 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest, NextResponse, type NextFetchEvent } from 'next/server';
+import { auth } from '@/auth';
+
+// Who can see the portal, in order:
+//
+// 1. PORTAL_PUBLIC=true      Everyone, no sign-in (the kill switch). Pages that
+//                            publish content still need Microsoft sign-in when
+//                            SSO_ENABLED=true (they check it themselves).
+// 2. SSO_ENABLED=true        Whole site behind Microsoft sign-in. The shared
+//                            password and its cookie no longer work; /login
+//                            forwards to /sign-in.
+// 3. Otherwise               The old shared-password gate (portal_auth cookie).
 
 const AUTH_COOKIE = 'portal_auth';
 
-export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
+const isSso = () => process.env.SSO_ENABLED === 'true';
 
-  // Temporary public-access kill switch. Set PORTAL_PUBLIC=true on the
-  // environment (Vercel or .env.local) to bypass the password gate entirely.
-  // Remove the env var (or set to anything other than 'true') to re-enable.
-  if (process.env.PORTAL_PUBLIC === 'true') {
-    return NextResponse.next();
+// Only what the Microsoft sign-in page itself needs is open to signed-out
+// visitors. Brand images and downloads are NOT, unlike the old gate.
+function isSsoPublic(pathname: string): boolean {
+  return (
+    pathname === '/sign-in' ||
+    pathname.startsWith('/api/auth/') ||
+    pathname.startsWith('/_next/') ||
+    pathname.startsWith('/favicon') ||
+    pathname === '/icon.png' ||
+    pathname === '/icon.svg' ||
+    pathname === '/apple-icon.png'
+  );
+}
+
+// Runs Auth.js (it re-checks the People list every ten minutes and keeps the
+// session cookie fresh), then sends anyone without a session to /sign-in.
+const ssoGate = auth((req) => {
+  const { pathname, search } = req.nextUrl;
+  if (pathname === '/login' || pathname.startsWith('/api/login')) {
+    return NextResponse.redirect(new URL('/sign-in', req.nextUrl));
   }
+  if (isSsoPublic(pathname) || req.auth?.user) return NextResponse.next();
+  const url = new URL('/sign-in', req.nextUrl);
+  url.searchParams.set('from', pathname + search);
+  return NextResponse.redirect(url);
+});
+
+function passwordGate(req: NextRequest) {
+  const { pathname } = req.nextUrl;
 
   // Public routes
   if (
@@ -34,6 +67,24 @@ export function middleware(req: NextRequest) {
   }
 
   return NextResponse.next();
+}
+
+export function middleware(req: NextRequest, ev: NextFetchEvent) {
+  const { pathname } = req.nextUrl;
+
+  if (process.env.PORTAL_PUBLIC === 'true') {
+    // The shared password is retired once Microsoft sign-in is on.
+    if (isSso() && (pathname === '/login' || pathname.startsWith('/api/login'))) {
+      return NextResponse.redirect(new URL('/sign-in', req.nextUrl));
+    }
+    return NextResponse.next();
+  }
+
+  if (isSso()) {
+    return (ssoGate as unknown as (r: NextRequest, e: NextFetchEvent) => ReturnType<typeof passwordGate>)(req, ev);
+  }
+
+  return passwordGate(req);
 }
 
 export const config = {
