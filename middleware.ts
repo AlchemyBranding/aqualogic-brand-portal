@@ -69,7 +69,23 @@ function passwordGate(req: NextRequest) {
   return NextResponse.next();
 }
 
+// Microsoft only accepts sign-ins that return to the address registered in
+// Entra (www.sustecgroupportal.com). On production, forward any vercel.app
+// alias there first, or sign-in fails with AADSTS50011. Previews keep their own
+// addresses (VERCEL_ENV is "preview" there).
+const CANONICAL_HOST = 'www.sustecgroupportal.com';
+
+function canonicalRedirect(req: NextRequest): NextResponse | null {
+  const host = (req.headers.get('host') ?? '').toLowerCase();
+  if (process.env.VERCEL_ENV !== 'production' || !host.endsWith('.vercel.app')) return null;
+  const url = new URL(req.nextUrl.pathname + req.nextUrl.search, `https://${CANONICAL_HOST}`);
+  return NextResponse.redirect(url, 308);
+}
+
 export function middleware(req: NextRequest, ev: NextFetchEvent) {
+  const canonical = canonicalRedirect(req);
+  if (canonical) return canonical;
+
   const { pathname } = req.nextUrl;
 
   if (process.env.PORTAL_PUBLIC === 'true') {
