@@ -19,7 +19,7 @@ const notices: Record<string, string> = {
 };
 
 export default async function UsersPage(props: {
-  searchParams: Promise<{ status?: string; error?: string }> | { status?: string; error?: string };
+  searchParams: Promise<{ status?: string; error?: string }>;
 }) {
   const admin = await requireAdmin('/admin/users');
   const searchParams = await props.searchParams;

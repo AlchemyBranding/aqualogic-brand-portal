@@ -60,17 +60,6 @@ const nextConfig = {
       'public/assets/sustec/photography/**/*'
     ]
   },
-  experimental: {
-    outputFileTracingExcludes: {
-      '*': [
-        'public/assets/aqualogic/photography/**/*',
-        'public/assets/aqualogic/headshots/**/*',
-        'public/assets/aqualogic/employer-brand/**/*',
-        'public/assets/aqualogic/aqua-summit-2026/**/*',
-        'public/assets/sustec/photography/**/*'
-      ]
-    }
-  },
   async headers() {
     return [
       {

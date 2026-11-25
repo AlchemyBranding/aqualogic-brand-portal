@@ -21,12 +21,11 @@ const categories = [
   { value: 'other', label: 'Other' }
 ];
 
-export default async function SubmitNews({
-  searchParams
-}: {
-  searchParams: { error?: string };
+export default async function SubmitNews(props: {
+  searchParams: Promise<{ error?: string }>;
 }) {
   await requireUser('/news/submit');
+  const searchParams = await props.searchParams;
   const configured = isSanityConfigured();
 
   return (

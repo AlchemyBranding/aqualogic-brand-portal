@@ -8,7 +8,8 @@ export const metadata = {
 
 export const dynamic = 'force-dynamic';
 
-export default function LoginPage({ searchParams }: { searchParams: SearchParams }) {
+export default async function LoginPage(props: { searchParams: Promise<SearchParams> }) {
+  const searchParams = await props.searchParams;
   // The shared password is retired once Microsoft sign-in is on.
   if (process.env.SSO_ENABLED === 'true') {
     redirect(searchParams.from ? `/sign-in?from=${encodeURIComponent(searchParams.from)}` : '/sign-in');

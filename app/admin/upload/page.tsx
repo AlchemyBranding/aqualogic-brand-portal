@@ -11,8 +11,9 @@ export const metadata = { title: 'Photo upload — Admin' };
 
 const categories = ['office', 'team', 'sites', 'equipment', 'events'];
 
-export default async function UploadPage({ searchParams }: { searchParams: { status?: string; error?: string } }) {
+export default async function UploadPage(props: { searchParams: Promise<{ status?: string; error?: string }> }) {
   await requireUser('/admin/upload');
+  const searchParams = await props.searchParams;
   const configured = isSanityConfigured();
   return (
     <BrandFrame brand="group">

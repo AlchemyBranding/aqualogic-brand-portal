@@ -23,7 +23,7 @@ function errorMessage(error: string | undefined): string | null {
   return 'Sign-in didn’t work just then. Please try again.';
 }
 
-export default async function SignInPage(props: { searchParams: Promise<SearchParams> | SearchParams }) {
+export default async function SignInPage(props: { searchParams: Promise<SearchParams> }) {
   if (!ssoEnabled()) redirect('/');
   const searchParams = await props.searchParams;
   const from = safePath(searchParams.from);
