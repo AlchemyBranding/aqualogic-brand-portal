@@ -11,6 +11,24 @@ export default defineConfig({
   projectId,
   dataset,
   basePath: '/studio',
+  form: {
+    components: {
+      portableText: {
+        // Sanity 5 turned "smart typography" on by default: it rewrites -- as a
+        // dash, straight quotes as curly and ... as an ellipsis, and stores the
+        // result. Off for every rich-text field so text is saved exactly as
+        // typed. (No rich-text fields yet; this covers any added later.)
+        plugins: (props) =>
+          props.renderDefault({
+            ...props,
+            plugins: {
+              ...props.plugins,
+              typography: { ...props.plugins.typography, enabled: false }
+            }
+          })
+      }
+    }
+  },
   plugins: [structureTool()],
   schema: { types: schemaTypes }
 });
