@@ -136,6 +136,6 @@ components/             Shared UI (BrandFrame, PageHeader, SwatchGrid, etc.)
 lib/                    Sanity client, asset reader, external links, brand tokens
 sanity/schemas/         caseStudy, photo
 public/assets/          Static brand assets (read by getAssets)
-middleware.ts           Site-wide password gate
+proxy.ts                Site-wide access gate (Microsoft sign-in)
 sanity.config.ts        Studio config (mounted at /studio)
 ```

@@ -5,8 +5,9 @@
 // they are never served to unauthenticated readers, only with the write token.
 //
 // Plain fetch calls to Sanity's HTTP API (no client library), because this file
-// is also used by the sign-in check in middleware.ts, which runs on the Edge
-// runtime. Store only what the admin page needs.
+// is also used by the sign-in check in proxy.ts (it ran on the Edge runtime
+// before Next 16, and plain fetch works on both). Store only what the admin
+// page needs.
 
 export type PortalUser = {
   _id: string;

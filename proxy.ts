@@ -82,7 +82,7 @@ function canonicalRedirect(req: NextRequest): NextResponse | null {
   return NextResponse.redirect(url, 308);
 }
 
-export function middleware(req: NextRequest, ev: NextFetchEvent) {
+export function proxy(req: NextRequest, ev: NextFetchEvent) {
   const canonical = canonicalRedirect(req);
   if (canonical) return canonical;
 

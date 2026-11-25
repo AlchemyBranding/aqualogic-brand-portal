@@ -2,7 +2,7 @@
 //
 // The whole feature sits behind SSO_ENABLED. While it is not exactly "true",
 // nothing here is enforced and the site behaves as before (the old gate in
-// middleware.ts stays in charge). Turning it on is a deliberate step.
+// proxy.ts stays in charge). Turning it on is a deliberate step.
 //
 // Env vars (names are the ones Auth.js reads for this provider):
 //   SSO_ENABLED                     "true" to switch Microsoft sign-in on

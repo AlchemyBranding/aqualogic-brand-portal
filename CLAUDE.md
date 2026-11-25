@@ -12,6 +12,6 @@ cd aqualogic-brand-portal && npx vercel deploy --prod --yes
 
 # Security headers (added 2026-07-30, live)
 
-`next.config.js` `headers()`. Same `/studio` CSP exclusion as digeo-collective, for the same reason: Sanity Studio v5's auth bridge script (`core.sanity-cdn.com`) gets blocked by a strict CSP and hangs Studio's loading spinner forever. Confirmed live: `/studio` reaches its normal login-provider screen; public routes carry the full CSP. `/studio` is protected by this project's own password gate (`middleware.ts`) regardless — the CSP exclusion doesn't reduce that.
+`next.config.js` `headers()`. Same `/studio` CSP exclusion as digeo-collective, for the same reason: Sanity Studio v5's auth bridge script (`core.sanity-cdn.com`) gets blocked by a strict CSP and hangs Studio's loading spinner forever. Confirmed live: `/studio` reaches its normal login-provider screen; public routes carry the full CSP. `/studio` is protected by this project's own Microsoft sign-in gate (`proxy.ts`, was `middleware.ts` before Next 16) regardless — the CSP exclusion doesn't reduce that.
 
 `outputFileTracingExcludes` (both top-level and under `experimental` — belt-and-braces for this Next 14.2 version) keeps the photography library out of serverless function bundles; unrelated to the headers work but lives in the same file, don't remove it.
